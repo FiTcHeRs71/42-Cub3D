@@ -3,8 +3,8 @@
 
 typedef struct s_data	
 {
-	
-}
-t_data;
+	int		fd;
+	char	**map;
+}			t_data;
 
-#endif // CUB3D_STRUCT_H
+#endif
