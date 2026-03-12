@@ -1,7 +1,27 @@
 
 #include "../../includes/cub3d.h"
 
-void	check_arg(char *line, t_data *data)
+static void	count_and_check_flags(char *line, t_data *data)
+{
+	size_t i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_strchr("10NSEW", line[i]))
+		{
+			if (data->player_flag > 0)
+			{
+				ft_error("Error : Multiple player in map, exit\n", data);
+			}
+			data->player_flag = 1;
+		}
+		i++;
+	}
+	
+}
+
+static void	check_arg(char *line, t_data *data)
 {
 	size_t	i;
 
@@ -16,7 +36,7 @@ void	check_arg(char *line, t_data *data)
 		{
 			ft_error("Invalid parameters.\n", data);
 		}
-		//ft_count_and_check_args(line[i], data); des trucs a compter ?
+		count_and_check_flags(line[i], data);
 		i++;
 	}
 }

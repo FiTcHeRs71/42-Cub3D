@@ -4,6 +4,7 @@
 typedef struct s_data	
 {
 	int		fd;
+	int		player_flag;
 	char	**map;
 }			t_data;
 
