@@ -20,6 +20,9 @@
 /*parse_cub3d.c*/
 void	parse_cub3d(t_data *data, char *file);
 
+/*check_map.c*/
+void	check_map(t_data *data);
+
 
 /*-------- UTILS ------------*/
 /*clear.c*/
