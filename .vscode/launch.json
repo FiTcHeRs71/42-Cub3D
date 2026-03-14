@@ -1,0 +1,68 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug cub3D",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/cub3D",
+      "args": [
+        "${workspaceFolder}/map/invalid_map/test.cub" 
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Laisser passer SIGINT au programme",
+          "text": "handle SIGINT pass noprint nostop",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "Build cub3D",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "logging": {
+        "engineLogging": false
+      }
+    },
+    {
+      "name": "Debug cub3D (no build)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/cub3D",
+      "args": [
+        "${workspaceFolder}/map/valid_map/intra.cub"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Laisser passer SIGINT au programme",
+          "text": "handle SIGINT pass noprint nostop",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
+}
