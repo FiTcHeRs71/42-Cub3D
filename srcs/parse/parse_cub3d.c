@@ -12,8 +12,6 @@ static char	**copy_map(t_data *data, char *line)
 		return (NULL);
 	while (line)
 	{
-		if (line[0] == '\n')
-			ft_error(INVALID_MAP, data);
 		old_temp = temp;
 		temp = ft_strjoin(temp, line);
 		free(old_temp);
@@ -25,6 +23,16 @@ static char	**copy_map(t_data *data, char *line)
 	args = ft_split(temp, '\n');
 	free(temp);
 	return (args);
+}
+
+static void	init_struct(t_data *data)
+{
+	data->map = ft_calloc(1, sizeof(t_map));
+	data->texture = ft_calloc(1, sizeof(t_texture));
+	if (!data->map || !data->texture)
+	{
+		ft_error(MALLOC_FAILED, data);
+	}
 }
 
 void	parse_cub3d(t_data *data, char *file)
@@ -41,6 +49,7 @@ void	parse_cub3d(t_data *data, char *file)
 	{
 		ft_error(FD_ERROR, data);
 	}
+	init_struct(data);
 	config_count = 0;
 	line = get_next_line(data->fd);
 	while (line)
@@ -63,4 +72,5 @@ void	parse_cub3d(t_data *data, char *file)
 		line = get_next_line(data->fd);
 	}
 	data->map->map = copy_map(data, line);
+	check_map(data, data->map);
 }

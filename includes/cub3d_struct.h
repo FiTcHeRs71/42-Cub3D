@@ -4,6 +4,8 @@
 typedef struct s_map
 {
 	char		**map;
+	char		**map_copy;
+	int			wall_flag;
 	int			player_flag;
 	int			player_x;
 	int			player_y;
