@@ -1,7 +1,7 @@
 
 #include "../../includes/cub3d.h"
 
-static void	check_arg(char *line, t_data *data)
+/*static void	check_arg(char *line, t_data *data)
 {
 	size_t	i;
 
@@ -17,9 +17,9 @@ static void	check_arg(char *line, t_data *data)
 
 		}
 	}
-}
+}*/
 
-void	check_map(t_data *data)
+/*void	check_map(t_data *data)
 {
 	size_t	i;
 
@@ -30,4 +30,4 @@ void	check_map(t_data *data)
 		i++;
 	}
 	//valide_path(data); // flood_fill ?
-}
+}*/

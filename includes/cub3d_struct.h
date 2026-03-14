@@ -1,11 +1,28 @@
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
 
-typedef struct s_data	
+typedef struct s_map
 {
-	int		fd;
-	int		player_flag;
-	char	**map;
-}			t_data;
+	char		**map;
+	int			player_flag;
+	int			player_x;
+	int			player_y;
+	char		player_dir;
+}				t_map;
+
+typedef struct s_texture
+{
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+}				t_texture;
+
+typedef struct s_data
+{
+	int			fd;
+	t_map		*map;
+	t_texture	*texture;
+}				t_data;
 
 #endif

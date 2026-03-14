@@ -1,9 +1,8 @@
 
 #include "../../includes/cub3d.h"
 
-static char	**copy_map(t_data *data)
+static char	**copy_map(t_data *data, char *line)
 {
-	char	*line;
 	char	*temp;
 	char	*old_temp;
 	char	**args;
@@ -11,7 +10,6 @@ static char	**copy_map(t_data *data)
 	temp = ft_strdup("");
 	if (!temp)
 		return (NULL);
-	line = get_next_line(data->fd);
 	while (line)
 	{
 		if (line[0] == '\n')
@@ -31,6 +29,9 @@ static char	**copy_map(t_data *data)
 
 void	parse_cub3d(t_data *data, char *file)
 {
+	char	*line;
+	int		config_count;
+
 	if (ft_strncmp(&file[ft_strlen(file + 4)], ".cub", 4))
 	{
 		ft_error("File map has to be .cub\n", data);
@@ -40,10 +41,26 @@ void	parse_cub3d(t_data *data, char *file)
 	{
 		ft_error(FD_ERROR, data);
 	}
-	data->map = copy_map(data);
-	if (!data->map || !data->map[0])
+	config_count = 0;
+	line = get_next_line(data->fd);
+	while (line)
 	{
-		ft_error(INVALID_MAP, data);
+		if (config_count < 6)
+		{
+			if (extract_config(line, data))
+			{
+				if (line[0] != '\n' && line[0] != '\0') 
+					config_count++;
+			}
+			else
+				ft_error(INVALID_SETTINGS, data);
+		}
+		else
+		{
+			break ;
+		}
+		free(line);
+		line = get_next_line(data->fd);
 	}
-	check_map(data);
+	data->map->map = copy_map(data, line);
 }

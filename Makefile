@@ -6,17 +6,16 @@ INCDIR = includes
 OBJDIR = objs
 LIBFTDIR = libft
 MLXDIR = minilibx-linux
+SRCDIR = srcs
 
 # Source files
 SRCS_MAIN = main.c
 
-SRCS_PARSE = \
-	srcs/parse/check_map.c \
-	srcs/parse/parse_cub3d.c
+SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
+	check_map.c parse_config.c parse_cub3d.c)
 
-SRCS_UTILS = \
-	srcs/utils/clear.c \
-	srcs/utils/error.c
+SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
+	clear.c error.c)
 
 
 # SRCS_RAYCAST = \

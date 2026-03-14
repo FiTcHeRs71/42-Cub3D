@@ -13,16 +13,14 @@
 # define MALLOC_FAILED "Memory allocation failed, exit \n"
 # define FD_ERROR "Unable to open map file, exit \n"
 # define INVALID_MAP "Invalid map, exit \n"
+# define INVALID_SETTINGS "Invalid configuration format or missing elements\n"
 
 /*================== FONCTION ==================*/
 
 /*-------- PARSE ------------*/
-/*parse_cub3d.c*/
 void	parse_cub3d(t_data *data, char *file);
-
-/*check_map.c*/
+bool	extract_config(char *line, t_data *data);
 void	check_map(t_data *data);
-
 
 /*-------- UTILS ------------*/
 /*clear.c*/
@@ -31,4 +29,4 @@ void	clean_all(t_data *data);
 /*error.c*/
 void	ft_error(char *msg, t_data *data);
 
-#endif 
+#endif
