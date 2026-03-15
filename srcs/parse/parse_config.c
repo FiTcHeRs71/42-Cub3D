@@ -1,11 +1,41 @@
 
 #include "../../includes/cub3d.h"
 
+static bool save_color_code(t_data *data, char **rgb_code, char *line)
+{
+	int	i;
+	char	**temp;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	/*if (*(*rgb_code)!= NULL)
+	{
+		return (false);
+	}*/
+	temp = ft_split(&line[i], ',');
+	if (!temp)
+	{
+		ft_error(MALLOC_FAILED, data);
+	}
+	i = 0;
+	while (temp[i])
+	{
+		rgb_code[i] = ft_strtrim(temp[i], "\n");
+		i++;
+	}
+	ft_free_2d_array(temp);
+	return (true);
+
+}
+
 static bool	save_texture(t_data *data, char **texture_path, char *line)
 {
 	int	i;
 
 	i = 0;
+	if (!line)
+		return (false);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	if (*texture_path != NULL)
@@ -16,7 +46,7 @@ static bool	save_texture(t_data *data, char **texture_path, char *line)
 	i = ft_strlen(*texture_path) - 1;
 	if (i >= 0 && (*texture_path)[i] == '\n')
 		(*texture_path)[i] = '\0';
-	return(true);
+	return (true);
 }
 
 bool	extract_config(char *line, t_data *data)
@@ -36,5 +66,9 @@ bool	extract_config(char *line, t_data *data)
 		return(save_texture(data, &data->texture->we_path, &line[i + 3]));
 	else if (ft_strncmp(&line[i], "EA ", 3) == 0)
 		return(save_texture(data, &data->texture->ea_path, &line[i + 3]));
-	return(true);
+	else if (ft_strncmp(&line[i], "F ", 2) == 0)
+		return (save_color_code(data, data->texture->floor, &line[i + 1]));
+	else if (ft_strncmp(&line[i], "C ", 2) == 0)
+		return (save_color_code(data, data->texture->ceiling, &line[i + 1]));
+	return(false);
 }

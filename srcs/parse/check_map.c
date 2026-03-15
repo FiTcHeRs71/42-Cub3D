@@ -82,6 +82,9 @@ void	check_map(t_data *data, t_map *map)
 		check_arg(map->map[i], data, i);
 		i++;
 	}
-
+	printf("%s\n", data->texture->floor[0]);
+	printf("%s\n", data->texture->floor[1]);
+	printf("%s\n", data->texture->floor[2]);
+	puts("test");
 	is_valid_map(data, data->map); // flood_fill ?
 }

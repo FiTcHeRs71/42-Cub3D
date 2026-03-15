@@ -18,6 +18,8 @@ typedef struct s_texture
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+	char		**floor;
+	char		**ceiling;
 }				t_texture;
 
 typedef struct s_data
