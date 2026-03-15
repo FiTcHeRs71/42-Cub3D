@@ -4,15 +4,12 @@
 static bool save_color_code(t_data *data, char **rgb_code, char *line)
 {
 	int	i;
+	int	x;
 	char	**temp;
 
 	i = 0;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	/*if (*(*rgb_code)!= NULL)
-	{
-		return (false);
-	}*/
 	temp = ft_split(&line[i], ',');
 	if (!temp)
 	{
@@ -22,11 +19,19 @@ static bool save_color_code(t_data *data, char **rgb_code, char *line)
 	while (temp[i])
 	{
 		rgb_code[i] = ft_strtrim(temp[i], "\n");
+		if (!rgb_code[i])
+			ft_error(MALLOC_FAILED, data);
+		x = 0;
+		while (rgb_code[i][x])
+		{
+			if (ft_isdigit(rgb_code[i][x]))
+				ft_error(INVALID_SETTINGS, data);
+			x++;
+		}
 		i++;
 	}
 	ft_free_2d_array(temp);
 	return (true);
-
 }
 
 static bool	save_texture(t_data *data, char **texture_path, char *line)
