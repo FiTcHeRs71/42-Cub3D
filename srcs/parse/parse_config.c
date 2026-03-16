@@ -6,15 +6,15 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 	int		i;
 	char	**temp;
 	
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	temp = ft_split(&line[i], ',');
+	temp = ft_split(&line[0], ',');
 	if (!temp)
 		ft_error(MALLOC_FAILED, data);
-	i = 0;
-	while (temp[i])
-		i++;
+	i = ft_array_size(temp);
+	if (i != 3)
+	{
+		ft_free_2d_array(temp);
+		ft_error(INVALID_SETTINGS, data);
+	}
 	*(rgb_code) = ft_calloc(i, sizeof(char *));
 	i = 0;
 	while (temp[i])

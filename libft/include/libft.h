@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   workspace.json                                     :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/12 16:41:52 by fducrot           #+#    #+#             */
-/*   Updated: 2026/03/12 16:41:52 by fducrot          ###   ########.ch       */
+/*   Created: 2026/03/16 18:52:13 by fducrot           #+#    #+#             */
+/*   Updated: 2026/03/16 18:52:16 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 void	ft_free_2d_array(char **tab);
+int		ft_array_size(char **array);
 
 /* Fonction filedescriptor */
 void	ft_putchar_fd(char c, int fd);
