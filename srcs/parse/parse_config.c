@@ -15,7 +15,7 @@ static bool save_color_code(t_data *data, char ***rgb_code, char *line)
 		ft_error(MALLOC_FAILED, data);
 	}
 	i = 0;
-	*(rgb_code) = ft_calloc(3, sizeof(char *));
+	rgb_code = ft_calloc(3, sizeof(char **));
 	while (temp[i])
 	{
 		*(rgb_code)[i] = ft_strtrim(temp[i], "\n");
@@ -72,5 +72,5 @@ bool	extract_config(char *line, t_data *data)
 		return (save_color_code(data, &data->texture->floor, &line[i + 1]));
 	else if (ft_strncmp(&line[i], "C ", 2) == 0)
 		return (save_color_code(data, &data->texture->ceiling, &line[i + 1]));
-	return(true);
+	return(false);
 }
