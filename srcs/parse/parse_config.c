@@ -1,10 +1,9 @@
 
 #include "../../includes/cub3d.h"
 
-static bool save_color_code(t_data *data, char **rgb_code, char *line)
+static bool save_color_code(t_data *data, char ***rgb_code, char *line)
 {
 	int	i;
-	int	x;
 	char	**temp;
 
 	i = 0;
@@ -16,21 +15,19 @@ static bool save_color_code(t_data *data, char **rgb_code, char *line)
 		ft_error(MALLOC_FAILED, data);
 	}
 	i = 0;
+	*(rgb_code) = ft_calloc(3, sizeof(char *));
 	while (temp[i])
 	{
-		rgb_code[i] = ft_strtrim(temp[i], "\n");
+		*(rgb_code)[i] = ft_strtrim(temp[i], "\n");
 		if (!rgb_code[i])
 			ft_error(MALLOC_FAILED, data);
-		x = 0;
-		while (rgb_code[i][x])
-		{
-			if (ft_isdigit(rgb_code[i][x]))
-				ft_error(INVALID_SETTINGS, data);
-			x++;
-		}
 		i++;
 	}
 	ft_free_2d_array(temp);
+	if (i != 2)
+	{
+		ft_error(INVALID_SETTINGS, data);
+	}
 	return (true);
 }
 
@@ -72,8 +69,8 @@ bool	extract_config(char *line, t_data *data)
 	else if (ft_strncmp(&line[i], "EA ", 3) == 0)
 		return(save_texture(data, &data->texture->ea_path, &line[i + 3]));
 	else if (ft_strncmp(&line[i], "F ", 2) == 0)
-		return (save_color_code(data, data->texture->floor, &line[i + 1]));
+		return (save_color_code(data, &data->texture->floor, &line[i + 1]));
 	else if (ft_strncmp(&line[i], "C ", 2) == 0)
-		return (save_color_code(data, data->texture->ceiling, &line[i + 1]));
-	return(false);
+		return (save_color_code(data, &data->texture->ceiling, &line[i + 1]));
+	return(true);
 }
