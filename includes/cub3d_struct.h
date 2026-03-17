@@ -20,6 +20,8 @@ typedef struct s_texture
 	char		*ea_path;
 	char		**floor;
 	char		**ceiling;
+	int			*rgb_floor;
+	int			*rgb_ceiling;
 }				t_texture;
 
 typedef struct s_data

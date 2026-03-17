@@ -1,6 +1,31 @@
 
 #include "../../includes/cub3d.h"
 
+int	*get_color_code(t_data *data, char **arry_code)
+{
+	int	i;
+	int	j;
+	int	*rgb_code;
+
+	i = 0;
+	rgb_code = ft_calloc(3, sizeof(int *));
+	while (arry_code[i])
+	{
+		j = 0;
+		while (arry_code[i][j])
+		{
+			if(!ft_isdigit(arry_code[i][j]))
+				ft_error(INVALID_SETTINGS, data);
+			j++;
+		}
+		if (j > 3)
+			ft_error(INVALID_SETTINGS, data);
+		rgb_code[i] = ft_atoi(arry_code[i]);
+		i++;
+	}
+	return(rgb_code);
+}
+
 static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 {
 	int		i;
@@ -24,9 +49,8 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 			ft_error(MALLOC_FAILED, data);
 		i++;
 	}
+	(*rgb_code)[i] = NULL;
 	ft_free_2d_array(temp);
-	if (i != 3)
-		ft_error(INVALID_SETTINGS, data);
 	return (true);
 }
 

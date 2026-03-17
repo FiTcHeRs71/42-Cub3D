@@ -71,6 +71,8 @@ void	parse_cub3d(t_data *data, char *file)
 		free(line);
 		line = get_next_line(data->fd);
 	}
+	data->texture->rgb_ceiling = get_color_code(data, data->texture->ceiling);
+	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
 	data->map->map = copy_map(data, line);
 	check_map(data, data->map);
 }
