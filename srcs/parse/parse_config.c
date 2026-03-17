@@ -23,6 +23,8 @@ int	*get_color_code(t_data *data, char **arry_code)
 		rgb_code[i] = ft_atoi(arry_code[i]);
 		i++;
 	}
+	int test = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 16);
+	printf("%d", test);
 	return(rgb_code);
 }
 
