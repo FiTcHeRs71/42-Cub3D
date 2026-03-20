@@ -20,29 +20,20 @@ static bool	is_valid_color_code(char *str)
 int	get_color_code(t_data *data, char **array_code)
 {
 	int	i;
-	int	*rgb_code;
+	int	rgb_code[3];
 	int	bit_rgb;
 
 	i = 0;
-	rgb_code = ft_calloc(3, sizeof(int *));
 	while (array_code[i])
 	{
 		if (!is_valid_color_code(array_code[i]))
-		{
-			free(rgb_code);
 			ft_error(INVALID_SETTINGS, data);
-		}
 		rgb_code[i] = ft_atoi(array_code[i]);
 		if (rgb_code[i] > 255  || rgb_code[i] < 0)
-		{
-			free(rgb_code);
 			ft_error(INVALID_SETTINGS, data);
-		}
 		i++;
 	}
 	bit_rgb = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 0);
-	free(rgb_code);
-	printf("test valid color code\n");
 	return(bit_rgb);
 }
 

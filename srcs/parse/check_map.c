@@ -59,6 +59,7 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 	{
 		ft_error(INVALID_MAP, data);
 	}
+	map->map_copy[y][x] = '1';
 	flood_fill_valid_map(data, map, y - 1, x);
 	flood_fill_valid_map(data, map, y + 1, x);
 	flood_fill_valid_map(data, map, y, x - 1);
