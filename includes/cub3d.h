@@ -21,7 +21,7 @@
 void	parse_cub3d(t_data *data, char *file);
 bool	extract_config(char *line, t_data *data);
 void	check_map(t_data *data, t_map *map);
-int		*get_color_code(t_data *data, char **arry_code);
+int		get_color_code(t_data *data, char **arry_code);
 /*-------- UTILS ------------*/
 /*clear.c*/
 void	clean_all(t_data *data);

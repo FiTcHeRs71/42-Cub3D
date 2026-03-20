@@ -1,31 +1,49 @@
 
 #include "../../includes/cub3d.h"
 
-int	*get_color_code(t_data *data, char **arry_code)
+static bool	is_valid_color_code(char *str)
 {
 	int	i;
-	int	j;
+
+	i = 0;
+	if (!str || str[0] == '\0')
+		return (false);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+int	get_color_code(t_data *data, char **array_code)
+{
+	int	i;
 	int	*rgb_code;
+	int	bit_rgb;
 
 	i = 0;
 	rgb_code = ft_calloc(3, sizeof(int *));
-	while (arry_code[i])
+	while (array_code[i])
 	{
-		j = 0;
-		while (arry_code[i][j])
+		if (!is_valid_color_code(array_code[i]))
 		{
-			if(!ft_isdigit(arry_code[i][j]))
-				ft_error(INVALID_SETTINGS, data);
-			j++;
-		}
-		if (j > 3)
+			free(rgb_code);
 			ft_error(INVALID_SETTINGS, data);
-		rgb_code[i] = ft_atoi(arry_code[i]);
+		}
+		rgb_code[i] = ft_atoi(array_code[i]);
+		if (rgb_code[i] > 255  || rgb_code[i] < 0)
+		{
+			free(rgb_code);
+			ft_error(INVALID_SETTINGS, data);
+		}
 		i++;
 	}
-	int test = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 16);
-	printf("%d", test);
-	return(rgb_code);
+	bit_rgb = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 0);
+	free(rgb_code);
+	printf("test valid color code\n");
+	return(bit_rgb);
 }
 
 static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
