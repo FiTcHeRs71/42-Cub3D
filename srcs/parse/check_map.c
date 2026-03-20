@@ -51,15 +51,17 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (x < 0 || y < 0 || !map->map_copy[y] || !map->map_copy[y][x])
-		return ;
-	if (map->map_copy[y][x] == '1')
-		return ;
-	if ((map->map_copy[y][x] != '0') && (map->map_copy[y][x] != 'N'))
+	if (!map->map_copy[y] || !map->map_copy[y][x])
 	{
 		ft_error(INVALID_MAP, data);
 	}
-	map->map_copy[y][x] = '1';
+	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
+		return ;
+	if (map->map_copy[y][x] != '0' && map->map_copy[y][x] != 'N')
+	{
+		ft_error(INVALID_MAP, data);
+	}
+	map->map_copy[y][x] = 'X';
 	flood_fill_valid_map(data, map, y - 1, x);
 	flood_fill_valid_map(data, map, y + 1, x);
 	flood_fill_valid_map(data, map, y, x - 1);
@@ -70,7 +72,7 @@ static void	is_valid_map(t_data *data, t_map *map)
 {
 	map->map_copy = flood_fill_copy_map(data, map->map);
 	flood_fill_valid_map(data, map, map->player_y, map->player_x);
-	ft_printf("good");
+	ft_printf("good\n");
 }
 
 void	check_map(t_data *data, t_map *map)
@@ -83,5 +85,5 @@ void	check_map(t_data *data, t_map *map)
 		check_arg(map->map[i], data, i);
 		i++;
 	}
-	is_valid_map(data, data->map); // flood_fill ?
+	is_valid_map(data, data->map);
 }
