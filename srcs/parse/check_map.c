@@ -65,7 +65,7 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
 		return ;
-	if (map->map_copy[y][x] != '0' && map->map_copy[y][x] != 'N')
+	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
 	{
 		ft_error(INVALID_MAP, data);
 	}
