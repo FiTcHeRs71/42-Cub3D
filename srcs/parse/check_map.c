@@ -12,10 +12,18 @@ static void	check_arg(char *line, t_data *data, int y)
 		{
 			ft_error("only ascii parameters.\n", data);
 		}
+		if (ft_strchr("NSEW10 ", line[i]))
+		{
+			ft_error(INVALID_MAP, data);
+		}
 		if (ft_strchr("NSEW", line[i]))
 		{
 			data->map->player_x = i;
 			data->map->player_y = y;
+			if (data->map->player_flag == 0)
+				data->map->player_flag = 1;
+			else
+				ft_error(NB_PLAYER, data);
 		}
 		i++;
 	}
@@ -53,14 +61,12 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
 	if (!map->map_copy[y] || !map->map_copy[y][x])
 	{
-		printf("invalid\n");
 		ft_error(INVALID_MAP, data);
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X' || y < 0 || x < 0)
 		return ;
 	if (map->map_copy[y][x] != '0' && map->map_copy[y][x] != 'N')
 	{
-		printf("trou\n");
 		ft_error(INVALID_MAP, data);
 	}
 	map->map_copy[y][x] = 'X';

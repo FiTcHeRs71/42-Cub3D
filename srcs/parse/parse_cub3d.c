@@ -40,7 +40,7 @@ void	parse_cub3d(t_data *data, char *file)
 	char	*line;
 	int		config_count;
 
-	if (ft_strncmp(&file[ft_strlen(file + 4)], ".cub", 4))
+	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))
 	{
 		ft_error("File map has to be .cub\n", data);
 	}
