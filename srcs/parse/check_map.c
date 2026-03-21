@@ -8,13 +8,11 @@ static void	check_arg(char *line, t_data *data, int y)
 	i = 0;
 	while (line[i])
 	{
+		if (line[i] == '\0')
+			ft_error(INVALID_MAP, data);
 		if (!ft_isascii(line[i]))
 		{
 			ft_error("only ascii parameters.\n", data);
-		}
-		if (ft_strchr("NSEW10 ", line[i]))
-		{
-			ft_error(INVALID_MAP, data);
 		}
 		if (ft_strchr("NSEW", line[i]))
 		{
