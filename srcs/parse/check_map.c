@@ -6,10 +6,10 @@ static void	check_arg(char *line, t_data *data, int y)
 	size_t	i;
 
 	i = 0;
+	if (line[0] =='\0')
+		ft_error(INVALID_MAP, data);
 	while (line[i])
 	{
-		if (line[i] == '\0')
-			ft_error(INVALID_MAP, data);
 		if (!ft_isascii(line[i]))
 		{
 			ft_error("only ascii parameters.\n", data);
@@ -57,11 +57,13 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
+	if (x < 0 || y < 0)
+		return ;
 	if (!map->map_copy[y] || !map->map_copy[y][x])
 	{
 		ft_error(INVALID_MAP, data);
 	}
-	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X' || y < 0 || x < 0)
+	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
 		return ;
 	if (map->map_copy[y][x] != '0' && map->map_copy[y][x] != 'N')
 	{
