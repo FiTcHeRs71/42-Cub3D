@@ -109,5 +109,9 @@ void	check_map(t_data *data, t_map *map)
 		check_arg(map->map[i], data, i);
 		i++;
 	}
+	if (map->player_flag == 0)
+	{
+		ft_error(NB_PLAYER, data);
+	}
 	is_valid_map(data, data->map);
 }
