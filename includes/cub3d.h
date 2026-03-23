@@ -26,6 +26,7 @@ int				get_color_code(t_data *data, char **arry_code);
 void			node_map_add_back(t_linked_map **lst, t_linked_map *new);
 t_linked_map	*new_node_map(void *content);
 int				node_map_size(t_linked_map *lst);
+
 /*-------- UTILS ------------*/
 /*clear.c*/
 void			clean_all(t_data *data);

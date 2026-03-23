@@ -3,16 +3,15 @@
 
 static void copy_map(t_data *data, char *line)
 {
-
+	char	*tmp;
 	while (line)
 	{
-		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(line)));
-		if (!data->linked_map || !data->linked_map->line)
-		{
-			free(line);
-			ft_error(MALLOC_FAILED, data);
-		}
+		tmp = ft_strtrim(line, "\n");
+		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(tmp)));
+		free(tmp);
 		free(line);
+		if (!data->linked_map || !data->linked_map->line)
+			ft_error(MALLOC_FAILED, data);
 		line = get_next_line(data->fd);
 	}
 }

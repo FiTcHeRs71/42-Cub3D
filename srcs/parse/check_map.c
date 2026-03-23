@@ -57,16 +57,18 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (!map->map_copy[y] || !map->map_copy[y][x] || x < 0 || y < 0)
+	if (y < 0 || x < 0)
 	{
-		printf("y = %d, x = %d\n", y, x);
+		ft_error(INVALID_MAP, data);
+	}
+	if (!map->map_copy[y] || !map->map_copy[y][x])
+	{
 		ft_error(INVALID_MAP, data);
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
 		return ;
 	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
 	{
-		printf("y = %d, x = %d\n", y, x);
 		ft_error(INVALID_MAP, data);
 	}
 	map->map_copy[y][x] = 'X';
@@ -101,6 +103,7 @@ void	check_map(t_data *data, t_map *map)
 		data->linked_map = data->linked_map->next;
 		i++;
 	}
+	i = 0;
 	while (map->map[i])
 	{
 		check_arg(map->map[i], data, i);
