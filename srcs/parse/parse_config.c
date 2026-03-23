@@ -51,7 +51,7 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 		ft_free_2d_array(temp);
 		ft_error(INVALID_SETTINGS, data);
 	}
-	*(rgb_code) = ft_calloc(i, sizeof(char *));
+	*(rgb_code) = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	while (temp[i])
 	{
