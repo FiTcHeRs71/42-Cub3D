@@ -1,28 +1,20 @@
 
 #include "../../includes/cub3d.h"
 
-static char	**copy_map(t_data *data, char *line)
+static void copy_map(t_data *data, char *line)
 {
-	char	*temp;
-	char	*old_temp;
-	char	**args;
 
-	temp = ft_strdup("");
-	if (!temp)
-		return (NULL);
 	while (line)
 	{
-		old_temp = temp;
-		temp = ft_strjoin(temp, line);
-		free(old_temp);
+		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(line)));
+		if (!data->linked_map || !data->linked_map->line)
+		{
+			free(line);
+			ft_error(MALLOC_FAILED, data);
+		}
 		free(line);
-		if (!temp)
-			return (NULL);
 		line = get_next_line(data->fd);
 	}
-	args = ft_split(temp, '\n');
-	free(temp);
-	return (args);
 }
 
 static void	init_struct(t_data *data)
@@ -73,6 +65,6 @@ void	parse_cub3d(t_data *data, char *file)
 	}
 	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
 	data->texture->rgb_ceiling = get_color_code(data, data->texture->ceiling);
-	data->map->map = copy_map(data, line);
+	copy_map(data, line);
 	check_map(data, data->map);
 }

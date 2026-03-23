@@ -10,9 +10,9 @@ static void	check_arg(char *line, t_data *data, int y)
 		ft_error(INVALID_MAP, data);
 	while (line[i])
 	{
-		if (!ft_isascii(line[i]))
+		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEW\n\t", line[i])))
 		{
-			ft_error("only ascii parameters.\n", data);
+			ft_error("Invalid parameters in map.\n", data);
 		}
 		if (ft_strchr("NSEW", line[i]))
 		{
@@ -57,16 +57,16 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (x < 0 || y < 0)
-		return ;
-	if (!map->map_copy[y] || !map->map_copy[y][x])
+	if (!map->map_copy[y] || !map->map_copy[y][x] || x < 0 || y < 0)
 	{
+		printf("y = %d, x = %d\n", y, x);
 		ft_error(INVALID_MAP, data);
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
 		return ;
 	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
 	{
+		printf("y = %d, x = %d\n", y, x);
 		ft_error(INVALID_MAP, data);
 	}
 	map->map_copy[y][x] = 'X';
@@ -88,6 +88,19 @@ void	check_map(t_data *data, t_map *map)
 	int	i;
 
 	i = 0;
+	map->map = ft_calloc(node_map_size(data->linked_map) + 1, sizeof(char *));
+	if (!map->map)
+		ft_error(MALLOC_FAILED, data);
+	while (data->linked_map)
+	{
+		if (data->linked_map->line[0] == '\n' || data->linked_map->line[0] == '\0')
+			ft_error(INVALID_MAP, data);
+		map->map[i] = ft_strdup(data->linked_map->line);
+		if (!map->map[i])
+			ft_error(MALLOC_FAILED, data);
+		data->linked_map = data->linked_map->next;
+		i++;
+	}
 	while (map->map[i])
 	{
 		check_arg(map->map[i], data, i);
