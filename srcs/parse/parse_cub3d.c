@@ -4,13 +4,13 @@
 static void copy_map(t_data *data, char *line)
 {
 	char	*tmp;
+	while (line[0] == '\n')
+	{
+		free(line);
+		line = get_next_line(data->fd);
+	}
 	while (line)
 	{
-		while (line[0] == '\n')
-		{
-			free(line);
-			line = get_next_line(data->fd);
-		}
 		tmp = ft_strtrim(line, "\n");
 		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(tmp)));
 		free(tmp);
