@@ -5,7 +5,7 @@ static void	copy_map(t_data *data, char *line)
 {
 	char	*tmp;
 
-	while (line[0] == '\n')
+	while (ft_is_whitespace(line) == 1)
 	{
 		free(line);
 		line = get_next_line(data->fd);

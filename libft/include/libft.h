@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 18:52:13 by fducrot           #+#    #+#             */
-/*   Updated: 2026/03/16 18:52:16 by fducrot          ###   ########.ch       */
+/*   Created: 2026/03/24 17:05:16 by fducrot           #+#    #+#             */
+/*   Updated: 2026/03/24 17:05:16 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_is_whitespace(char *str);
 
 /* Fonction mem */
 void	*ft_memchr(const void *s, int c, size_t n);
