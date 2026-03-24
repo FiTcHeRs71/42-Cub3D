@@ -60,7 +60,7 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y]))
+	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y]) || y >= node_map_size(data->linked_map))
 	{
 		ft_error(INVALID_MAP, data);
 	}
@@ -69,7 +69,9 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 		ft_error(INVALID_MAP, data);
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
+	{
 		return ;
+	}
 	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
 	{
 		ft_error(INVALID_MAP, data);
@@ -85,7 +87,7 @@ static void	is_valid_map(t_data *data, t_map *map)
 {
 	map->map_copy = flood_fill_copy_map(data, map->map);
 	flood_fill_valid_map(data, map, map->player_y, map->player_x);
-	printf("good\n");
+	printf("good MAP\n");
 }
 
 void	check_map(t_data *data, t_map *map)
