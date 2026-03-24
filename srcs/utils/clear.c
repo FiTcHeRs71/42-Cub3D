@@ -5,10 +5,8 @@ static void free_linked_map(t_linked_map *linked_map)
 {
 	t_linked_map	*temp;
 
-	printf("Freeing linked map...\n"); // Debug statement
 	while (linked_map)
 	{
-		printf("Freeing linked map node: %s\n", linked_map->line); // Debug statement
 		temp = linked_map;
 		linked_map = linked_map->next;
 		if (temp->line)
@@ -53,7 +51,9 @@ static void free_map_struct(t_map *map)
 static void close_fds(t_data *data)
 {
 	if (data->fd > 0)
+	{
 		close(data->fd);
+	}
 }
 
 void	clean_all(t_data *data)
@@ -62,7 +62,6 @@ void	clean_all(t_data *data)
 	close_fds(data);
 	free_map_struct(data->map);
 	free_texture_struct(data->texture);
-	printf("%p\n", data->linked_map); // Debug statement
 	free_linked_map(data->linked_map);
 	ft_memset(data, 0, sizeof(t_data));
 	return ;

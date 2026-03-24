@@ -55,3 +55,22 @@ t_linked_map	*new_node_map(void *content)
 	new_elem->line = content;
 	return (new_elem);
 }
+
+void convert_linked_map_to_array(t_data *data, t_map *map)
+{
+	t_linked_map *current;
+	int i;
+
+	current = data->linked_map;
+	i = 0;
+	while (current)
+	{
+		if (current->line[0] == '\n' || current->line[0] == '\0')
+			ft_error(INVALID_MAP, data);
+		map->map[i] = ft_strdup(current->line);
+		if (!map->map[i])
+			ft_error(MALLOC_FAILED, data);
+		current = current->next;
+		i++;
+	}
+}

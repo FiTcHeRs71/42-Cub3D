@@ -11,23 +11,13 @@ static void copy_map(t_data *data, char *line)
 	}
 	while (line)
 	{
-		tmp = ft_strtrim(line, "\n");
+		tmp = ft_strtrim(line, "\t\n");
 		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(tmp)));
 		free(tmp);
 		free(line);
 		if (!data->linked_map || !data->linked_map->line)
 			ft_error(MALLOC_FAILED, data);
 		line = get_next_line(data->fd);
-	}
-}
-
-static void	init_struct(t_data *data)
-{
-	data->map = ft_calloc(1, sizeof(t_map));
-	data->texture = ft_calloc(1, sizeof(t_texture));
-	if (!data->map || !data->texture)
-	{
-		ft_error(MALLOC_FAILED, data);
 	}
 }
 
@@ -45,20 +35,28 @@ static void fill_config(t_data *data)
 			if (extract_config(line, data))
 			{
 				if (line[0] != '\n' && line[0] != '\0') 
-					config_count++;
+				config_count++;
 			}
 			else
-				ft_error(INVALID_SETTINGS, data);
+			ft_error(INVALID_SETTINGS, data);
 		}
 		else
-			break ;
+		break ;
 		free(line);
 		line = get_next_line(data->fd);
 	}
 	copy_map(data, line);
-	check_map(data, data->map);
 }
 
+static void	init_struct(t_data *data)
+{
+	data->map = ft_calloc(1, sizeof(t_map));
+	data->texture = ft_calloc(1, sizeof(t_texture));
+	if (!data->map || !data->texture)
+	{
+		ft_error(MALLOC_FAILED, data);
+	}
+}
 void	parse_cub3d(t_data *data, char *file)
 {
 	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))
@@ -72,6 +70,7 @@ void	parse_cub3d(t_data *data, char *file)
 	}
 	init_struct(data);
 	fill_config(data);
+	check_map(data, data->map);
 	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
 	data->texture->rgb_ceiling = get_color_code(data, data->texture->ceiling);
 }

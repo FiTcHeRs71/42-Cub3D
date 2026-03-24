@@ -20,12 +20,13 @@
 
 /*-------- PARSE ------------*/
 void			parse_cub3d(t_data *data, char *file);
-bool			extract_config(char *line, t_data *data);
 void			check_map(t_data *data, t_map *map);
-int				get_color_code(t_data *data, char **arry_code);
 void			node_map_add_back(t_linked_map **lst, t_linked_map *new);
-t_linked_map	*new_node_map(void *content);
+void			convert_linked_map_to_array(t_data *data, t_map *map);
+bool			extract_config(char *line, t_data *data);
+int				get_color_code(t_data *data, char **arry_code);
 int				node_map_size(t_linked_map *lst);
+t_linked_map	*new_node_map(void *content);
 
 /*-------- UTILS ------------*/
 /*clear.c*/

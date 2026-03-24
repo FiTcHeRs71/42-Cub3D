@@ -11,17 +11,20 @@ static void	check_arg(char *line, t_data *data, int y)
 	while (line[i])
 	{
 		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEW\n\t", line[i])))
-		{
 			ft_error("Invalid parameters in map.\n", data);
-		}
-		if (ft_strchr("NSEW", line[i])) // save player dir ?
+		if (ft_strchr("NSEW", line[i]))
 		{
+			if(ft_strchr("N", line[i]))
+				data->map->payer_dir = NORTH;
+			if(ft_strchr("S", line[i]))
+				data->map->payer_dir = SOUTH;
+			if(ft_strchr("W", line[i]))
+				data->map->payer_dir = WEST;
+			if(ft_strchr("E", line[i]))
+				data->map->payer_dir = EAST;
 			data->map->player_x = i;
 			data->map->player_y = y;
-			if (data->map->player_flag == 0)
-				data->map->player_flag = 1;
-			else
-				ft_error(NB_PLAYER, data);
+			data->map->player_flag += 1;
 		}
 		i++;
 	}
@@ -93,23 +96,13 @@ void	check_map(t_data *data, t_map *map)
 	map->map = ft_calloc(node_map_size(data->linked_map) + 1, sizeof(char *));
 	if (!map->map)
 		ft_error(MALLOC_FAILED, data);
-	while (data->linked_map)
-	{
-		if (data->linked_map->line[0] == '\n' || data->linked_map->line[0] == '\0')
-			ft_error(INVALID_MAP, data);
-		map->map[i] = ft_strdup(data->linked_map->line);
-		if (!map->map[i])
-			ft_error(MALLOC_FAILED, data);
-		data->linked_map = data->linked_map->next;
-		i++;
-	}
-	i = 0;
+	convert_linked_map_to_array(data, map);
 	while (map->map[i])
 	{
 		check_arg(map->map[i], data, i);
 		i++;
 	}
-	if (map->player_flag == 0)
+	if (map->player_flag != 1)
 		ft_error(NB_PLAYER, data);
 	is_valid_map(data, data->map);
 }
