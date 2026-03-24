@@ -26,6 +26,7 @@ int	node_map_size(t_linked_map *lst)
 	}
 	return (size);
 }
+
 void	node_map_add_back(t_linked_map **lst, t_linked_map *new)
 {
 	t_linked_map	*last;
@@ -56,10 +57,10 @@ t_linked_map	*new_node_map(void *content)
 	return (new_elem);
 }
 
-void convert_linked_map_to_array(t_data *data, t_map *map)
+void	convert_linked_map_to_array(t_data *data, t_map *map)
 {
-	t_linked_map *current;
-	int i;
+	t_linked_map	*current;
+	int				i;
 
 	current = data->linked_map;
 	i = 0;

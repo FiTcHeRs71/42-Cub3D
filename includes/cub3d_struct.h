@@ -7,43 +7,43 @@ typedef enum e_direction
 	SOUTH,
 	WEST,
 	EAST
-}				t_direction;
+}						t_direction;
 
 typedef struct s_linked_map
 {
-	char					*line;
-	struct s_linked_map			*next;
-}				t_linked_map;
+	char				*line;
+	struct s_linked_map	*next;
+}						t_linked_map;
 
 typedef struct s_map
 {
-	char		**map;
-	char		**map_copy;
-	int			wall_flag;
-	int			player_flag;
-	int			player_x;
-	int			player_y;
-	int			payer_dir;
-}				t_map;
+	char				**map;
+	char				**map_copy;
+	int					wall_flag;
+	int					player_flag;
+	int					player_x;
+	int					player_y;
+	int					payer_dir;
+}						t_map;
 
 typedef struct s_texture
 {
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	char		**floor;
-	char		**ceiling;
-	int			rgb_floor;
-	int			rgb_ceiling;
-}				t_texture;
+	char				*no_path;
+	char				*so_path;
+	char				*we_path;
+	char				*ea_path;
+	char				**floor;
+	char				**ceiling;
+	int					rgb_floor;
+	int					rgb_ceiling;
+}						t_texture;
 
 typedef struct s_data
 {
-	int				fd;
-	t_map			*map;
-	t_texture		*texture;
+	int					fd;
+	t_map				*map;
+	t_texture			*texture;
 	struct s_linked_map	*linked_map;
-}				t_data;
+}						t_data;
 
 #endif

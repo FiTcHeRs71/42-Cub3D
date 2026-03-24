@@ -1,7 +1,7 @@
 
 #include "../../includes/cub3d.h"
 
-static void free_linked_map(t_linked_map *linked_map)
+static void	free_linked_map(t_linked_map *linked_map)
 {
 	t_linked_map	*temp;
 
@@ -15,7 +15,7 @@ static void free_linked_map(t_linked_map *linked_map)
 	}
 }
 
-static void free_texture_struct(t_texture *texture)
+static void	free_texture_struct(t_texture *texture)
 {
 	if (texture)
 	{
@@ -35,7 +35,7 @@ static void free_texture_struct(t_texture *texture)
 	}
 }
 
-static void free_map_struct(t_map *map)
+static void	free_map_struct(t_map *map)
 {
 	if (map)
 	{
@@ -43,12 +43,11 @@ static void free_map_struct(t_map *map)
 			ft_free_2d_array(map->map);
 		if (map->map_copy)
 			ft_free_2d_array(map->map_copy);
-	
 		free(map);
 	}
 }
 
-static void close_fds(t_data *data)
+static void	close_fds(t_data *data)
 {
 	if (data->fd > 0)
 	{

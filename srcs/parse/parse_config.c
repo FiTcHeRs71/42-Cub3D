@@ -29,19 +29,19 @@ int	get_color_code(t_data *data, char **array_code)
 		if (!is_valid_color_code(array_code[i]))
 			ft_error(INVALID_SETTINGS, data);
 		rgb_code[i] = ft_atoi(array_code[i]);
-		if (rgb_code[i] > 255  || rgb_code[i] < 0)
+		if (rgb_code[i] > 255 || rgb_code[i] < 0)
 			ft_error(INVALID_SETTINGS, data);
 		i++;
 	}
 	bit_rgb = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 0);
-	return(bit_rgb);
+	return (bit_rgb);
 }
 
 static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 {
 	int		i;
 	char	**temp;
-	
+
 	temp = ft_split(&line[0], ',');
 	if (!temp)
 		ft_error(MALLOC_FAILED, data);

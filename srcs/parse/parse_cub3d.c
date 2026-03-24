@@ -1,9 +1,10 @@
 
 #include "../../includes/cub3d.h"
 
-static void copy_map(t_data *data, char *line)
+static void	copy_map(t_data *data, char *line)
 {
 	char	*tmp;
+
 	while (line[0] == '\n')
 	{
 		free(line);
@@ -21,7 +22,7 @@ static void copy_map(t_data *data, char *line)
 	}
 }
 
-static void fill_config(t_data *data)
+static void	fill_config(t_data *data)
 {
 	char	*line;
 	int		config_count;
@@ -34,14 +35,14 @@ static void fill_config(t_data *data)
 		{
 			if (extract_config(line, data))
 			{
-				if (line[0] != '\n' && line[0] != '\0') 
-				config_count++;
+				if (line[0] != '\n' && line[0] != '\0')
+					config_count++;
 			}
 			else
-			ft_error(INVALID_SETTINGS, data);
+				ft_error(INVALID_SETTINGS, data);
 		}
 		else
-		break ;
+			break ;
 		free(line);
 		line = get_next_line(data->fd);
 	}
@@ -57,6 +58,7 @@ static void	init_struct(t_data *data)
 		ft_error(MALLOC_FAILED, data);
 	}
 }
+
 void	parse_cub3d(t_data *data, char *file)
 {
 	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))

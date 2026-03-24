@@ -6,7 +6,7 @@ static void	check_arg(char *line, t_data *data, int y)
 	size_t	i;
 
 	i = 0;
-	if (line[0] =='\0')
+	if (line[0] == '\0')
 		ft_error(INVALID_MAP, data);
 	while (line[i])
 	{
@@ -14,13 +14,13 @@ static void	check_arg(char *line, t_data *data, int y)
 			ft_error("Invalid parameters in map.\n", data);
 		if (ft_strchr("NSEW", line[i]))
 		{
-			if(ft_strchr("N", line[i]))
+			if (ft_strchr("N", line[i]))
 				data->map->payer_dir = NORTH;
-			if(ft_strchr("S", line[i]))
+			if (ft_strchr("S", line[i]))
 				data->map->payer_dir = SOUTH;
-			if(ft_strchr("W", line[i]))
+			if (ft_strchr("W", line[i]))
 				data->map->payer_dir = WEST;
-			if(ft_strchr("E", line[i]))
+			if (ft_strchr("E", line[i]))
 				data->map->payer_dir = EAST;
 			data->map->player_x = i;
 			data->map->player_y = y;
@@ -60,7 +60,8 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y]) || y >= node_map_size(data->linked_map))
+	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y])
+		|| y >= node_map_size(data->linked_map))
 	{
 		ft_error(INVALID_MAP, data);
 	}
