@@ -54,12 +54,12 @@ static void fill_config(t_data *data)
 		free(line);
 		line = get_next_line(data->fd);
 	}
+	copy_map(data, line);
+	check_map(data, data->map);
 }
 
 void	parse_cub3d(t_data *data, char *file)
 {
-	char	*line;
-
 	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))
 	{
 		ft_error("File map has to be .cub\n", data);
@@ -73,6 +73,4 @@ void	parse_cub3d(t_data *data, char *file)
 	fill_config(data);
 	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
 	data->texture->rgb_ceiling = get_color_code(data, data->texture->ceiling);
-	copy_map(data, line);
-	check_map(data, data->map);
 }

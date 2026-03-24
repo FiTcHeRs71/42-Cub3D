@@ -14,7 +14,7 @@ static void	check_arg(char *line, t_data *data, int y)
 		{
 			ft_error("Invalid parameters in map.\n", data);
 		}
-		if (ft_strchr("NSEW", line[i]))
+		if (ft_strchr("NSEW", line[i])) // save player dir ?
 		{
 			data->map->player_x = i;
 			data->map->player_y = y;

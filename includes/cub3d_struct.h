@@ -1,6 +1,14 @@
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
 
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}				t_direction;
+
 typedef struct s_linked_map
 {
 	char					*line;
@@ -15,7 +23,7 @@ typedef struct s_map
 	int			player_flag;
 	int			player_x;
 	int			player_y;
-	char		player_dir;
+	int			payer_dir;
 }				t_map;
 
 typedef struct s_texture
