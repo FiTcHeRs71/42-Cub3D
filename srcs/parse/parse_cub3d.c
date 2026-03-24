@@ -37,6 +37,7 @@ static void fill_config(t_data *data)
 	int		config_count;
 
 	line = get_next_line(data->fd);
+	config_count = 0;
 	while (line)
 	{
 		if (config_count < 6)

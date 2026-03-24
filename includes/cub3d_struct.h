@@ -12,7 +12,7 @@ typedef enum e_direction
 typedef struct s_linked_map
 {
 	char					*line;
-	struct s_linked_map		*next;
+	struct s_linked_map			*next;
 }				t_linked_map;
 
 typedef struct s_map
@@ -43,7 +43,7 @@ typedef struct s_data
 	int				fd;
 	t_map			*map;
 	t_texture		*texture;
-	t_linked_map	*linked_map;
+	struct s_linked_map	*linked_map;
 }				t_data;
 
 #endif
