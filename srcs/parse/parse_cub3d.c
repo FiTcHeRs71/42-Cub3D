@@ -31,22 +31,11 @@ static void	init_struct(t_data *data)
 	}
 }
 
-void	parse_cub3d(t_data *data, char *file)
+static void fill_config(t_data *data)
 {
 	char	*line;
 	int		config_count;
 
-	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))
-	{
-		ft_error("File map has to be .cub\n", data);
-	}
-	data->fd = open(file, O_RDONLY);
-	if (data->fd < 0)
-	{
-		ft_error(FD_ERROR, data);
-	}
-	init_struct(data);
-	config_count = 0;
 	line = get_next_line(data->fd);
 	while (line)
 	{
@@ -61,12 +50,27 @@ void	parse_cub3d(t_data *data, char *file)
 				ft_error(INVALID_SETTINGS, data);
 		}
 		else
-		{
 			break ;
-		}
 		free(line);
 		line = get_next_line(data->fd);
 	}
+}
+
+void	parse_cub3d(t_data *data, char *file)
+{
+	char	*line;
+
+	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))
+	{
+		ft_error("File map has to be .cub\n", data);
+	}
+	data->fd = open(file, O_RDONLY);
+	if (data->fd < 0)
+	{
+		ft_error(FD_ERROR, data);
+	}
+	init_struct(data);
+	fill_config(data);
 	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
 	data->texture->rgb_ceiling = get_color_code(data, data->texture->ceiling);
 	copy_map(data, line);

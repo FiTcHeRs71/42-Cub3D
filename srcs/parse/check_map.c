@@ -82,7 +82,7 @@ static void	is_valid_map(t_data *data, t_map *map)
 {
 	map->map_copy = flood_fill_copy_map(data, map->map);
 	flood_fill_valid_map(data, map, map->player_y, map->player_x);
-	ft_printf("good\n");
+	printf("good\n");
 }
 
 void	check_map(t_data *data, t_map *map)
@@ -110,8 +110,6 @@ void	check_map(t_data *data, t_map *map)
 		i++;
 	}
 	if (map->player_flag == 0)
-	{
 		ft_error(NB_PLAYER, data);
-	}
 	is_valid_map(data, data->map);
 }
