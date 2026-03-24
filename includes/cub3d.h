@@ -13,8 +13,8 @@
 # define MALLOC_FAILED "Memory allocation failed, exit \n"
 # define FD_ERROR "Unable to open map file, exit \n"
 # define INVALID_MAP "Invalid map, exit \n"
-# define INVALID_SETTINGS "Invalid configuration format or missing elements\n"
-# define NB_PLAYER "Map must contain only one player\n"
+# define INVALID_SETTINGS "Invalid configuration format or missing elements, exit\n"
+# define NB_PLAYER "Map must contain only one player, exit\n"
 
 /*================== FONCTION ==================*/
 
