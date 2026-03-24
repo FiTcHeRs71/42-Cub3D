@@ -11,7 +11,7 @@ static void copy_map(t_data *data, char *line)
 	}
 	while (line)
 	{
-		tmp = ft_strtrim(line, "\t\n");
+		tmp = ft_strtrim(line, "\n");
 		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(tmp)));
 		free(tmp);
 		free(line);

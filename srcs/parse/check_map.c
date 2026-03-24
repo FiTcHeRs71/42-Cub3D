@@ -60,7 +60,7 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (y < 0 || x < 0)
+	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y]))
 	{
 		ft_error(INVALID_MAP, data);
 	}
