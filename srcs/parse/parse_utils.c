@@ -1,6 +1,10 @@
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @file parse_utils.c
+ * @brief Utility functions for parsing the .cub configuration file.
+ */
 static t_linked_map	*node_map_last(t_linked_map *lst)
 {
 	if (!lst)

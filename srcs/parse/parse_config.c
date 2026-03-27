@@ -16,7 +16,16 @@ static bool	is_valid_color_code(char *str)
 	}
 	return (true);
 }
-
+/**
+ * @brief checks that the code is valid and performs the bit shifting.
+ * 
+ * Checks that the code contains only numbers.
+ * Converts ASCII characters to integers.
+ * did the bit shifting.
+ * 
+ * @param data  Pointer to the main structure where parsed data is stored.
+ * @param array_code Double pointer or where is the code stored.
+ */
 int	get_color_code(t_data *data, char **array_code)
 {
 	int	i;
@@ -36,7 +45,17 @@ int	get_color_code(t_data *data, char **array_code)
 	bit_rgb = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 0);
 	return (bit_rgb);
 }
-
+/**
+ * @brief Splits and stores an RGB color string into the texture structure.
+ *
+ * Splits the line by ',' expecting exactly 3 components (R, G, B),
+ * trims whitespace from each, and allocates the result into rgb_code.
+ *
+ * @param data      Pointer to the main structure (used for error handling).
+ * @param rgb_code  Output double pointer where the split color array is stored.
+ * @param line      Raw color string to parse (e.g. "255,128,0").
+ * @return true on success, false otherwise.
+ */
 static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 {
 	int		i;
@@ -84,7 +103,16 @@ static bool	save_texture(t_data *data, char **texture_path, char *line)
 		(*texture_path)[i] = '\0';
 	return (true);
 }
-
+/**
+ * @brief Parses a single configuration line and stores the corresponding value.
+ *
+ * Identifies the identifier (NO, SO, WE, EA, F, C) and dispatches
+ * to save_texture or save_color_code. Skips empty and whitespace-only lines.
+ *
+ * @param line  The raw line read from the .cub file.
+ * @param data  Pointer to the main structure where config is stored.
+ * @return true if the line is valid or empty, false if unrecognized.
+ */
 bool	extract_config(char *line, t_data *data)
 {
 	int	i;

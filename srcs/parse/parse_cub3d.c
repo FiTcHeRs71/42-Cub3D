@@ -21,7 +21,15 @@ static void	copy_map(t_data *data, char *line)
 		line = get_next_line(data->fd);
 	}
 }
-
+/**
+ * @brief opens the map file and parses the elements.
+ *
+ * Records the absolute path to the NORT, SOUTH, EAST, and WEST textures
+ * Copy the map contained in the file into a linked list
+ * Saves and converts RGB codes for the floor and ceiling.
+ *
+ * @param data  Pointer to the main structure where parsed data is stored.
+ */
 static void	fill_config(t_data *data)
 {
 	char	*line;
@@ -59,6 +67,17 @@ static void	init_struct(t_data *data)
 	}
 }
 
+/**
+ * @brief Parses and validates the .cub configuration file.
+ *
+ * Checks that the file has a .cub extension, opens it, initializes
+ * the map and texture structures, extracts the configuration settings
+ * and map data, validates the map, then computes the RGB color codes
+ * for the floor and ceiling.
+ *
+ * @param data  Pointer to the main structure where parsed data is stored.
+ * @param file  Path to the .cub file to parse.
+ */
 void	parse_cub3d(t_data *data, char *file)
 {
 	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))

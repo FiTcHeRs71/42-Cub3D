@@ -57,7 +57,18 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 	copy[i] = NULL;
 	return (copy);
 }
-
+/**
+ * @brief Recursively validates map boundaries using a flood fill algorithm.
+ *
+ * Starting from the player's position, marks visited cells with 'X' and
+ * explores all 4 directions. Exits with an error if a cell goes out of
+ * bounds or hits an invalid character, ensuring the map is fully enclosed.
+ *
+ * @param data  Pointer to the main structure (used for error handling).
+ * @param map   Pointer to the map structure containing the working copy.
+ * @param y     Current row index.
+ * @param x     Current column index.
+ */
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
 	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y])
@@ -84,13 +95,15 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 	flood_fill_valid_map(data, map, y, x + 1);
 }
 
-static void	is_valid_map(t_data *data, t_map *map)
-{
-	map->map_copy = flood_fill_copy_map(data, map->map);
-	flood_fill_valid_map(data, map, map->player_y, map->player_x);
-	printf("good MAP\n");
-}
-
+/**
+ * @brief Convert the map into a linked list and verify its validity.
+ * 
+ * Saves the map to an array (char**).
+ * Copy the map to another array to perform a flood fill.
+ * 
+ * @param data Pointer to the main structure where parsed data is stored.
+ * @param map Pointer to the structure where the map and player info is stored.
+ */
 void	check_map(t_data *data, t_map *map)
 {
 	int	i;
@@ -107,5 +120,7 @@ void	check_map(t_data *data, t_map *map)
 	}
 	if (map->player_flag != 1)
 		ft_error(NB_PLAYER, data);
-	is_valid_map(data, data->map);
+	map->map_copy = flood_fill_copy_map(data, map->map);
+	flood_fill_valid_map(data, map, map->player_y, map->player_x);
+	printf("good MAP\n");
 }
