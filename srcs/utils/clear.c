@@ -55,6 +55,14 @@ static void	close_fds(t_data *data)
 	}
 }
 
+/**
+ * @brief Frees all allocated resources and resets the main data structure.
+ *
+ * Closes any open file descriptors, frees the map, textures,
+ * and linked map, then zeroes out the data structure with ft_memset.
+ *
+ * @param data  Pointer to the main structure holding all program resources.
+ */
 void	clean_all(t_data *data)
 {
 	printf("Cleaning all resources...\n"); // Debug statement
