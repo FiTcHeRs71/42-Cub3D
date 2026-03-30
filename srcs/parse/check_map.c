@@ -1,6 +1,15 @@
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief Validates the map's characters and counts player occurrences.
+ * 
+ * Checks each character in the map line for validity 
+ * (only ' ', '0', '1', 'N', 'S', 'E', 'W' are allowed).
+ * @param line  The current line of the map being checked.
+ * @param data  Pointer to the main structure (used for error handling and player info).
+ * @param y     The current row index in the map (used for player position).
+ */
 static void	check_arg(char *line, t_data *data, int y)
 {
 	size_t	i;
@@ -54,7 +63,6 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 		}
 		i++;
 	}
-	copy[i] = NULL;
 	return (copy);
 }
 /**
