@@ -6,7 +6,7 @@ typedef enum e_direction
 	NORTH,
 	SOUTH,
 	WEST,
-	EAST
+	EAST,
 }						t_direction;
 
 typedef struct s_linked_map
