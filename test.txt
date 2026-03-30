@@ -1,0 +1,14 @@
+je cherche a faire un CV en ligne il devra s'inspire du CV en PJ.
+J'imagine une interface a la glassy ios 26.4.
+je vois un cube glassy et on peux tourner les phases du cubes pour afficher differentes sections du CV.
+premier face principale(en arrivant sur le site) : a monn sujet
+face de droite depuis la face principale : competences cles
+face de gauche epuis la face principale : soft skills
+face du haut epuis la face principale : experience profesionnele 
+face du bas epuis la face principale : diplomes
+
+Il devra il y avoir une notice pour la navigation
+
+Le fond devra etre en ton bleu nuit ou bleu marine et pas trop de melange de couleur.
+
+Si il te faut des elements ou des precisions avant de commencer demande moi. 

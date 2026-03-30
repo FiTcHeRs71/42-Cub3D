@@ -79,7 +79,6 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 			ft_error(MALLOC_FAILED, data);
 		i++;
 	}
-	(*rgb_code)[i] = NULL;
 	ft_free_2d_array(temp);
 	return (true);
 }
