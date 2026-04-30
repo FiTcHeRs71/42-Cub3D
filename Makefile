@@ -28,7 +28,7 @@ SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST)
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # Compiler and flags
-CC = gcc
+CC =  cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 # Includes
