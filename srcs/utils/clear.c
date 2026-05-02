@@ -65,7 +65,6 @@ static void	close_fds(t_data *data)
  */
 void	clean_all(t_data *data)
 {
-	printf("Cleaning all resources...\n"); // Debug statement
 	close_fds(data);
 	free_map_struct(data->map);
 	free_texture_struct(data->texture);

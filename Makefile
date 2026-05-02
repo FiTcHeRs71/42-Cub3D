@@ -15,23 +15,23 @@ SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
 	check_map.c parse_config.c parse_cub3d.c parse_utils.c)
 
 SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
-	clear.c error.c)
+	init.c clear.c error.c window_clear.c)
 
 SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
-	window.c)
+	window.c window_utils.c)
 
 # SRCS_RAYCAST = \
 	# srcs/raycast/raycast.c
 
 # Combine all sources
-SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST)
+SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_WINDOW)
 
 # Object files 
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # Compiler and flags
 CC =  cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -std=c17
 
 # Includes
 INCLUDES = -I$(INCDIR) -I$(LIBFTDIR)/include -I$(MLXDIR)
