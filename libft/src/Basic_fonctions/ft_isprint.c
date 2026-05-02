@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:31:41 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/06 14:31:41 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:48:34 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:48:34 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_isprint(int c)
 {
@@ -23,14 +23,3 @@ int	ft_isprint(int c)
 		return (0);
 	}
 }
-
-/*
-ISASCII(3) (simplified)
-
-NAME
-    isascii -- test for ASCII character
-SYNOPSIS
-    int isascii(int c)
-DESCRIPTION
-    The isascii() function tests for an ASCII character, 
-	which is any character between 0 and octal 0177 inclusive.*/

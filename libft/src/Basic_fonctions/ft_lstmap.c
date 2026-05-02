@@ -6,11 +6,11 @@
 /*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:33:09 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/07 10:25:33 by fdcurot          ###   ########.fr       */
+/*   Updated: 2026/05/02 20:50:23 by fdcurot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
@@ -38,26 +38,3 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (new_list);
 }
-
-/*
-FT_LSTMAP (simplified)
-
-NAME
-	ft_lstmap -- creates a new list resulting from the application 
-	of f to each element
-SYNOPSIS
-	t_list *ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *));
-DESCRIPTION
-	Iterate over the list 'lst' and apply the function 'f' to the content 
-	of each elements.
-	Create a new list resulting of the successive applications of 'f'.
-	The function 'del' is used to destroy the content of an element if necessary.
-PARAMETERS
-	lst: pointer address to one element
-	f: the address of the function to apply
-	del: the address of the function that can delete an element's content
-RETURN VALUES
-	None
-AUTHORIZED EXTERNAL FUNCTIONS
-	None
-	*/

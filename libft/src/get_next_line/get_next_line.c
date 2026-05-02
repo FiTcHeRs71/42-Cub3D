@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 10:40:59 by fducrot           #+#    #+#             */
-/*   Updated: 2025/10/16 10:41:24 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:54:06 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:54:06 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 char	*ft_update_static(char *all_files)
 {

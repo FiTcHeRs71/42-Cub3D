@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:28:15 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/01 14:28:15 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:52:44 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:52:44 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
@@ -34,21 +34,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-
-/*
-STRNSTR(3) (simplified)
-
-NAME
-    strnstr -- locate a substring in a string
-SYNOPSIS
-    char *strnstr(const char *big, const char *little, size_t len);
-DESCRIPTION
-    The strnstr() function locates the first occurence of the 
-	null-terminated string little in the string big, 
-	where not more than len characters are searched.
-    Characters that appear after a '\0' character are not searched.
-RETURN VALUES
-    If little is an empty string, big is returned; if little 
-	occurs nowhere in big, NULL is returned; otherwise a pointer 
-	to the first character of the first occurence of little is returned.
-	*/

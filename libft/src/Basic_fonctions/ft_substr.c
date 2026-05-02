@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:35:59 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/07 08:46:02 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:52:59 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:52:59 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+#include "../../include/libft.h"
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
@@ -39,23 +38,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
-
-/*
-FT_SUBSTR (simplified)
-
-NAME
-    ft_substr -- extract a substring from a string
-SYNOPSIS
-    char *ft_substr(const char *s, unsigned int start, size_t len);
-DESCRIPTION
-    Allocate (with malloc(3)) and return a new string from the string s.
-    This new string starts at index 'start' and has a maximum size of 'len'.
-PARAMETERS
-    s: string from which to extract the new string
-    start: start index of the new string in the string 's'
-    len: maximum size of the new string
-RETURN VALUES
-    ft_substr() returns the new string; NULL if the memory allocation failed.
-AUTHORIZED EXTERNAL FUNCTIONS
-    malloc(3)
-	*/

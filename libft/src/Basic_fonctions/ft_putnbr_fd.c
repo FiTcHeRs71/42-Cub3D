@@ -6,11 +6,11 @@
 /*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:34:19 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/06 15:04:45 by fdcurot          ###   ########.fr       */
+/*   Updated: 2026/05/02 20:51:27 by fdcurot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -31,21 +31,3 @@ void	ft_putnbr_fd(int n, int fd)
 	r = (nb % 10) + 48;
 	write(fd, &r, 1);
 }
-
-/*
-FT_PUTNBR_FD (simplified)
-
-NAME
-    ft_putnbr_fd -- write an int on a specified file descriptor
-SYNOPSIS
-    void ft_putnbr_fd(int n, int fd);
-DESCRIPTION
-    ft_putnbr_fd() writes the int n on the file descriptor fd
-PARAMETERS
-    n: int to write
-    fd: file descriptor on which to write
-RETURN VALUES
-    ft_putnbr_fd() does not return anything
-AUTHORIZED EXTERNAL FUNCTIONS
-    write(2)
-	*/

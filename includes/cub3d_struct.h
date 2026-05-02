@@ -15,6 +15,13 @@ typedef struct s_linked_map
 	struct s_linked_map	*next;
 }						t_linked_map;
 
+typedef struct	s_mlx
+{
+	void	*mlx_connect;
+	void	*mlx_window;
+
+}				t_mlx;
+
 typedef struct s_map
 {
 	char				**map;
@@ -41,8 +48,11 @@ typedef struct s_texture
 typedef struct s_data
 {
 	int					fd;
+	int					window_y;
+	int					window_x;
 	t_map				*map;
 	t_texture			*texture;
+	t_mlx				*mlx;
 	struct s_linked_map	*linked_map;
 }						t_data;
 

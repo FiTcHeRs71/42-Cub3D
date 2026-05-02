@@ -17,6 +17,8 @@ SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
 SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
 	clear.c error.c)
 
+SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
+	window.c)
 
 # SRCS_RAYCAST = \
 	# srcs/raycast/raycast.c

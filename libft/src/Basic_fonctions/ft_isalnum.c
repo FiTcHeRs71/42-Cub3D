@@ -6,11 +6,11 @@
 /*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:28:04 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/06 14:28:04 by fdcurot          ###   ########.fr       */
+/*   Updated: 2026/05/02 20:48:09 by fdcurot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_isalnum(int c)
 {
@@ -23,19 +23,3 @@ int	ft_isalnum(int c)
 		return (0);
 	}
 }
-
-/*
-ISALNUM(3) (simplified)
-
-NAME
-    isalnum -- alphanumeric character test
-SYNOPSIS
-    int isalnum(int c)
-DESCRIPTION
-    The isalnum() function tests for any character for which isalpha(3) or 
-	isdigit(3) is true. The value of the argument must be representable 
-	as an unsigned char or the value of EOF.
-RETURN VALUES
-    The isalnum() function returns zero if the character tests 
-	false and returns non-zero if the character tests true.
-	*/

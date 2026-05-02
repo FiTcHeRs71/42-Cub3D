@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:31:34 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/06 14:31:34 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:48:28 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:48:28 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_isdigit(int c)
 {
@@ -23,19 +23,3 @@ int	ft_isdigit(int c)
 		return (0);
 	}
 }
-
-/*
-ISDIGIT(3) (simplified)
-
-NAME
-    isdigit -- decimal-digit character test
-SYNOPSIS
-    int isdigit(int c)
-DESCRIPTION
-    The isdigit() function tests for a decimal digit character.
-    The value of the argument must be representable as an 
-	unsigned char or the value of EOF.
-RETURN VALUES
-    The isdigit() function return zero if the character tests false 
-	and return non-zero if the character tests true.
-	*/

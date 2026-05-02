@@ -54,6 +54,8 @@ static void	fill_config(t_data *data)
 		free(line);
 		line = get_next_line(data->fd);
 	}
+	if (config_count < 6)
+		ft_error(INVALID_SETTINGS, data);
 	copy_map(data, line);
 }
 

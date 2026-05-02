@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:31:47 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/07 08:54:54 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:48:40 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:48:40 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 size_t	ft_count_int(int nbr)
 {
@@ -63,22 +63,3 @@ char	*ft_itoa(int n)
 	}
 	return (result);
 }
-
-/*
-FT_ITOA (simplified)
-
-NAME
-    ft_itoa -- convert an int to a string
-SYNOPSIS
-    char *ft_itoa(int n);
-DESCRIPTION
-    Allocate (with malloc(3)) and returns a string representing n.
-    Negative numbers must be handled.
-PARAMETERS
-    n: int to convert
-RETURN VALUES
-    ft_itoa() returns the string representing n; NULL if
-	 the memory allocation failed.
-AUTHORIZED EXTERNAL FUNCTIONS
-    malloc(3)
-	*/

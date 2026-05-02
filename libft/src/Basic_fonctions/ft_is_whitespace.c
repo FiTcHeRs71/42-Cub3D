@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 17:13:05 by fducrot           #+#    #+#             */
-/*   Updated: 2026/03/24 17:15:19 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:48:00 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:48:00 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_is_whitespace(char *str)
 {

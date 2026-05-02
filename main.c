@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 	}
 	ft_memset(&data, 0, sizeof(data));
 	parse_cub3d(&data, argv[1]);
+	init_window(&data, data.mlx);
 	clean_all(&data);
 	return (0);
 }

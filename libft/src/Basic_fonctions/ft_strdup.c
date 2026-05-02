@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strdup(const char *s1)
 {
@@ -33,18 +33,3 @@ char	*ft_strdup(const char *s1)
 	dest[i] = '\0';
 	return (dest);
 }
-
-/*
-STRDUP(3) (simplified)
-
-NAME
-    strdup -- save a copy of a string
-SYNOPSIS
-    char *strdup(const char *s1);
-DESCRIPTION
-    The strdup() function allocates sufficient memory for a copy of the 
-	string s1, does the copy, and returns a pointer to it. The pointer may 
-	subsequently be used as an argument to the function free(3).
-    If insufficient memory is available, NULL is returned and errno is
-	 set to ENOMEM.
-	 */

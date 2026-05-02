@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:27:38 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/07 08:53:29 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:47:39 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:47:45 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_atoi(const char *str)
 {
@@ -38,19 +38,3 @@ int	ft_atoi(const char *str)
 	}
 	return (result * ngps);
 }
-
-/*
-ISPRINT(3) (simplified)
-
-NAME
-    isprint -- printing character test (space character inclusive)
-SYNOPSIS
-    int isprint(int c)
-DESCRIPTION
-    The isprint() function tests for any printing character, 
-	including space. 
-	The value of the argument must representable as an unsigned char 
-	or the value of EOF.
-RETURN VALUES
-    The isprint() function returns zero if the character tests 
-	false and returns non-zero if the character tests true.*/

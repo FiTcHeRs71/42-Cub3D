@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 16/03/2026 18:49:35 by fducrot           #+#    #+#             */
-/*   Updated: 16/03/2026 18:49:44 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:47:33 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:47:33 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_array_size(char **array)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
@@ -39,24 +39,3 @@ char	*ft_strtrim(const char *s1, const char *set)
 	}
 	return (str);
 }
-
-/*
-FT_STRTRIM (simplified)
-
-NAME
-    ft_strtrim -- trims character set from string
-SYNOPSIS
-    char *ft_strtrim(const char *s1, const char *set);
-DESCRIPTION
-    Allocate (with malloc(3)) and returns a copy of s1, 
-	without the characters specified in set at the beginning 
-	and the end of s1.
-PARAMETERS
-    s1: string to trim
-    set: characters to trim
-RETURN VALUES
-    ft_strtrim() returns a trimmed copy of s1; 
-	NULL if the memory allocation failed.
-AUTHORIZED EXTERNAL FUNCTIONS
-    malloc(3)
-	*/

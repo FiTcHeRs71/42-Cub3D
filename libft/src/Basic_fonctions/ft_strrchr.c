@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:35:46 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/06 14:35:46 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:52:49 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:52:52 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -32,18 +32,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
-/*
-STRRCHR(3) (simplified)
-
-NAME
-    strrchr -- locate character in string
-SYNOPSIS
-    char *strrchr(const char *s, int c);
-DESCRIPTION
-    The strrchr() function is identical to strchr(), 
-	except it locates the last occurence of c.
-RETURN VALUES
-    The function strrchr() returns a pointer to the located character, 
-	or NULL if the character does not appear in the string.
-	*/

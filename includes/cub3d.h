@@ -2,10 +2,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define TITLE "Cub3D - LES RAY-CAST-COUILLES"
+
 /*================== LIBRAIRY & HEADERS ==================*/
 
+# include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
+# include "fred.h"
 
 /*================== MESSAGE MANAGEMENT ==================*/
 
@@ -21,7 +25,7 @@
 /*-------- PARSE ------------*/
 void			parse_cub3d(t_data *data, char *file);
 void			check_map(t_data *data, t_map *map);
-void			node_map_add_back(t_linked_map **lst, t_linked_map *new);
+void			node_map_add_back(t_linked_map **lst, t_linked_map *new_one);
 void			convert_linked_map_to_array(t_data *data, t_map *map);
 bool			extract_config(char *line, t_data *data);
 int				get_color_code(t_data *data, char **arry_code);

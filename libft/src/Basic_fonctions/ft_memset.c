@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 08:27:41 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/17 08:27:46 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:51:08 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:51:08 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+#include "../../include/libft.h"
 void	*ft_memset(void *s, int c, size_t len)
 {
 	unsigned char	*tmp;
@@ -23,17 +22,3 @@ void	*ft_memset(void *s, int c, size_t len)
 	}
 	return (s);
 }
-
-/*
-MEMSET(3) (simplified)
-
-NAME
-    memset -- fill a byte string with a byte value
-SYNOPSIS
-    void *memset(void *b, int c, size_t len);
-DESCRIPTION
-    The memset() function writes len bytes of value c 
-	(converted to an unsigned char) to the string b.
-RETURN VALUES
-    The memset() function returns its first argument.
-	*/

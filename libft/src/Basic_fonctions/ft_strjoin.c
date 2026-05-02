@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:34:54 by fdcurot           #+#    #+#             */
-/*   Updated: 2026/02/05 22:08:00 by fdcurot          ###   ########.fr       */
+/*   Created: 2026/05/02 20:52:08 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:52:08 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -40,23 +40,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[j++] = s2[i++];
 	return (str);
 }
-
-/*
-FT_STRJOIN (simplified)
-
-NAME
-    ft_strjoin -- concatenate 2 strings in a new string
-SYNOPSIS
-    char *ft_strjoin(const char *s1, const char *s2);
-DESCRIPTION
-    Allocate (with malloc(3)) and returns a new string 
-	resulting from the concatenation of s1 and s2.
-PARAMETERS
-    s1: prefix string
-    s2: suffix string
-RETURN VALUES
-    ft_strjoin() returns the new string; NULL if the memory 
-	allocation failed.
-AUTHORIZED EXTERNAL FUNCTIONS
-    malloc(3)
-	*/

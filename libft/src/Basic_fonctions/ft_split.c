@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 17:44:20 by fducrot           #+#    #+#             */
-/*   Updated: 2026/01/12 17:45:13 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:51:41 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:51:45 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+#include "../../include/libft.h"
 void	ft_free_2d_array(char **tab)
 {
 	int	i;
@@ -94,23 +93,4 @@ char	**ft_split(char const *s, char c)
 	}
 	return (array_of_string);
 }
-/*
-FT_SPLIT (simplified)
 
-NAME
-	ft_split -- split a string into an array of words
-SYNOPSIS
-	char **ft_split(const char *s, char c);
-DESCRIPTION
-	Allocate (with malloc(3)) and returns an array of strings
-	obtained by splitting s with the character c, used as delimiter.
-	The returned array must be NUL-terminated.
-PARAMETERS
-	s: string to split
-	c: delimiter character
-RETURN VALUES
-	ft_split() returns an array of strings resulting
-	from the splitting of s; NULL if the memory allocation failed.
-AUTHORIZED EXTERNAL FUNCTIONS
-	malloc(3)
-	*/

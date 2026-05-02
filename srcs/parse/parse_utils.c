@@ -31,21 +31,21 @@ int	node_map_size(t_linked_map *lst)
 	return (size);
 }
 
-void	node_map_add_back(t_linked_map **lst, t_linked_map *new)
+void	node_map_add_back(t_linked_map **lst, t_linked_map *new_one)
 {
 	t_linked_map	*last;
 
-	if (!new)
+	if (!new_one)
 	{
 		return ;
 	}
 	if (!*lst)
 	{
-		*lst = new;
+		*lst = new_one;
 		return ;
 	}
 	last = node_map_last(*lst);
-	last->next = new;
+	last->next = new_one;
 }
 
 t_linked_map	*new_node_map(void *content)

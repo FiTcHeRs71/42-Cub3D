@@ -6,11 +6,11 @@
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 13:57:40 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/01 13:57:54 by fducrot          ###   ########.ch       */
+/*   Updated: 2026/05/02 20:53:33 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 int	ft_putstr_pf(char *str)
 {

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 13:58:01 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/01 13:58:01 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/02 20:53:53 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/02 20:53:53 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 int	ft_putnumb_hexa_pf(unsigned int nbr, char *base)
 {
