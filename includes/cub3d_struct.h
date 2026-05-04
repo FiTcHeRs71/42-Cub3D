@@ -19,7 +19,11 @@ typedef struct	s_mlx
 {
 	void	*mlx_connect;
 	void	*mlx_window;
-
+	void	*img;
+	char	*img_data;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
 }				t_mlx;
 
 typedef struct s_map
