@@ -1,5 +1,6 @@
-#include "cub3d.h"
-#include <math.h>
+
+#include "../../includes/cub3d.h"
+
 
 void	put_pixel(t_data *stats, t_raycast *data, int y_coord, int x_coord)
 {
