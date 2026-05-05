@@ -74,6 +74,10 @@ typedef struct s_map
 
 typedef struct s_texture
 {
+	void				*so_wall;
+	void				*no_wall;
+	void				*we_wall;
+	void				*ea_wall;
 	char				*no_path;
 	char				*so_path;
 	char				*we_path;
@@ -82,6 +86,8 @@ typedef struct s_texture
 	char				**ceiling;
 	int					rgb_floor;
 	int					rgb_ceiling;
+	int					width;
+	int					height;
 }						t_texture;
 
 typedef struct s_data

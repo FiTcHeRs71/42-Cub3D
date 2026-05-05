@@ -100,6 +100,8 @@ static bool	save_texture(t_data *data, char **texture_path, char *line)
 	i = ft_strlen(*texture_path) - 1;
 	if (i >= 0 && (*texture_path)[i] == '\n')
 		(*texture_path)[i] = '\0';
+	if (!checker_file_extension((*texture_path), ".xpm"))
+		return (false);
 	return (true);
 }
 /**

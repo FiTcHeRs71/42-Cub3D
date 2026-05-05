@@ -47,12 +47,27 @@ static void	free_map_struct(t_map *map)
 	}
 }
 
-static void	close_fds(t_data *data)
+static void	destroy_images(t_texture *texture, t_mlx *mlx)
 {
-	if (data->fd > 0)
+	if (mlx && mlx->mlx_connect)
 	{
-		close(data->fd);
+		if (texture->no_wall)
+			mlx_destroy_image(mlx->mlx_connect, texture->no_wall);
+		if (texture->so_wall)
+			mlx_destroy_image(mlx->mlx_connect, texture->so_wall);
+		if (texture->we_wall)
+			mlx_destroy_image(mlx->mlx_connect, texture->we_wall);
+		if (texture->ea_wall)
+			mlx_destroy_image(mlx->mlx_connect, texture->ea_wall);
+		if (mlx->img)
+			mlx_destroy_image(mlx->mlx_connect, mlx->img);
+		if (mlx->mlx_window)
+			mlx_destroy_window(mlx->mlx_connect, mlx->mlx_window);
+		mlx_destroy_display(mlx->mlx_connect);
+		free(mlx->mlx_connect);
 	}
+	if (mlx)
+		free(mlx);
 }
 
 /**
@@ -65,7 +80,11 @@ static void	close_fds(t_data *data)
  */
 void	clean_all(t_data *data)
 {
-	close_fds(data);
+	if (data->fd > 0)
+	{
+		close(data->fd);
+	}
+	destroy_images(data->texture, data->mlx);
 	free_map_struct(data->map);
 	free_texture_struct(data->texture);
 	free_linked_map(data->linked_map);

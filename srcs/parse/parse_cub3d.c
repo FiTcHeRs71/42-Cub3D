@@ -1,5 +1,21 @@
 
 #include "../../includes/cub3d.h"
+#include <fcntl.h>
+#include <stdbool.h>
+
+bool	checker_file_extension(char *file, char *extension)
+{
+
+	if (ft_strncmp(&file[ft_strlen(file) - 4], extension, 4))
+	{
+		return (false);
+	}
+	if (open(file, O_RDONLY) < 0)
+	{
+		return (false);
+	}
+	return (true);
+}
 
 static void	copy_map(t_data *data, char *line)
 {
@@ -47,7 +63,10 @@ static void	fill_config(t_data *data)
 					config_count++;
 			}
 			else
+			{
+				free(line);
 				ft_error(INVALID_SETTINGS, data);
+			}
 		}
 		else
 			break ;
@@ -82,10 +101,8 @@ static void	init_struct(t_data *data)
  */
 void	parse_cub3d(t_data *data, char *file)
 {
-	if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4))
-	{
-		ft_error("File map has to be .cub\n", data);
-	}
+	if (!checker_file_extension(file, ".cub"))
+		ft_error(FD_ERROR, data);
 	data->fd = open(file, O_RDONLY);
 	if (data->fd < 0)
 	{

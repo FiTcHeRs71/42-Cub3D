@@ -25,6 +25,7 @@
 # define INVALID_SETTINGS "Invalid configuration format or missing elements exit\n"
 # define NB_PLAYER "Map must contain only one player, exit\n"
 # define MINI_LBX "Error related to the mini libx\n"
+# define NO_ACCES "No acces right to the file\n"
 
 /*================== FONCTION ==================*/
 
@@ -37,16 +38,20 @@ bool			extract_config(char *line, t_data *data);
 int				get_color_code(t_data *data, char **arry_code);
 int				node_map_size(t_linked_map *lst);
 t_linked_map	*new_node_map(void *content);
+bool			checker_file_extension(char *file, char *extension);
 
 /*-------- UTILS ------------*/
 void			clean_all(t_data *data);
 void			ft_error(char *msg, t_data *data);
 void			init_data(t_data *data);
 
+/*-------- TEXTURES ------------*/
+void			load_textures(t_data *data, t_texture *texture, t_mlx *mlx);
+
 /*-------- WINDOW ------------*/
 void			init_window(t_data *data, t_mlx *mlx);
-int				handle_keyboard_input(int keycode, t_mlx *mlx);
-int				close_window(t_mlx *mlx, t_data *data);
+int				handle_keyboard_input(int keycode, t_data *data);
+int				close_window(t_data *data);
 
 /*-------- DRAW ------------*/
 void			draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord);

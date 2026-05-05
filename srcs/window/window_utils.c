@@ -1,12 +1,11 @@
 
 # include "../../includes/cub3d.h"
 
-int	handle_keyboard_input(int keycode, t_mlx *mlx)
+int	handle_keyboard_input(int keycode, t_data *data)
 {
-	(void)mlx;
 	if (keycode == XK_Escape)
 	{
-
+			close_window(data);
 	}
 	if (keycode == XK_w || keycode == XK_Up)
 	{

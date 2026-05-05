@@ -26,8 +26,11 @@ SRCS_RAYCAST = $(addprefix $(SRCDIR)/raycasting/, \
 SRCS_DRAW = $(addprefix $(SRCDIR)/draw/, \
 	draw.c)
 
+SRCS_TEXTURES = $(addprefix $(SRCDIR)/textures/, \
+	textures.c)
+
 # Combine all sources
-SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW)
+SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES)
 
 # Object files 
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
