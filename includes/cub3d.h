@@ -8,11 +8,13 @@
 
 # include <X11/keysym.h>
 # include <math.h>
+# include <stdbool.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
-# include "fred.h"
-# include "leo.h"
+
+# include "fred.h"// a suppr
+# include "leo.h" // a suppr
 
 /*================== MESSAGE MANAGEMENT ==================*/
 
@@ -22,6 +24,7 @@
 # define INVALID_MAP "Invalid map, exit \n"
 # define INVALID_SETTINGS "Invalid configuration format or missing elements exit\n"
 # define NB_PLAYER "Map must contain only one player, exit\n"
+# define MINI_LBX "Error related to the mini libx\n"
 
 /*================== FONCTION ==================*/
 
@@ -35,11 +38,20 @@ int				get_color_code(t_data *data, char **arry_code);
 int				node_map_size(t_linked_map *lst);
 t_linked_map	*new_node_map(void *content);
 
-//-------- UTILS ------------
-/*clear.c*/
+/*-------- UTILS ------------*/
 void			clean_all(t_data *data);
-
-/*error.c*/
 void			ft_error(char *msg, t_data *data);
+void			init_data(t_data *data);
+
+/*-------- WINDOW ------------*/
+void			init_window(t_data *data, t_mlx *mlx);
+int				handle_keyboard_input(int keycode, t_mlx *mlx);
+int				close_window(t_mlx *mlx, t_data *data);
+
+/*-------- DRAW ------------*/
+void			draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord);
+
+/*-------- RAYCASTING ------------*/
+void			raycasting(t_data *stats, t_map *map);
 
 #endif
