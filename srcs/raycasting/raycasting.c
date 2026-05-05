@@ -1,5 +1,5 @@
-#include "../../includes/cub3d_struct.h"
-#include "../../includes/leo.h"
+#include "cub3d.h"
+#include "leo.h"
 #include <math.h>
 
 void	set_dir_vector(t_raycast *data, t_map *map)
@@ -84,10 +84,7 @@ void	finalise_DDA_data(t_raycast *data)
 
 void	initialise_DDA(t_raycast *data, int x, t_data *stats)
 {
-	double		window_x; // remplacer par largeur enregistree dans stats
-
-	window_x = 1920;
-	data->camera_x = 2 * x / window_x - 1;
+	data->camera_x = 2 * x / stats->window_x - 1;
 	data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
 	data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
 	if (data->ray_dir_x == 0)
@@ -122,13 +119,26 @@ void	cast_ray(t_data *stats, t_raycast *data)
 	}
 }
 
+void	set_up_drawing_data(t_data *stats, t_raycast *data, t_draw *draw)
+{
+	draw->line_h = (int)(stats->window_y / data->wall_dist);
+	draw->line_start = -draw->line_h / 2 + stats->window_y / 2;
+	if (draw->line_start < 0)
+		draw->line_start = 0;
+	draw->line_end = draw->line_h / 2 + stats->window_y / 2;
+	if (draw->line_end >= stats->window_y)
+		draw->line_end = stats->window_y - 1;
+}
+
 void	raycasting(t_data *stats, t_map *map)
 {
 	t_raycast	data;
+	t_draw		draw;
 	int			x;
 
 	x = 0;
 	ft_memset(&data, 0, sizeof(t_raycast));
+	ft_memset(&draw, 0, sizeof(t_draw));
 	set_data(&data, map);
 	while (1)
 	{
@@ -142,6 +152,8 @@ void	raycasting(t_data *stats, t_map *map)
 				data.wall_dist = (data.side_dist_x - data.delta_dist_x);
 			else
 				data.wall_dist = (data.side_dist_y - data.delta_dist_y);
+			set_up_drawing_data(stats, &data, &draw);
+			draw_wall(stats, &data, &draw, x);
 			x++;
 		}
 	}

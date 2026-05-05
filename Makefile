@@ -20,11 +20,14 @@ SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
 SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
 	window.c window_utils.c)
 
-# SRCS_RAYCAST = \
-	# srcs/raycast/raycast.c
+SRCS_RAYCAST = $(addprefix $(SRCDIR)/raycasting/, \
+	raycasting.c)
+
+SRCS_DRAW = $(addprefix $(SRCDIR)/draw/, \
+	draw.c)
 
 # Combine all sources
-SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_WINDOW)
+SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW)
 
 # Object files 
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
