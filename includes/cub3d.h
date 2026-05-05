@@ -11,6 +11,7 @@
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
 # include "fred.h"
+# include "leo.h"
 
 /*================== MESSAGE MANAGEMENT ==================*/
 

@@ -1,5 +1,4 @@
 #include "cub3d.h"
-#include "leo.h"
 #include <math.h>
 
 void	set_dir_vector(t_raycast *data, t_map *map)
