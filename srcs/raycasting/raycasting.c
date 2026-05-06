@@ -52,8 +52,8 @@ void	set_plane_vector(t_raycast *data, t_map *map)
 
 void	set_data_raycasting(t_raycast *data, t_map *map)
 {
-	data->pos_x = map->player_x;
-	data->pos_y = map->player_y;
+	data->pos_x = map->player_x + 0.5;
+	data->pos_y = map->player_y + 0.5;
 	set_dir_vector(data, map);
 	set_plane_vector(data, map);
 }
@@ -147,12 +147,9 @@ void	raycasting(t_data *stats, t_raycast *data, t_draw *draw)
 			data->wall_dist = (data->side_dist_y - data->delta_dist_y);
 		set_up_drawing_data(stats, data, draw);
 		draw_wall(stats, data, draw, x);
+		draw_floor(stats, data, draw, x);
+		draw_ceiling(stats, data, draw, x);
 		data->is_hit = false;
 		x++;
 	}
 }
-
-
-
-// si on va vers le nord, dirY diminue, vers le sud il augmente (x ne change pas)
-// si on va vers l'ouest il diminue, vers l'est dirX augmente (y ne change pas)

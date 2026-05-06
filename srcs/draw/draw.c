@@ -16,6 +16,66 @@ void	put_pixel(t_data *stats, t_raycast *data, int y_coord, int x_coord)
 		*(unsigned int *)pixel = 0xFF;
 }
 
+void	put_pixel_floor(t_data *stats, t_raycast *data, int y_coord, int x_coord)
+{
+	char	*pixel;
+	int		offset;
+
+	if (x_coord < 0 || x_coord >= stats->window_x || y_coord < 0 || y_coord >= stats->window_y)
+		return ;
+	offset = (y_coord * stats->mlx->size_line) + (x_coord * (stats->mlx->bits_per_pixel / 8));
+	pixel = stats->mlx->img_data + offset;
+	if (data->wall_side == 1)
+		*(unsigned int *)pixel = stats->texture->rgb_floor;
+	else
+		*(unsigned int *)pixel = stats->texture->rgb_floor;
+}
+
+void	put_pixel_ceiling(t_data *stats, t_raycast *data, int y_coord, int x_coord)
+{
+	char	*pixel;
+	int		offset;
+
+	if (x_coord < 0 || x_coord >= stats->window_x || y_coord < 0 || y_coord >= stats->window_y)
+		return ;
+	offset = (y_coord * stats->mlx->size_line) + (x_coord * (stats->mlx->bits_per_pixel / 8));
+	pixel = stats->mlx->img_data + offset;
+	if (data->wall_side == 1)
+		*(unsigned int *)pixel = stats->texture->rgb_ceiling;
+	else
+		*(unsigned int *)pixel = stats->texture->rgb_ceiling;
+}
+
+void	draw_floor(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	y = 0;
+	while (i < draw->line_start)
+	{
+		put_pixel_floor(stats, data, y, x_coord);
+		y++;
+		i++;
+	}
+}
+
+void	draw_ceiling(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
+{
+	int	i;
+	int	y;
+
+	i = draw->line_end;
+	y = draw->line_end;
+	while (i < stats->window_y)
+	{
+		put_pixel_ceiling(stats, data, y, x_coord);
+		y++;
+		i++;
+	}
+}
+
 void	draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
 {
 	int	i;
