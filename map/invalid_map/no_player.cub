@@ -1,0 +1,14 @@
+NO ./images/wall/north.xpm
+SO ./images/wall/south.xpm
+WE ./images/wall/west.xpm
+EA ./images/wall/east.xpm
+
+F 10,20,50
+C 60,60,60
+
+111111
+100001
+100001
+100001
+100001
+111111
