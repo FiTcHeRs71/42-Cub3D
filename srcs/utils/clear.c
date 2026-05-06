@@ -1,5 +1,6 @@
 
 #include "../../includes/cub3d.h"
+#include <stdlib.h>
 
 static void	free_linked_map(t_linked_map *linked_map)
 {
@@ -49,6 +50,8 @@ static void	free_map_struct(t_map *map)
 
 static void	destroy_images(t_texture *texture, t_mlx *mlx)
 {
+	if (!texture)
+		return ;
 	if (mlx && mlx->mlx_connect)
 	{
 		if (texture->no.img)
@@ -84,6 +87,8 @@ void	clean_all(t_data *data)
 	{
 		close(data->fd);
 	}
+	free(data->draw);
+	free(data->raycast);
 	destroy_images(data->texture, data->mlx);
 	free_map_struct(data->map);
 	free_texture_struct(data->texture);

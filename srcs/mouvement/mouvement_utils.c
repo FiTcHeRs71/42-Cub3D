@@ -10,7 +10,7 @@ bool	can_move(t_data *data, double new_x, double mew_y)
 	y = (int)mew_y;
 	if (y < 0 || x < 0 || !data->map->map[y] || x >= (int)ft_strlen(data->map->map[y]))
 		return (false);
-	if (data->map->map[x][y] == '1' || data->map->map[x][y] == ' ')
+	if (data->map->map[y][x] == '1' || data->map->map[y][x] == ' ')
 		return (false);
 	return (true);
 }

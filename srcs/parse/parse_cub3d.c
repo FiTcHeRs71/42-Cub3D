@@ -5,6 +5,8 @@
 
 bool	checker_file_extension(char *file, char *extension)
 {
+	if (ft_strlen(file) < 4)
+		return (false);
 	if (ft_strncmp(&file[ft_strlen(file) - 4], extension, 4))
 	{
 		return (false);

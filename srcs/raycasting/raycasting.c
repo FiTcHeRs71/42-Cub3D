@@ -4,22 +4,22 @@
 
 void	set_dir_vector(t_raycast *data, t_map *map)
 {
-	if (map->payer_dir == NORTH)
+	if (map->player_dir == NORTH)
 	{
 		data->dir_x = 0;
 		data->dir_y = -1;
 	}
-	else if (map->payer_dir == SOUTH)
+	else if (map->player_dir == SOUTH)
 	{
 		data->dir_x = 0;
 		data->dir_y = 1;
 	}
-	else if (map->payer_dir == EAST)
+	else if (map->player_dir == EAST)
 	{
 		data->dir_x = 1;
 		data->dir_y = 0;
 	}
-	else if (map->payer_dir == WEST)
+	else if (map->player_dir == WEST)
 	{
 		data->dir_x = -1;
 		data->dir_y = 0;
@@ -28,22 +28,22 @@ void	set_dir_vector(t_raycast *data, t_map *map)
 
 void	set_plane_vector(t_raycast *data, t_map *map)
 {
-	if (map->payer_dir == NORTH)
+	if (map->player_dir == NORTH)
 	{
 		data->plane_x = 0.66;
 		data->plane_y = 0;
 	}
-	else if (map->payer_dir == SOUTH)
+	else if (map->player_dir == SOUTH)
 	{
 		data->plane_x = -0.66;
 		data->plane_y = 0;
 	}
-	else if (map->payer_dir == EAST)
+	else if (map->player_dir == EAST)
 	{
 		data->plane_x = 0;
 		data->plane_y = 0.66;
 	}
-	else if (map->payer_dir == WEST)
+	else if (map->player_dir == WEST)
 	{
 		data->plane_x = 0;
 		data->plane_y = -0.66;

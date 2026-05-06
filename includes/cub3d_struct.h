@@ -11,48 +11,49 @@ typedef enum e_direction
 
 typedef struct s_keys
 {
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-}	t_keys;
+	bool				w;
+	bool				a;
+	bool				s;
+	bool				d;
+	bool				left;
+	bool				right;
+}						t_keys;
 
 typedef struct s_raycast
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x; // direction vector
-	double	dir_y;
-	double	plane_x; // 2d raycasting version
-	double	plane_y;
-	double	time; // used to make movement smoother by using time difference between frames
-	double	old_time;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	double	wall_dist;
-	int		wall_side;
-	bool	is_hit;
-	bool	done;
-}			t_raycast;
+	double				pos_x;
+	double				pos_y;
+	double dir_x; // direction vector
+	double				dir_y;
+	double plane_x; // 2d raycasting version
+	double				plane_y;
+	double time;
+		// used to make movement smoother by using time difference between frames
+	double				old_time;
+	double				camera_x;
+	double				ray_dir_x;
+	double				ray_dir_y;
+	double				side_dist_x;
+	double				side_dist_y;
+	double				delta_dist_x;
+	double				delta_dist_y;
+	int					map_x;
+	int					map_y;
+	int					step_x;
+	int					step_y;
+	double				wall_dist;
+	int					wall_side;
+	bool				is_hit;
+	bool				done;
+}						t_raycast;
 
 typedef struct s_draw
 {
-	int		line_h;
-	int		line_start;
-	int		line_end;
-	int		steps;
-}			t_draw;
+	int					line_h;
+	int					line_start;
+	int					line_end;
+	int					steps;
+}						t_draw;
 
 typedef struct s_linked_map
 {
@@ -60,16 +61,16 @@ typedef struct s_linked_map
 	struct s_linked_map	*next;
 }						t_linked_map;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
-	void	*mlx_connect;
-	void	*mlx_window;
-	void	*img;
-	char	*img_data;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}				t_mlx;
+	void				*mlx_connect;
+	void				*mlx_window;
+	void				*img;
+	char				*img_data;
+	int					bits_per_pixel;
+	int					size_line;
+	int					endian;
+}						t_mlx;
 
 typedef struct s_map
 {
@@ -79,19 +80,20 @@ typedef struct s_map
 	int					player_flag;
 	int					player_x;
 	int					player_y;
-	int					payer_dir;
+	int					player_dir;
+	int					map_size;
 }						t_map;
 
 typedef struct s_tex_img
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		size_line;
-	int		endian;
-	int		width;
-	int		height;
-}	t_tex_img;
+	void				*img;
+	char				*addr;
+	int					bpp;
+	int					size_line;
+	int					endian;
+	int					width;
+	int					height;
+}						t_tex_img;
 
 typedef struct s_texture
 {
@@ -114,6 +116,12 @@ typedef struct s_data
 	int					fd;
 	int					window_y;
 	int					window_x;
+	int					flag_no;
+	int					flag_so;
+	int					flag_ea;
+	int					flag_we;
+	int					flag_f;
+	int					flag_c;
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;

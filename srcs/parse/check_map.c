@@ -24,13 +24,13 @@ static void	check_arg(char *line, t_data *data, int y)
 		if (ft_strchr("NSEW", line[i]))
 		{
 			if (ft_strchr("N", line[i]))
-				data->map->payer_dir = NORTH;
+				data->map->player_dir = NORTH;
 			if (ft_strchr("S", line[i]))
-				data->map->payer_dir = SOUTH;
+				data->map->player_dir = SOUTH;
 			if (ft_strchr("W", line[i]))
-				data->map->payer_dir = WEST;
+				data->map->player_dir = WEST;
 			if (ft_strchr("E", line[i]))
-				data->map->payer_dir = EAST;
+				data->map->player_dir = EAST;
 			data->map->player_x = i;
 			data->map->player_y = y;
 			data->map->player_flag += 1;
@@ -79,8 +79,7 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
  */
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (y < 0 || x < 0 || x >= (int)ft_strlen(map->map_copy[y])
-		|| y >= node_map_size(data->linked_map))
+	if (y < 0 || x < 0 || y >= map->map_size || x >= (int)ft_strlen(map->map_copy[y]))
 	{
 		ft_error(INVALID_MAP, data);
 	}
@@ -117,7 +116,8 @@ void	check_map(t_data *data, t_map *map)
 	int	i;
 
 	i = 0;
-	map->map = ft_calloc(node_map_size(data->linked_map) + 1, sizeof(char *));
+	map->map_size = node_map_size(data->linked_map);
+	map->map = ft_calloc(map->map_size + 1, sizeof(char *));
 	if (!map->map)
 		ft_error(MALLOC_FAILED, data);
 	convert_linked_map_to_array(data, map);
