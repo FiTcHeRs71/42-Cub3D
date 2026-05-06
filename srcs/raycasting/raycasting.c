@@ -97,6 +97,19 @@ void	initialise_DDA(t_raycast *data, int x, t_data *stats)
 		data->delta_dist_y = fabs(1 / data->ray_dir_y);
 }
 
+static bool	is_wall_or_oob(t_map *map, int y, int x)
+{
+	if (y < 0 || y >= map->map_size)
+		return (true);
+	if (!map->map[y])
+		return (true);
+	if (x < 0 || x >= (int)ft_strlen(map->map[y]))
+		return (true);
+	if (map->map[y][x] == '1' || map->map[y][x] == ' ')
+		return (true);
+	return (false);
+}
+
 void	cast_ray(t_data *stats, t_raycast *data)
 {
 	while (!data->is_hit)
@@ -113,7 +126,7 @@ void	cast_ray(t_data *stats, t_raycast *data)
 			data->map_y += data->step_y;
 			data->wall_side = 1;
 		}
-		if (stats->map->map[data->map_y][data->map_x] > '0')
+		if (is_wall_or_oob(stats->map, data->map_y, data->map_x))
 			data->is_hit = true;
 	}
 }

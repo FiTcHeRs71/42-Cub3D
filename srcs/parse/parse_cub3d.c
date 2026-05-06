@@ -1,7 +1,5 @@
 
 #include "../../includes/cub3d.h"
-#include <fcntl.h>
-#include <stdbool.h>
 
 bool	checker_file_extension(char *file, char *extension)
 {
@@ -18,10 +16,40 @@ bool	checker_file_extension(char *file, char *extension)
 	return (true);
 }
 
+static void	add_map_line(t_data *data, char **line)
+{
+	char			*temp;
+	char			*dup;
+	t_linked_map	*node;
+
+	temp = ft_strtrim(*line, "\n");
+	if (!temp)
+	{
+		free(*line);
+		ft_error(MALLOC_FAILED, data);
+	}
+	dup = ft_strdup(temp);
+	free(temp);
+	if (!dup)
+	{
+		free(*line);
+		ft_error(MALLOC_FAILED, data);
+	}
+	node = new_node_map(dup);
+	if (!node)
+	{
+		free(dup);
+		free(*line);
+		ft_error(MALLOC_FAILED, data);
+	}
+	node_map_add_back(&data->linked_map, node);
+}
+
 static void	copy_map(t_data *data, char *line)
 {
-	char	*tmp;
+	bool	map_end;
 
+	map_end = false;
 	while (ft_is_whitespace(line) == 1)
 	{
 		free(line);
@@ -29,12 +57,18 @@ static void	copy_map(t_data *data, char *line)
 	}
 	while (line)
 	{
-		tmp = ft_strtrim(line, "\n");
-		node_map_add_back(&data->linked_map, new_node_map(ft_strdup(tmp)));
-		free(tmp);
+		if (ft_is_whitespace(line) == 1)
+			map_end = true;
+		else
+		{
+			if (map_end)
+			{
+				free(line);
+				ft_error(INVALID_MAP, data);
+			}
+			add_map_line(data, &line);
+		}
 		free(line);
-		if (!data->linked_map || !data->linked_map->line)
-			ft_error(MALLOC_FAILED, data);
 		line = get_next_line(data->fd);
 	}
 }
@@ -79,15 +113,6 @@ static void	fill_config(t_data *data)
 	copy_map(data, line);
 }
 
-static void	init_struct(t_data *data)
-{
-	data->map = ft_calloc(1, sizeof(t_map));
-	data->texture = ft_calloc(1, sizeof(t_texture));
-	if (!data->map || !data->texture)
-	{
-		ft_error(MALLOC_FAILED, data);
-	}
-}
 
 /**
  * @brief Parses and validates the .cub configuration file.
@@ -109,7 +134,6 @@ void	parse_cub3d(t_data *data, char *file)
 	{
 		ft_error(FD_ERROR, data);
 	}
-	init_struct(data);
 	fill_config(data);
 	check_map(data, data->map);
 	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
