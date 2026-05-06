@@ -3,13 +3,12 @@
 # define CUB3D_H
 
 # define TITLE "Cub3D - LES RAY-CAST-COUILLES"
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.08
 # define ROT_SPEED  0.03
 /*================== LIBRAIRY & HEADERS ==================*/
 
 # include <X11/keysym.h>
 # include <math.h>
-# include <stdbool.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
