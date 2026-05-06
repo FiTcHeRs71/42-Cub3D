@@ -8,16 +8,19 @@ void	put_pixel(t_data *stats, t_raycast *data, int y_coord, int x_coord)
 	int			offset;
 	int			color;
 
+	(void)data;
 	tex = stats->texture->tex_flag;
-	color = *(unsigned int *)(tex.addr + stats->texture->tex_y * tex.size_line + stats->texture->tex_x * (tex.bpp / 8));
 	if (x_coord < 0 || x_coord >= stats->window_x || y_coord < 0 || y_coord >= stats->window_y)
 		return ;
+	if (stats->texture->tex_x < 0 || stats->texture->tex_x >= tex.width
+		|| stats->texture->tex_y < 0 || stats->texture->tex_y >= tex.height)
+		return ;
+	color = *(unsigned int *)(tex.addr + stats->texture->tex_y * tex.size_line + stats->texture->tex_x * (tex.bpp / 8));
 	offset = (y_coord * stats->mlx->size_line) + (x_coord * (stats->mlx->bits_per_pixel / 8));
 	pixel = stats->mlx->img_data + offset;
 	if (data->wall_side == 1)
-		*(unsigned int *)pixel = color / 2;
-	else
-		*(unsigned int *)pixel = color;
+		color = (color >> 1) & 0x7F7F7F;
+	*(unsigned int *)pixel = color;
 }
 
 void	put_pixel_floor(t_data *stats, t_raycast *data, int y_coord, int x_coord)
@@ -82,26 +85,18 @@ void	draw_ceiling(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
 
 void	draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
 {
-	int	i;
-	int	dy;
-	int	y_inc;
-	int	new_y;
+	int	y;
 
-	i = 0;
-	new_y = draw->line_start;
-	dy = draw->line_end - draw->line_start;
-	draw->steps = abs(dy);
+	y = draw->line_start;
 	use_texture(stats, data, stats->texture);
 	if (draw->steps == 0)
 		draw->steps = 1;
-	y_inc = dy / draw->steps;
-	while (i <= draw->steps)
+	while (y < draw->line_end)
 	{
 		stats->texture->tex_y = (int)stats->texture->tex_pos;
 		stats->texture->tex_pos += stats->texture->step;
-		put_pixel(stats, data, new_y, x_coord);
-		new_y += y_inc;
-		i++;
+		put_pixel(stats, data, y, x_coord);
+		y++;
 	}
 }
 

@@ -110,9 +110,9 @@ typedef struct s_texture
 	char				**ceiling;
 	int					rgb_floor;
 	int					rgb_ceiling;
-	int					step;
 	int					tex_x;
 	int					tex_y;
+	double				step;
 	double				tex_pos;
 	double				wall_x;
 }						t_texture;

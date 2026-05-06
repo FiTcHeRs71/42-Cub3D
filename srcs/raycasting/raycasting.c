@@ -84,7 +84,7 @@ void	finalise_DDA_data(t_raycast *data)
 
 void	initialise_DDA(t_raycast *data, int x, t_data *stats)
 {
-	data->camera_x = 2.0 * x / (double)stats->window_x - 1;
+	data->camera_x = 2.0 * x / (double)stats->window_x - 1.0;
 	data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
 	data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
 	if (data->ray_dir_x == 0)

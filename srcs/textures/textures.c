@@ -49,11 +49,11 @@ void	use_texture(t_data *data, t_raycast *ray, t_texture *tex)
 		tex->wall_x = ray->pos_y + ray->wall_dist * ray->ray_dir_y;
 	else
 		tex->wall_x = ray->pos_x + ray->wall_dist * ray->ray_dir_x;
-	tex->wall_x = tex->wall_x - (int)tex->wall_x;
-	tex->tex_x = (int)(tex->wall_x * (double)(tex->so.width));
-	if (ray->wall_side == 0 && ray->ray_dir_x > 0)
-		tex->tex_x = tex->so.width - tex->tex_x - 1;
-	if (ray->wall_side == 1 && ray->ray_dir_y > 0)
-		tex->tex_x = tex->so.width - tex->tex_x - 1;
+	tex->wall_x = tex->wall_x - floor(tex->wall_x);
 	finalise_tex_data(data, tex, data->draw, ray);
+	tex->tex_x = (int)(tex->wall_x * (double)(tex->tex_flag.width));
+	if (ray->wall_side == 0 && ray->ray_dir_x > 0)
+		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;
+	if (ray->wall_side == 1 && ray->ray_dir_y > 0)
+		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;
 }
