@@ -40,7 +40,7 @@ OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # Compiler and flags
 CC =  cc
-CFLAGS = -Wall -Wextra -Werror -g -std=c17
+CFLAGS = -Wall -Wextra -Werror -g
 
 # Includes
 INCLUDES = -I$(INCDIR) -I$(LIBFTDIR)/include -I$(MLXDIR)
