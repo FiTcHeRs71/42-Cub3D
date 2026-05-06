@@ -77,8 +77,8 @@ typedef struct s_map
 	char				**map_copy;
 	int					wall_flag;
 	int					player_flag;
-	int					player_x;
-	int					player_y;
+	double				player_x;
+	double				player_y;
 	int					payer_dir;
 }						t_map;
 

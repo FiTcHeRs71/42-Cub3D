@@ -132,7 +132,7 @@ void	set_up_drawing_data(t_data *stats, t_raycast *data, t_draw *draw)
 
 void	raycasting(t_data *stats, t_map *map, t_raycast *data, t_draw *draw)
 {
-	int			x;
+	int	x;
 
 	x = 0;
 	set_data(data, map);

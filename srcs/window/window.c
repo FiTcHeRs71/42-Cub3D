@@ -8,7 +8,7 @@ int	game_loop(t_data *data)
 	i = 0;
 	update_player(data);
 	// branche raycasting
-	while (i < data->window_x * data->window_y)
+	while (i < data->window_x * data->window_y)  //debug a virer
 	{
 		((unsigned int *)data->mlx->img_data)[i] = 0xFF0000;
 		i++;
