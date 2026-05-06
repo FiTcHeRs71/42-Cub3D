@@ -3,7 +3,7 @@
 
 /**
  * @brief Prints an error message and exits the program cleanly.
- * 
+ *
  * Frees all allocated resources before quitting,
  * then writes the message to standard error (stderr).
  *

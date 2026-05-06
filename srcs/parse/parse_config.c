@@ -18,11 +18,11 @@ static bool	is_valid_color_code(char *str)
 }
 /**
  * @brief checks that the code is valid and performs the bit shifting.
- * 
+ *
  * Checks that the code contains only numbers.
  * Converts ASCII characters to integers.
  * did the bit shifting.
- * 
+ *
  * @param data  Pointer to the main structure where parsed data is stored.
  * @param array_code Double pointer or where is the code stored.
  */

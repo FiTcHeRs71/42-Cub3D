@@ -3,8 +3,8 @@
 
 /**
  * @brief Validates the map's characters and counts player occurrences.
- * 
- * Checks each character in the map line for validity 
+ *
+ * Checks each character in the map line for validity
  * (only ' ', '0', '1', 'N', 'S', 'E', 'W' are allowed).
  * @param line  The current line of the map being checked.
  * @param data  Pointer to the main structure (used for error handling and player info).
@@ -105,10 +105,10 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 
 /**
  * @brief Convert the map into a linked list and verify its validity.
- * 
+ *
  * Saves the map to an array (char**).
  * Copy the map to another array to perform a flood fill.
- * 
+ *
  * @param data Pointer to the main structure where parsed data is stored.
  * @param map Pointer to the structure where the map and player info is stored.
  */

@@ -130,30 +130,26 @@ void	set_up_drawing_data(t_data *stats, t_raycast *data, t_draw *draw)
 		draw->line_end = stats->window_y - 1;
 }
 
-void	raycasting(t_data *stats, t_map *map)
+void	raycasting(t_data *stats, t_map *map, t_raycast *data, t_draw *draw)
 {
-	t_raycast	data;
-	t_draw		draw;
 	int			x;
 
 	x = 0;
-	ft_memset(&data, 0, sizeof(t_raycast));
-	ft_memset(&draw, 0, sizeof(t_draw));
-	set_data(&data, map);
+	set_data(data, map);
 	while (1)
 	{
 		while (x < stats->window_x)
 		{
-			initialise_DDA(&data, x, stats);
-			data.map_x = (int)data.pos_x;
-			data.map_y = (int)data.pos_y;
-			cast_ray(stats, &data);
-			if (data.wall_side == 0)
-				data.wall_dist = (data.side_dist_x - data.delta_dist_x);
+			initialise_DDA(data, x, stats);
+			data->map_x = (int)data->pos_x;
+			data->map_y = (int)data->pos_y;
+			cast_ray(stats, data);
+			if (data->wall_side == 0)
+				data->wall_dist = (data->side_dist_x - data->delta_dist_x);
 			else
-				data.wall_dist = (data.side_dist_y - data.delta_dist_y);
-			set_up_drawing_data(stats, &data, &draw);
-			draw_wall(stats, &data, &draw, x);
+				data->wall_dist = (data->side_dist_y - data->delta_dist_y);
+			set_up_drawing_data(stats, data, draw);
+			draw_wall(stats, data, draw, x);
 			x++;
 		}
 	}

@@ -9,6 +9,16 @@ typedef enum e_direction
 	EAST,
 }						t_direction;
 
+typedef struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}	t_keys;
+
 typedef struct s_raycast
 {
 	double	pos_x;
@@ -95,10 +105,12 @@ typedef struct s_data
 	int					fd;
 	int					window_y;
 	int					window_x;
-	bool				keys[256];
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;
+	t_keys				keys;
+	t_raycast			*raycast;
+	t_draw				*draw;
 	struct s_linked_map	*linked_map;
 }						t_data;
 

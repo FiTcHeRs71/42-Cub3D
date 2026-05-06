@@ -20,6 +20,9 @@ SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
 SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
 	window.c window_utils.c)
 
+SRCS_MOUV = $(addprefix $(SRCDIR)/mouvement/, \
+	mouvement.c)
+
 SRCS_RAYCAST = $(addprefix $(SRCDIR)/raycasting/, \
 	raycasting.c)
 
@@ -30,7 +33,7 @@ SRCS_TEXTURES = $(addprefix $(SRCDIR)/textures/, \
 	textures.c)
 
 # Combine all sources
-SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES)
+SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV)
 
 # Object files 
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

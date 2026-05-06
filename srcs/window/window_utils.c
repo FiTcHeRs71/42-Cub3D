@@ -1,35 +1,38 @@
 
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	key_release(int keycode, t_data *data)
+int	handle_key_press(int keycode, t_data *data)
 {
-	data->keys[keycode] = false;
+	if (keycode == XK_Escape)
+		close_window(data);
+	else if (keycode == XK_w)
+		data->keys.w = true;
+	else if (keycode == XK_a)
+		data->keys.a = true;
+	else if (keycode == XK_s)
+		data->keys.s = true;
+	else if (keycode == XK_d)
+		data->keys.d = true;
+	else if (keycode == XK_Left)
+		data->keys.left = true;
+	else if (keycode == XK_Right)
+		data->keys.right = true;
 	return (0);
 }
 
-int	key_press(int keycode, t_data *data)
+int	handle_key_release(int keycode, t_data *data)
 {
-	printf("---%i--- | keycode\n", keycode);
-	data->keys[keycode] = true;
-	if (keycode == XK_Escape)
-	{
-			close_window(data);
-	}
-	if (keycode == XK_w || keycode == XK_Up)
-	{
-
-	}
-	if (keycode == XK_a || keycode == XK_Left)
-	{
-
-	}
-	if (keycode == XK_s || keycode == XK_Down)
-	{
-
-	}
-	if (keycode == XK_d || keycode == XK_Right)
-	{
-
-	}
+	if (keycode == XK_w)
+		data->keys.w = false;
+	else if (keycode == XK_a)
+		data->keys.a = false;
+	else if (keycode == XK_s)
+		data->keys.s = false;
+	else if (keycode == XK_d)
+		data->keys.d = false;
+	else if (keycode == XK_Left)
+		data->keys.left = false;
+	else if (keycode == XK_Right)
+		data->keys.right = false;
 	return (0);
 }

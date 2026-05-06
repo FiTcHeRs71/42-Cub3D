@@ -3,7 +3,8 @@
 # define CUB3D_H
 
 # define TITLE "Cub3D - LES RAY-CAST-COUILLES"
-
+# define MOVE_SPEED 0.05
+# define ROT_SPEED  0.03
 /*================== LIBRAIRY & HEADERS ==================*/
 
 # include <X11/keysym.h>
@@ -57,6 +58,6 @@ int				close_window(t_data *data);
 void			draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord);
 
 /*-------- RAYCASTING ------------*/
-void			raycasting(t_data *stats, t_map *map);
+void	raycasting(t_data *stats, t_map *map, t_raycast *data, t_draw *draw);
 
 #endif
