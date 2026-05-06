@@ -23,12 +23,11 @@ typedef struct s_raycast
 {
 	double				pos_x;
 	double				pos_y;
-	double dir_x; // direction vector
+	double				dir_x; // direction vector
 	double				dir_y;
-	double plane_x; // 2d raycasting version
+	double				plane_x; // 2d raycasting version
 	double				plane_y;
-	double time;
-		// used to make movement smoother by using time difference between frames
+	double				time;// used to make movement smoother by using time difference between frames
 	double				old_time;
 	double				camera_x;
 	double				ray_dir_x;

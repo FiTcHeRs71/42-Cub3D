@@ -51,9 +51,18 @@ void			init_data(t_data *data);
 void			load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx);
 void			use_texture(t_data *data, t_raycast *ray, t_texture *tex);
 
+/*-------- MOUVEMENT ------------*/
+void			update_player(t_data *data);
+bool			can_move(t_data *data, double new_x, double mew_y);
+void			move_up(t_data *data, t_raycast *r);
+void			move_down(t_data *data, t_raycast *r);
+void			move_left(t_data *data, t_raycast *r);
+void			move_right(t_data *data, t_raycast *r);
+
 /*-------- WINDOW ------------*/
 void			init_window(t_data *data, t_mlx *mlx);
-int				handle_keyboard_input(int keycode, t_data *data);
+int				handle_key_press(int keycode, t_data *data);
+int				handle_key_release(int keycode, t_data *data);
 int				close_window(t_data *data);
 
 /*-------- DRAW ------------*/

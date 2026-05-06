@@ -3,16 +3,16 @@
 
 bool	checker_file_extension(char *file, char *extension)
 {
+	int	fd;
+
 	if (ft_strlen(file) < 4)
 		return (false);
 	if (ft_strncmp(&file[ft_strlen(file) - 4], extension, 4))
-	{
 		return (false);
-	}
-	if (open(file, O_RDONLY) < 0)
-	{
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
 		return (false);
-	}
+	close(fd);
 	return (true);
 }
 

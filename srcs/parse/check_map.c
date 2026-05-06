@@ -87,10 +87,8 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 	{
 		ft_error(INVALID_MAP, data);
 	}
-	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X')
-	{
+	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X' || map->map_copy[y][x] == ' ')
 		return ;
-	}
 	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
 	{
 		ft_error(INVALID_MAP, data);
@@ -130,5 +128,4 @@ void	check_map(t_data *data, t_map *map)
 		ft_error(NB_PLAYER, data);
 	map->map_copy = flood_fill_copy_map(data, map->map);
 	flood_fill_valid_map(data, map, map->player_y, map->player_x);
-	printf("good MAP\n");
 }

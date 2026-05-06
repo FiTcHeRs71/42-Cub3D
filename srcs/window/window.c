@@ -3,9 +3,6 @@
 
 int	game_loop(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	update_player(data);
 	clear_image(data);
 	raycasting(data, data->raycast, data->draw);
