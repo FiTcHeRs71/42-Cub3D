@@ -112,4 +112,5 @@ void	parse_cub3d(t_data *data, char *file)
 	check_map(data, data->map);
 	data->texture->rgb_floor = get_color_code(data, data->texture->floor);
 	data->texture->rgb_ceiling = get_color_code(data, data->texture->ceiling);
+	set_data_raycasting(data->raycast, data->map);
 }

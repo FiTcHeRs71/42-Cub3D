@@ -60,7 +60,8 @@ void			draw_wall(t_data *stats, t_raycast *data,
 					t_draw *draw, int x_coord);
 
 /*-------- RAYCASTING ------------*/
-void			raycasting(t_data *stats, t_map *map,
+void			raycasting(t_data *stats,
 					t_raycast *data, t_draw *draw);
+void			set_data_raycasting(t_raycast *data, t_map *map);
 
 #endif

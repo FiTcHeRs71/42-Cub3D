@@ -50,7 +50,7 @@ void	set_plane_vector(t_raycast *data, t_map *map)
 	}
 }
 
-void	set_data(t_raycast *data, t_map *map)
+void	set_data_raycasting(t_raycast *data, t_map *map)
 {
 	data->pos_x = map->player_x;
 	data->pos_y = map->player_y;
@@ -129,12 +129,11 @@ void	set_up_drawing_data(t_data *stats, t_raycast *data, t_draw *draw)
 		draw->line_end = stats->window_y - 1;
 }
 
-void	raycasting(t_data *stats, t_map *map, t_raycast *data, t_draw *draw)
+void	raycasting(t_data *stats, t_raycast *data, t_draw *draw)
 {
 	int	x;
 
 	x = 0;
-	set_data(data, map);
 	while (x < stats->window_x)
 	{
 		initialise_DDA(data, x, stats);
