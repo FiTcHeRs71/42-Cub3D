@@ -1,23 +1,23 @@
 
 #include "../../includes/cub3d.h"
 
-static void	move_player(t_data *data, t_raycast *r, t_map *pos)
+static void	move_player(t_data *data, t_raycast *r)
 {
 	if (data->keys.w)
 	{
-		move_up(data, r, pos);
+		move_up(data, r);
 	}
 	if (data->keys.s)
 	{
-		move_down(data, r, pos);
+		move_down(data, r);
 	}
 	if (data->keys.d)
 	{
-		move_right(data, r, pos);
+		move_right(data, r);
 	}
 	if (data->keys.a)
 	{
-		move_left(data, r, pos);
+		move_left(data, r);
 	}
 }
 
@@ -44,6 +44,6 @@ static void rotate_player(t_data *data, t_raycast *r)
 
 void	update_player(t_data *data)
 {
-	move_player(data, data->raycast, data->map);
+	move_player(data, data->raycast);
 	rotate_player(data, data->raycast);
 }

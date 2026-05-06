@@ -82,12 +82,23 @@ typedef struct s_map
 	int					payer_dir;
 }						t_map;
 
+typedef struct s_tex_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}	t_tex_img;
+
 typedef struct s_texture
 {
-	void				*so_wall;
-	void				*no_wall;
-	void				*we_wall;
-	void				*ea_wall;
+	t_tex_img			so;
+	t_tex_img			no;
+	t_tex_img			we;
+	t_tex_img			ea;
 	char				*no_path;
 	char				*so_path;
 	char				*we_path;
@@ -96,8 +107,6 @@ typedef struct s_texture
 	char				**ceiling;
 	int					rgb_floor;
 	int					rgb_ceiling;
-	int					width;
-	int					height;
 }						t_texture;
 
 typedef struct s_data

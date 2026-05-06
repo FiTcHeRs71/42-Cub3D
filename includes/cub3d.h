@@ -23,7 +23,8 @@
 # define MALLOC_FAILED "Memory allocation failed, exit \n"
 # define FD_ERROR "Unable to open map file, exit \n"
 # define INVALID_MAP "Invalid map, exit \n"
-# define INVALID_SETTINGS "Invalid configuration format or missing elements exit\n"
+# define INVALID_SETTINGS "Invalid configuration format or \
+missing elements exit\n"
 # define NB_PLAYER "Map must contain only one player, exit\n"
 # define MINI_LBX "Error related to the mini libx\n"
 # define NO_ACCES "No acces right to the file\n"
@@ -55,9 +56,11 @@ int				handle_keyboard_input(int keycode, t_data *data);
 int				close_window(t_data *data);
 
 /*-------- DRAW ------------*/
-void			draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord);
+void			draw_wall(t_data *stats, t_raycast *data,
+					t_draw *draw, int x_coord);
 
 /*-------- RAYCASTING ------------*/
-void	raycasting(t_data *stats, t_map *map, t_raycast *data, t_draw *draw);
+void			raycasting(t_data *stats, t_map *map,
+					t_raycast *data, t_draw *draw);
 
 #endif

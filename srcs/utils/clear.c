@@ -51,14 +51,14 @@ static void	destroy_images(t_texture *texture, t_mlx *mlx)
 {
 	if (mlx && mlx->mlx_connect)
 	{
-		if (texture->no_wall)
-			mlx_destroy_image(mlx->mlx_connect, texture->no_wall);
-		if (texture->so_wall)
-			mlx_destroy_image(mlx->mlx_connect, texture->so_wall);
-		if (texture->we_wall)
-			mlx_destroy_image(mlx->mlx_connect, texture->we_wall);
-		if (texture->ea_wall)
-			mlx_destroy_image(mlx->mlx_connect, texture->ea_wall);
+		if (texture->no.img)
+			mlx_destroy_image(mlx->mlx_connect, texture->no.img);
+		if (texture->so.img)
+			mlx_destroy_image(mlx->mlx_connect, texture->so.img);
+		if (texture->ea.img)
+			mlx_destroy_image(mlx->mlx_connect, texture->ea.img);
+		if (texture->we.img)
+			mlx_destroy_image(mlx->mlx_connect, texture->we.img);
 		if (mlx->img)
 			mlx_destroy_image(mlx->mlx_connect, mlx->img);
 		if (mlx->mlx_window)

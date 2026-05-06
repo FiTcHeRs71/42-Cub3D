@@ -15,7 +15,7 @@ bool	can_move(t_data *data, double new_x, double mew_y)
 	return (true);
 }
 
-void	move_up(t_data *data, t_raycast *r, t_map *pos)
+void	move_up(t_data *data, t_raycast *r)
 {
 	double	new_x;
 	double	new_y;
@@ -28,7 +28,7 @@ void	move_up(t_data *data, t_raycast *r, t_map *pos)
 		r->pos_y= new_y;
 }
 
-void	move_down(t_data *data, t_raycast *r, t_map *pos)
+void	move_down(t_data *data, t_raycast *r)
 {
 	double	new_x;
 	double	new_y;
@@ -41,7 +41,7 @@ void	move_down(t_data *data, t_raycast *r, t_map *pos)
 		r->pos_y= new_y;
 }
 
-void	move_left(t_data *data, t_raycast *r, t_map *pos)
+void	move_left(t_data *data, t_raycast *r)
 {
 	double	new_x;
 	double	new_y;
@@ -54,7 +54,7 @@ void	move_left(t_data *data, t_raycast *r, t_map *pos)
 		r->pos_y= new_y;
 }
 
-void	move_right(t_data *data, t_raycast *r, t_map *pos)
+void	move_right(t_data *data, t_raycast *r)
 {
 	double	new_x;
 	double	new_y;
