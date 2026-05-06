@@ -1,61 +1,23 @@
 
 #include "../../includes/cub3d.h"
-#include <stdbool.h>
-
-static bool	can_move(t_data *data, double new_x, double mew_y)
-{
-	int	x;
-	int	y;
-
-	x = (int)new_x;
-	y = (int)mew_y;
-	if (y < 0 || x < 0 || !data->map->map[y] || x >= (int)ft_strlen(data->map->map[y]))
-		return (false);
-	if (data->map->map[x][y] == '1' || data->map->map[x][y] == ' ')
-		return (false);
-	return (true);
-}
 
 static void	move_player(t_data *data, t_raycast *r, t_map *pos)
 {
-	double	new_x;
-	double	new_y;
-
 	if (data->keys.w)
 	{
-		new_x = r->pos_x + r->dir_x * MOVE_SPEED;
-		new_y = r->pos_y + r->dir_y * MOVE_SPEED;
-		if (can_move(data, new_x, r->pos_y))
-			data->map->player_x = new_x;
-		if (can_move(data, r->pos_x, new_y))
-			data->map->player_y = new_y;
+		move_up(data, r, pos);
 	}
 	if (data->keys.s)
 	{
-		new_x = r->pos_x - r->dir_x * MOVE_SPEED;
-		new_y = r->pos_y - r->dir_y * MOVE_SPEED;
-		if (can_move(data, new_x, r->pos_y))
-			data->map->player_x = new_x;
-		if (can_move(data, r->pos_x, new_y))
-			data->map->player_y = new_y;
+		move_down(data, r, pos);
 	}
 	if (data->keys.d)
 	{
-		new_x = r->pos_x + r->plane_x * MOVE_SPEED;
-		new_y = r->pos_y + r->plane_y * MOVE_SPEED;
-		if (can_move(data, new_x, r->pos_y))
-			data->map->player_x = new_x;
-		if (can_move(data, r->pos_x, new_y))
-			data->map->player_y = new_y;
+		move_right(data, r, pos);
 	}
 	if (data->keys.a)
 	{
-		new_x = r->pos_x - r->plane_x * MOVE_SPEED;
-		new_y = r->pos_y - r->plane_y * MOVE_SPEED;
-		if (can_move(data, new_x, r->pos_y))
-			data->map->player_x = new_x;
-		if (can_move(data, r->pos_x, new_y))
-			data->map->player_y = new_y;
+		move_left(data, r, pos);
 	}
 }
 
@@ -65,7 +27,6 @@ static void rotate_player(t_data *data, t_raycast *r)
 	double	old_plane_x;
 	double	rot;
 
-	r = data->raycast;
 	rot = 0;
 	if (data->keys.left)
 		rot = -ROT_SPEED;
