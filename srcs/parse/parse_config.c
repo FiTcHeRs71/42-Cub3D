@@ -29,7 +29,7 @@ static bool	is_valid_color_code(char *str)
 int	get_color_code(t_data *data, char **array_code)
 {
 	int	i;
-	int	rgb_code[3];
+	int	rgb_code[3]; 
 	int	bit_rgb;
 
 	i = 0;
@@ -61,6 +61,8 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 	int		i;
 	char	**temp;
 
+	if (*rgb_code != NULL)
+		return (false);
 	temp = ft_split(&line[0], ',');
 	if (!temp)
 		ft_error(MALLOC_FAILED, data);
@@ -123,17 +125,17 @@ bool	extract_config(char *line, t_data *data)
 		i++;
 	if (line[i] == '\n' || line[i] == '\0')
 		return (true);
-	if (ft_strncmp(&line[i], "NO ", 3) == 0 && data->flag_no == 0)
-		return (data->flag_no++, save_texture(data, &data->texture->no_path, &line[i + 3]));
-	else if (ft_strncmp(&line[i], "SO ", 3) == 0 && data->flag_so == 0)
-		return (data->flag_so++, save_texture(data, &data->texture->so_path, &line[i + 3]));
-	else if (ft_strncmp(&line[i], "WE ", 3) == 0 && data->flag_we == 0)
-		return (data->flag_we++, save_texture(data, &data->texture->we_path, &line[i + 3]));
-	else if (ft_strncmp(&line[i], "EA ", 3) == 0 && data->flag_ea == 0)
-		return (data->flag_ea++, save_texture(data, &data->texture->ea_path, &line[i + 3]));
-	else if (ft_strncmp(&line[i], "F ", 2) == 0 && data->flag_f == 0)
-		return (data->flag_f++, save_color_code(data, &data->texture->floor, &line[i + 1]));
-	else if (ft_strncmp(&line[i], "C ", 2) == 0 && data->flag_c == 0)
-		return (data->flag_c++, save_color_code(data, &data->texture->ceiling, &line[i + 1]));
+	if (ft_strncmp(&line[i], "NO ", 3) == 0)
+		return (save_texture(data, &data->texture->no_path, &line[i + 3]));
+	else if (ft_strncmp(&line[i], "SO ", 3) == 0)
+		return (save_texture(data, &data->texture->so_path, &line[i + 3]));
+	else if (ft_strncmp(&line[i], "WE ", 3) == 0)
+		return (save_texture(data, &data->texture->we_path, &line[i + 3]));
+	else if (ft_strncmp(&line[i], "EA ", 3) == 0)
+		return (save_texture(data, &data->texture->ea_path, &line[i + 3]));
+	else if (ft_strncmp(&line[i], "F ", 2) == 0)
+		return (save_color_code(data, &data->texture->floor, &line[i + 1]));
+	else if (ft_strncmp(&line[i], "C ", 2) == 0)
+		return (save_color_code(data, &data->texture->ceiling, &line[i + 1]));
 	return (false);
 }

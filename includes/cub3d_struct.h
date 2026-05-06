@@ -116,12 +116,6 @@ typedef struct s_data
 	int					fd;
 	int					window_y;
 	int					window_x;
-	int					flag_no;
-	int					flag_so;
-	int					flag_ea;
-	int					flag_we;
-	int					flag_f;
-	int					flag_c;
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;
