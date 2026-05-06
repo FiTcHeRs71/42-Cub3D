@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/cub3D",
       "args": [
-        "${workspaceFolder}/map/invalid_map/test.cub" 
+        "${workspaceFolder}/map/valid_map/intra.cub" 
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
