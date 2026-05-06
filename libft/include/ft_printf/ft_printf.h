@@ -5,13 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/27 10:44:04 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/27 10:44:04 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/06 19:55:39 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/06 19:55:49 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+#include <stdarg.h>
 
 /* ft_printf.c */
 

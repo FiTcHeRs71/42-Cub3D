@@ -55,31 +55,44 @@ YELLOW = \033[0;33m
 RED = \033[0;31m
 RESET = \033[0m
 
+define spin
+	@printf "$(CYAN)$(1)$(RESET)  "; \
+	log=$$(mktemp); \
+	( $(2) ) > $$log 2>&1 & pid=$$!; \
+	while kill -0 $$pid 2>/dev/null; do \
+		for f in ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏; do \
+			printf "\b$$f"; sleep 0.08; \
+			kill -0 $$pid 2>/dev/null || break; \
+		done; \
+	done; \
+	wait $$pid; rc=$$?; \
+	if [ $$rc -eq 0 ]; then \
+		printf "\b$(GREEN)✓$(RESET)\n"; rm -f $$log; \
+	else \
+		printf "\b$(RED)✗$(RESET)\n"; cat $$log; rm -f $$log; exit $$rc; \
+	fi
+endef
+
 # Rules
 all: $(LIBFTDIR)/libft.a $(MLXDIR)/libmlx.a $(NAME)
 	@echo "$(GREEN)🎉 $(NAME) ready! 🎉$(RESET)"
 
 $(LIBFTDIR)/libft.a:
-	@echo "$(CYAN)📚 Building libft...$(RESET)"
-	@$(MAKE) -C $(LIBFTDIR) --no-print-directory
-	@echo "$(GREEN)✓ libft compiled$(RESET)"
+	$(call spin,📚 Building libft...,$(MAKE) -C $(LIBFTDIR) --no-print-directory)
 
 $(MLXDIR)/libmlx.a:
-	@echo "$(CYAN)🖼️  Building minilibx...$(RESET)"
-	@$(MAKE) -C $(MLXDIR) > /dev/null 2>&1
-	@echo "$(GREEN)✓ minilibx compiled$(RESET)"
+	$(call spin,🖼️  Building minilibx...,$(MAKE) -C $(MLXDIR))
 
-# Règle générique pour la compilation des .o
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@printf "$(CYAN)Compiling $(notdir $<)...$(RESET)\r"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@printf "$(GREEN)✓ Compiled $(notdir $<)   $(RESET)\n"
 
-$(NAME): $(OBJS)
-	@echo "$(YELLOW)🔗 Linking $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
+.PHONY: _compile
+_compile:
+	$(call spin,🛠  Compiling sources...,$(MAKE) --no-print-directory $(OBJS))
+
+$(NAME): $(OBJS) | _compile
+	$(call spin,🔗 Linking $(NAME)...,$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME))
 
 clean:
 	@$(MAKE) -C $(LIBFTDIR) clean --no-print-directory
@@ -88,7 +101,8 @@ clean:
 	@echo "$(CYAN)✓ Object files removed$(RESET)"
 
 fclean: clean
-	@$(MAKE) -C $(LIBFTDIR) fclean --no-print-directory
+	@rm -f $(LIBFTDIR)/libft.a
+	@echo "$(CYAN)✓ libft.a removed$(RESET)"
 	@rm -f $(NAME)
 	@echo "$(CYAN)✓ $(NAME) removed$(RESET)"
 
