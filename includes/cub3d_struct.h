@@ -95,6 +95,7 @@ typedef struct s_data
 	int					fd;
 	int					window_y;
 	int					window_x;
+	bool				keys[256];
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;

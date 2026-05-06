@@ -1,8 +1,16 @@
 
 # include "../../includes/cub3d.h"
 
-int	handle_keyboard_input(int keycode, t_data *data)
+int	key_release(int keycode, t_data *data)
 {
+	data->keys[keycode] = false;
+	return (0);
+}
+
+int	key_press(int keycode, t_data *data)
+{
+	printf("---%i--- | keycode\n", keycode);
+	data->keys[keycode] = true;
 	if (keycode == XK_Escape)
 	{
 			close_window(data);

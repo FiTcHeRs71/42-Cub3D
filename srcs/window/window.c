@@ -24,7 +24,8 @@ void	init_window(t_data *data, t_mlx *mlx)
 	if (!mlx->mlx_window)
 		ft_error(MINI_LBX, data);
 	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
-	mlx_key_hook(mlx->mlx_window, handle_keyboard_input, data);
+	mlx_hook(mlx->mlx_window, 2, 0, key_press, data);
+	mlx_hook(mlx->mlx_window, 3, 0, key_release, data);
 	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
 	mlx->img = mlx_new_image(mlx->mlx_connect, data->window_x, data->window_y);
 	if (!mlx->img)
