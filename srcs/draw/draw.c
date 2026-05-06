@@ -18,7 +18,7 @@ void	put_pixel(t_data *stats, t_raycast *data, int y_coord, int x_coord)
 	color = *(unsigned int *)(tex.addr + stats->texture->tex_y * tex.size_line + stats->texture->tex_x * (tex.bpp / 8));
 	offset = (y_coord * stats->mlx->size_line) + (x_coord * (stats->mlx->bits_per_pixel / 8));
 	pixel = stats->mlx->img_data + offset;
-	if (data->wall_side == 1)
+	if ((data->wall_side == 0 && data->ray_dir_x > 0) || (data->wall_side == 1 && data->ray_dir_y > 0))
 		color = (color >> 1) & 0x7F7F7F;
 	*(unsigned int *)pixel = color;
 }
