@@ -7,12 +7,12 @@ int	game_loop(t_data *data)
 
 	i = 0;
 	update_player(data);
-	// branche raycasting
-	while (i < data->window_x * data->window_y)
-	{
-		((unsigned int *)data->mlx->img_data)[i] = 0xFF0000;
-		i++;
-	}
+	raycasting(data, data->map, data->raycast, data->draw);
+	// while (i < data->window_x * data->window_y)
+	// {
+	// 	((unsigned int *)data->mlx->img_data)[i] = 0xFF0000;
+	// 	i++;
+	// }
 	mlx_put_image_to_window(data->mlx->mlx_connect, data->mlx->mlx_window,
 		data->mlx->img, 0, 0);
 	return (0);

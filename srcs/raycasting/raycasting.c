@@ -84,7 +84,7 @@ void	finalise_DDA_data(t_raycast *data)
 
 void	initialise_DDA(t_raycast *data, int x, t_data *stats)
 {
-	data->camera_x = 2 * x / stats->window_x - 1;
+	data->camera_x = 2.0 * x / (double)stats->window_x - 1;
 	data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
 	data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
 	if (data->ray_dir_x == 0)
@@ -95,7 +95,6 @@ void	initialise_DDA(t_raycast *data, int x, t_data *stats)
 		data->delta_dist_y = 1e30;
 	else
 		data->delta_dist_y = fabs(1 / data->ray_dir_y);
-	finalise_DDA_data(data);
 }
 
 void	cast_ray(t_data *stats, t_raycast *data)
@@ -114,7 +113,7 @@ void	cast_ray(t_data *stats, t_raycast *data)
 			data->map_y += data->step_y;
 			data->wall_side = 1;
 		}
-		if (stats->map->map[data->map_x][data->map_y] > 0)
+		if (stats->map->map[data->map_y][data->map_x] > '0')
 			data->is_hit = true;
 	}
 }
@@ -136,22 +135,21 @@ void	raycasting(t_data *stats, t_map *map, t_raycast *data, t_draw *draw)
 
 	x = 0;
 	set_data(data, map);
-	while (1)
+	while (x < stats->window_x)
 	{
-		while (x < stats->window_x)
-		{
-			initialise_DDA(data, x, stats);
-			data->map_x = (int)data->pos_x;
-			data->map_y = (int)data->pos_y;
-			cast_ray(stats, data);
-			if (data->wall_side == 0)
-				data->wall_dist = (data->side_dist_x - data->delta_dist_x);
-			else
-				data->wall_dist = (data->side_dist_y - data->delta_dist_y);
-			set_up_drawing_data(stats, data, draw);
-			draw_wall(stats, data, draw, x);
-			x++;
-		}
+		initialise_DDA(data, x, stats);
+		data->map_x = (int)data->pos_x;
+		data->map_y = (int)data->pos_y;
+		finalise_DDA_data(data);
+		cast_ray(stats, data);
+		if (data->wall_side == 0)
+			data->wall_dist = (data->side_dist_x - data->delta_dist_x);
+		else
+			data->wall_dist = (data->side_dist_y - data->delta_dist_y);
+		set_up_drawing_data(stats, data, draw);
+		draw_wall(stats, data, draw, x);
+		data->is_hit = false;
+		x++;
 	}
 }
 
