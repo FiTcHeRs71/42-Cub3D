@@ -5,6 +5,8 @@
 # define TITLE "Cub3D - LES RAY-CAST-COUILLES"
 # define MOVE_SPEED 0.08
 # define ROT_SPEED  0.03
+# define MAGENTA 0xFF00FF
+
 /*================== LIBRAIRY & HEADERS ==================*/
 
 # include <X11/keysym.h>

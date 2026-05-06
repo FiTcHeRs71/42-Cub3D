@@ -48,3 +48,165 @@ l'apprentissage.
 
 ACTION IMMÉDIATE : Lis le sujet joint, analyse les contraintes techniques, et commence
 par la phase 3 : pose-moi tes 3 questions de vérification sur le sujet.
+
+Si si, carré + transparence = forme libre ! 🎨                                                         
+                                         
+  Le principe                                                                                            
+   
+  L'image fichier est toujours rectangulaire (carrée pour cub3D). Mais tu rends transparents les pixels  
+  que tu ne veux pas afficher → ton ennemi peut avoir n'importe quelle silhouette.
+                                                                                                         
+  Image 64×64 (carré)        À l'écran (rendu)              
+  ┌────────────┐                                                                                         
+  │  ░░░██░░░  │              ░ = transparent (skip)
+  │  ░██████░  │              █ = pixel ennemi                                                           
+  │  ████████  │                                                                                         
+  │  ██░██░██  │              → on ne voit que la silhouette                                             
+  │  ░░████░░  │                                                                                         
+  └────────────┘                                            
+                                                                                                         
+  Le piège XPM + minilibx                                                                                
+   
+  Le canal alpha de XPM marche mal avec mlx_xpm_file_to_image. La technique fiable : couleur magique     
+  (chroma key).                                             
+                                                                                                         
+  Étapes concrètes                                                                                       
+   
+  1. Dans GIMP                                                                                           
+  - Peins le fond en magenta pur : #FF00FF (couleur qu'on n'utilise jamais dans le sprite).
+  - Dessine ton ennemi par dessus.                                                                       
+  - Exporte en XPM.               
+                                                                                                         
+  2. Dans le code (au rendu du sprite)                      
+                                                                                                         
+  #define TRANSPARENT 0xFF00FF                              
+                                                                                                         
+  int color = get_pixel(sprite, tex_x, tex_y);                                                           
+  if ((color & 0x00FFFFFF) != TRANSPARENT)  // ignore les pixels magenta                                 
+      put_pixel(frame, screen_x, screen_y, color);                                                       
+                                                                                                         
+  Alternative plus propre : utilise noir pur #000000 comme couleur transparente si ton sprite n'a pas de 
+  noir, ou réserve une couleur que tu n'utilises jamais.                                                 
+                                                                                                         
+  Résultat : ennemi avec n'importe quelle forme (humanoïde, pieuvre, fantôme…), même si l'image est      
+  techniquement un carré.
+
+
+
+
+  
+  ● En regardant ton code, le chroma key ne va pas dans le rendu actuel — put_pixel (draw.c:4) sert pour   
+  les murs qui sont opaques, donc rien à filtrer.                  
+                                                                                                         
+  Le chroma key magenta est nécessaire pour les sprites (toads + guns), qui n'ont pas encore de code de  
+  rendu chez toi. Voici où l'intégrer :                                                                  
+                                                                                                         
+  1. Charger les sprites (à ajouter dans textures.c)                                                     
+   
+  À la suite de load_wall_textures, tu ajoutes :                                                         
+                                                            
+  void  load_sprite_textures(t_data *data, t_texture *texture, t_mlx *mlx)                               
+  {                                                                                                      
+        int     i;                                                                                       
+                                                                                                         
+        const char *toad_paths[4] = {                                                                    
+                "images/enemies/toad1.xpm", "images/enemies/toad2.xpm",
+                "images/enemies/toad3.xpm", "images/enemies/toad4.xpm"                                   
+        };                                                  
+        const char *gun_paths[3] = {                                                                     
+                "images/guns/gun_neutre.xpm",               
+                "images/guns/gun-shoot-1.xpm",                                                           
+                "images/guns/gun-shoot-2.xpm"                                                            
+        };                                                                                               
+        i = 0;                                                                                           
+        while (i < 4)                                                                                    
+        {
+                texture->toad[i].img = mlx_xpm_file_to_image(mlx->mlx_connect,                           
+                        (char *)toad_paths[i],                                                           
+                        &texture->toad[i].width, &texture->toad[i].height);                              
+                texture->toad[i].addr = mlx_get_data_addr(texture->toad[i].img,                          
+                        &texture->toad[i].bpp, &texture->toad[i].size_line,                              
+                        &texture->toad[i].endian);                                                       
+                if (!texture->toad[i].img)                                                               
+                        ft_error(NO_ACCES, data);                                                        
+                i++;                                                                                     
+        }                                                                                                
+        i = 0;                                                                                           
+        while (i < 3)                                       
+        {
+                texture->gun[i].img = mlx_xpm_file_to_image(mlx->mlx_connect,
+                        (char *)gun_paths[i],                                                            
+                        &texture->gun[i].width, &texture->gun[i].height);
+                texture->gun[i].addr = mlx_get_data_addr(texture->gun[i].img,                            
+                        &texture->gun[i].bpp, &texture->gun[i].size_line,
+                        &texture->gun[i].endian);                                                        
+                if (!texture->gun[i].img)                   
+                        ft_error(NO_ACCES, data);                                                        
+                i++;                                        
+        }
+  }
+
+  Dans includes/cub3d.h, struct t_texture :                                                              
+  t_tex_img    toad[4];
+  t_tex_img    gun[3];                                                                                   
+                                                                                                         
+  2. Le chroma key — nouveau fichier srcs/draw/draw_sprite.c
+                                                                                                         
+  C'est ici que le chroma key opère :                                                                    
+                                                                                                         
+  #include "../../includes/cub3d.h"                                                                      
+                                                            
+  #define MAGENTA 0xFF00FF                                                                               
+   
+  static int    get_tex_pixel(t_tex_img *tex, int x, int y)                                              
+  {                                                         
+        if (x < 0 || y < 0 || x >= tex->width || y >= tex->height)                                       
+                return (MAGENTA);                           
+        return (*(unsigned int *)(tex->addr + y * tex->size_line                                         
+                        + x * (tex->bpp / 8)));
+  }                                                                                                      
+                                                            
+  static void   put_screen_pixel(t_mlx *mlx, int x, int y, int win_x, int win_y, int color)              
+  {                                                         
+        char    *pixel;                                                                                  
+        int             offset;                             
+
+        if (x < 0 || y < 0 || x >= win_x || y >= win_y)                                                  
+                return ;
+        offset = (y * mlx->size_line) + (x * (mlx->bits_per_pixel / 8));                                 
+        pixel = mlx->img_data + offset;                     
+        *(unsigned int *)pixel = color;                                                                  
+  }
+                                                                                                         
+  /* Dessine `tex` à (dst_x, dst_y) à l'écran, avec chroma key magenta */                                
+  void  draw_sprite(t_data *data, t_tex_img *tex, int dst_x, int dst_y)
+  {                                                                                                      
+        int     x;                                          
+        int     y;                                                                                       
+        int     color;                                      
+                                                                                                         
+        y = 0;
+        while (y < tex->height)                                                                          
+        {                                                   
+                x = 0;
+                while (x < tex->width)
+                {
+                        color = get_tex_pixel(tex, x, y);
+                        if ((color & 0x00FFFFFF) != MAGENTA)        /* ← chroma key ici */               
+                                put_screen_pixel(data->mlx, dst_x + x, dst_y + y,                        
+                                        data->window_x, data->window_y, color);                          
+                        x++;                                                                             
+                }                                                                                        
+                y++;                                        
+        }
+  }
+
+  3. Appel — dessiner le pistolet à chaque frame                                                         
+   
+  Dans ta boucle de rendu (après draw_wall, juste avant le mlx_put_image_to_window) :                    
+                                                            
+  t_tex_img *gun = &data->texture->gun[data->gun_frame];                                                 
+  int gx = (data->window_x - gun->width) / 2;       /* centré */
+  int gy = data->window_y - gun->height;            /* collé en bas */                                   
+  draw_sprite(data, gun, gx, gy);                                                                        
+                                   
