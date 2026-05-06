@@ -101,6 +101,7 @@ typedef struct s_texture
 	t_tex_img			no;
 	t_tex_img			we;
 	t_tex_img			ea;
+	t_tex_img			tex_flag;
 	char				*no_path;
 	char				*so_path;
 	char				*we_path;
@@ -109,6 +110,11 @@ typedef struct s_texture
 	char				**ceiling;
 	int					rgb_floor;
 	int					rgb_ceiling;
+	int					step;
+	int					tex_x;
+	int					tex_y;
+	double				tex_pos;
+	double				wall_x;
 }						t_texture;
 
 typedef struct s_data

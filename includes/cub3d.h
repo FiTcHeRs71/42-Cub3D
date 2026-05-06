@@ -48,7 +48,8 @@ void			ft_error(char *msg, t_data *data);
 void			init_data(t_data *data);
 
 /*-------- TEXTURES ------------*/
-void			load_textures(t_data *data, t_texture *texture, t_mlx *mlx);
+void			load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx);
+void			use_texture(t_data *data, t_raycast *ray, t_texture *tex);
 
 /*-------- WINDOW ------------*/
 void			init_window(t_data *data, t_mlx *mlx);
