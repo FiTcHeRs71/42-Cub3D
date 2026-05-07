@@ -11,11 +11,14 @@ SRCDIR = srcs
 # Source files
 SRCS_MAIN = main.c
 
+SRCS_MM = $(addprefix $(SRCDIR)/mini_map/,\
+	mini_map.c)
+
 SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
 	check_map.c parse_config.c parse_cub3d.c parse_utils.c utils.c)
 
 SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
-	init.c clear.c error.c window_clear.c)
+	init.c clear.c error.c window_clear.c clear_2.c)
 
 SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
 	window.c window_utils.c)
@@ -33,7 +36,7 @@ SRCS_TEXTURES = $(addprefix $(SRCDIR)/textures/, \
 	textures.c)
 
 # Combine all sources
-SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV)
+SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV) $(SRCS_MM)
 
 # Object files 
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
