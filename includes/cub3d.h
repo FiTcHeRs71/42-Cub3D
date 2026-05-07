@@ -28,22 +28,10 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
+# include "cub3d_message.h"
 
 # include "fred.h"// a suppr
 # include "leo.h" // a suppr
-
-/*================== MESSAGE MANAGEMENT ==================*/
-
-# define INSTRUCTIONS "Error \nUsage: ./cub3d <valid_map.cub>\n"
-# define MALLOC_FAILED "Error \nMemory allocation failed\n"
-# define FD_ERROR "Error \nUnable to open map file\n"
-# define INVALID_MAP "Error \nInvalid map\n"
-# define INVALID_SETTINGS "Error \nInvalid configuration format or \
-missing elements\n"
-# define NB_PLAYER "Error \nMap must contain only one player\n"
-# define MINI_LBX "Error \nError related to the mini libx\n"
-# define NO_ACCES "Error \nNo acces right to the file\n"
-# define NO_MAP "Error\nNo map in file\n"
 
 /*================== FONCTION ==================*/
 
@@ -63,6 +51,7 @@ bool			checker_before_split(char *line, char sep);
 /*-------- UTILS ------------*/
 void			clean_all(t_data *data);
 void			ft_error(char *msg, t_data *data);
+void			ft_error_ctx(char *what, char *detail, t_data *data);
 void			init_data(t_data *data);
 void			init_mini_map(t_data *data);
 void			clean_mini_map(t_data *data);

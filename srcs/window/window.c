@@ -24,12 +24,12 @@ void	init_window(t_data *data, t_mlx *mlx)
 {
 	mlx->mlx_connect = mlx_init();
 	if (!mlx->mlx_connect)
-		ft_error(MINI_LBX, data);
+		ft_error(ERR_MLX_INIT, data);
 	mlx_get_screen_size(mlx->mlx_connect, &data->window_x, &data->window_y);
 	mlx->mlx_window = mlx_new_window(mlx->mlx_connect, data->window_x,
 			data->window_y, TITLE);
 	if (!mlx->mlx_window)
-		ft_error(MINI_LBX, data);
+		ft_error(ERR_MLX_INIT, data);
 	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
@@ -40,7 +40,7 @@ void	init_window(t_data *data, t_mlx *mlx)
 	reset_mouse_to_center(data);
 	mlx->img = mlx_new_image(mlx->mlx_connect, data->window_x, data->window_y);
 	if (!mlx->img)
-		ft_error(MINI_LBX, data);
+		ft_error(ERR_MLX_INIT, data);
 	mlx->img_data = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 			&mlx->size_line, &mlx->endian);
 }

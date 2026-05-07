@@ -72,7 +72,7 @@ void	convert_linked_map_to_array(t_data *data, t_map *map)
 	{
 		map->map[i] = ft_strdup(current->line);
 		if (!map->map[i])
-			ft_error(MALLOC_FAILED, data);
+			ft_error(ERR_MALLOC, data);
 		current = current->next;
 		i++;
 	}

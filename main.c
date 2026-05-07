@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr_fd(INSTRUCTIONS, 2);
+		ft_putstr_fd(ERR_USAGE, 2);
 		return (1);
 	}
 	init_data(&data);

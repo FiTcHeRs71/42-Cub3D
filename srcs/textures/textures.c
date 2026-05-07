@@ -19,8 +19,14 @@ void	load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx)
 			&texture->we.width, &texture->we.height);
 	texture->we.addr = mlx_get_data_addr(texture->we.img, &texture->we.bpp,
 			&texture->we.size_line, &texture->we.endian);
-	if (!texture->no.img || !texture->so.img || !texture->ea.img || !texture->we.img)
-		ft_error(NO_ACCES, data);
+	if (!texture->no.img)
+		ft_error_ctx("Texture", texture->no_path, data);
+	if (!texture->so.img)
+		ft_error_ctx("Texture", texture->so_path, data);
+	if (!texture->ea.img)
+		ft_error_ctx("Texture", texture->ea_path, data);
+	if (!texture->we.img)
+		ft_error_ctx("Texture", texture->we_path, data);
 }
 
 void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw, t_raycast *ray)

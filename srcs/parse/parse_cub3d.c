@@ -28,21 +28,21 @@ static void	add_map_line(t_data *data, char **line)
 	if (!temp)
 	{
 		free(*line);
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	}
 	dup = ft_strdup(temp);
 	free(temp);
 	if (!dup)
 	{
 		free(*line);
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	}
 	node = new_node_map(dup);
 	if (!node)
 	{
 		free(dup);
 		free(*line);
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	}
 	node_map_add_back(&data->linked_map, node);
 }
@@ -63,7 +63,7 @@ static void	copy_map(t_data *data, char *line)
 			if (map_end)
 			{
 				free(line);
-				ft_error(INVALID_MAP, data);
+				ft_error(ERR_MAP_EMPTY_LINE, data);
 			}
 			add_map_line(data, &line);
 		}
@@ -98,7 +98,7 @@ static void	fill_config(t_data *data)
 			else
 			{
 				free(line);
-				ft_error(INVALID_SETTINGS, data);
+				ft_error(ERR_CFG_FORMAT, data);
 			}
 		}
 		else
@@ -106,7 +106,7 @@ static void	fill_config(t_data *data)
 		line = free_and_getline(line, data->fd);
 	}
 	if (config_count < 6)
-		ft_error(INVALID_SETTINGS, data);
+		ft_error(ERR_CFG_MISSING, data);
 	copy_map(data, line);
 }
 
@@ -125,11 +125,11 @@ static void	fill_config(t_data *data)
 void	parse_cub3d(t_data *data, char *file)
 {
 	if (!checker_file_extension(file, ".cub"))
-		ft_error(FD_ERROR, data);
+		ft_error(ERR_FILE_EXT, data);
 	data->fd = open(file, O_RDONLY);
 	if (data->fd < 0)
 	{
-		ft_error(FD_ERROR, data);
+		ft_error(ERR_FILE_OPEN, data);
 	}
 	fill_config(data);
 	close(data->fd);
