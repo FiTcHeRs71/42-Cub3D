@@ -54,6 +54,7 @@ static void	destroy_images(t_texture *texture, t_mlx *mlx)
 		return ;
 	if (mlx && mlx->mlx_connect)
 	{
+		mlx_mouse_show(mlx->mlx_connect, mlx->mlx_window);
 		if (texture->no.img)
 			mlx_destroy_image(mlx->mlx_connect, texture->no.img);
 		if (texture->so.img)
