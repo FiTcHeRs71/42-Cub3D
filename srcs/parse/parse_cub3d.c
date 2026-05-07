@@ -1,5 +1,7 @@
 
 #include "../../includes/cub3d.h"
+#include <fcntl.h>
+#include <math.h>
 
 bool	checker_file_extension(char *file, char *extension)
 {
@@ -9,7 +11,7 @@ bool	checker_file_extension(char *file, char *extension)
 		return (false);
 	if (ft_strncmp(&file[ft_strlen(file) - 4], extension, 4))
 		return (false);
-	fd = open(file, O_RDONLY);
+	fd = open(file, O_RDONLY, O_DIRECTORY);
 	if (fd < 0)
 		return (false);
 	close(fd);
@@ -50,11 +52,8 @@ static void	copy_map(t_data *data, char *line)
 	bool	map_end;
 
 	map_end = false;
-	while (ft_is_whitespace(line) == 1)
-	{
-		free(line);
-		line = get_next_line(data->fd);
-	}
+	while (line && ft_is_whitespace(line) == 1)
+		line = free_and_getline(line, data->fd);
 	while (line)
 	{
 		if (ft_is_whitespace(line) == 1)
@@ -68,8 +67,7 @@ static void	copy_map(t_data *data, char *line)
 			}
 			add_map_line(data, &line);
 		}
-		free(line);
-		line = get_next_line(data->fd);
+		line = free_and_getline(line, data->fd);
 	}
 }
 /**
@@ -105,8 +103,7 @@ static void	fill_config(t_data *data)
 		}
 		else
 			break ;
-		free(line);
-		line = get_next_line(data->fd);
+		line = free_and_getline(line, data->fd);
 	}
 	if (config_count < 6)
 		ft_error(INVALID_SETTINGS, data);

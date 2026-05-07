@@ -1,0 +1,8 @@
+SO ./images/wall/south.xpm
+NO ./images/wall/north.xpm
+WE ./images/wall/west.xpm
+EA ./images/wall/east.xpm
+
+F 10,20,50
+C 60,60,60
+

@@ -129,3 +129,11 @@ void	check_map(t_data *data, t_map *map)
 	map->map_copy = flood_fill_copy_map(data, map->map);
 	flood_fill_valid_map(data, map, map->player_y, map->player_x);
 }
+
+char	*free_and_getline(char *line, int fd)
+{
+	if (line)
+		free(line);
+	line = get_next_line(fd);
+	return (line);
+}

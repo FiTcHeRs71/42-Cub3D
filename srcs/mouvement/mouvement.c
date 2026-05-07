@@ -52,8 +52,10 @@ int	mouse_motion(int x, int y, t_data *data)
 {
 	int	delta_x;
 	double	rot;
-	(void)	y;
 
+	(void)y;
+	if (!data->mouse_active)
+		return (0);
 	delta_x = x - (data->window_x / 2);
 	if (delta_x == 0)
 		return (0);

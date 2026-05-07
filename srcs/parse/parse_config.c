@@ -61,18 +61,17 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 	int		i;
 	char	**temp;
 
-	if (*rgb_code != NULL)
+	if (*rgb_code != NULL || !checker_before_split(&line[0], ','))
 		return (false);
 	temp = ft_split(&line[0], ',');
 	if (!temp)
 		ft_error(MALLOC_FAILED, data);
-	i = ft_array_size(temp);
-	if (i != 3)
+	if (ft_array_size(temp) != 3)
 	{
 		ft_free_2d_array(temp);
 		ft_error(INVALID_SETTINGS, data);
 	}
-	*(rgb_code) = ft_calloc(i + 1, sizeof(char *));
+	*(rgb_code) = ft_calloc(ft_array_size(temp) + 1, sizeof(char *));
 	i = 0;
 	while (temp[i])
 	{
@@ -81,8 +80,7 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 			ft_error(MALLOC_FAILED, data);
 		i++;
 	}
-	ft_free_2d_array(temp);
-	return (true);
+	return (ft_free_2d_array(temp), true);
 }
 
 static bool	save_texture(t_data *data, char **texture_path, char *line)

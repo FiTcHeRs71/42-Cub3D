@@ -12,7 +12,7 @@ SRCDIR = srcs
 SRCS_MAIN = main.c
 
 SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
-	check_map.c parse_config.c parse_cub3d.c parse_utils.c)
+	check_map.c parse_config.c parse_cub3d.c parse_utils.c utils.c)
 
 SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
 	init.c clear.c error.c window_clear.c)

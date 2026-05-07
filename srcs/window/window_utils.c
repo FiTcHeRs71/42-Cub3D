@@ -36,3 +36,16 @@ int	handle_key_release(int keycode, t_data *data)
 		data->keys.right = false;
 	return (0);
 }
+
+int focus_in(t_data *data)
+{
+	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x / 2, data->window_y / 2);
+	data->mouse_active = true;
+	return (0);
+}
+
+int focus_out(t_data *data)
+{
+	data->mouse_active = false;
+	return (0);
+} 

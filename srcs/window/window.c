@@ -25,6 +25,8 @@ void	init_window(t_data *data, t_mlx *mlx)
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
 	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
 	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_motion, data);
+	mlx_hook(mlx->mlx_window, 9, 1L << 21, focus_in, data);
+	mlx_hook(mlx->mlx_window, 10, 1L << 21, focus_out, data);
 	mlx_mouse_hide(mlx->mlx_connect, mlx->mlx_window);
 	mlx_mouse_move(mlx->mlx_connect, mlx->mlx_window, data->window_x / 2, data->window_y / 2);
 	mlx->img = mlx_new_image(mlx->mlx_connect, data->window_x, data->window_y);
@@ -33,3 +35,4 @@ void	init_window(t_data *data, t_mlx *mlx)
 	mlx->img_data = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 			&mlx->size_line, &mlx->endian);
 }
+

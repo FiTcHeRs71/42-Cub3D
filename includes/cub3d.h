@@ -3,7 +3,7 @@
 # define CUB3D_H
 
 # define TITLE "Cub3D - LES RAY-CAST-COUILLES"
-# define MOVE_SPEED 0.08
+# define MOVE_SPEED 0.15
 # define ROT_SPEED  0.03
 # define MOUSE_SENSITIVITY 0.002
 # define MOUSE_MAX_DELTA 5
@@ -22,15 +22,16 @@
 
 /*================== MESSAGE MANAGEMENT ==================*/
 
-# define INSTRUCTIONS "Error \n Usage: ./cub3d <valid_map.cub>\n"
-# define MALLOC_FAILED "Memory allocation failed, exit \n"
-# define FD_ERROR "Unable to open map file, exit \n"
-# define INVALID_MAP "Invalid map, exit \n"
-# define INVALID_SETTINGS "Invalid configuration format or \
-missing elements exit\n"
-# define NB_PLAYER "Map must contain only one player, exit\n"
-# define MINI_LBX "Error related to the mini libx\n"
-# define NO_ACCES "No acces right to the file\n"
+# define INSTRUCTIONS "Error \nUsage: ./cub3d <valid_map.cub>\n"
+# define MALLOC_FAILED "Error \nMemory allocation failed\n"
+# define FD_ERROR "Error \nUnable to open map file\n"
+# define INVALID_MAP "Error \nInvalid map\n"
+# define INVALID_SETTINGS "Error \nInvalid configuration format or \
+missing elements\n"
+# define NB_PLAYER "Error \nMap must contain only one player\n"
+# define MINI_LBX "Error \nError related to the mini libx\n"
+# define NO_ACCES "Error \nNo acces right to the file\n"
+# define NO_MAP "Error\nNo map in file\n"
 
 /*================== FONCTION ==================*/
 
@@ -44,6 +45,8 @@ int				get_color_code(t_data *data, char **arry_code);
 int				node_map_size(t_linked_map *lst);
 t_linked_map	*new_node_map(void *content);
 bool			checker_file_extension(char *file, char *extension);
+char			*free_and_getline(char *line, int fd);
+bool			checker_before_split(char *line, char sep);
 
 /*-------- UTILS ------------*/
 void			clean_all(t_data *data);
@@ -61,12 +64,15 @@ void			move_up(t_data *data, t_raycast *r);
 void			move_down(t_data *data, t_raycast *r);
 void			move_left(t_data *data, t_raycast *r);
 void			move_right(t_data *data, t_raycast *r);
+int				mouse_motion(int x, int y, t_data *data);
 
 /*-------- WINDOW ------------*/
 void			init_window(t_data *data, t_mlx *mlx);
 int				handle_key_press(int keycode, t_data *data);
 int				handle_key_release(int keycode, t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
+int				focus_in(t_data *data);
+int				focus_out(t_data *data);
 int				close_window(t_data *data);
 
 /*-------- DRAW ------------*/
