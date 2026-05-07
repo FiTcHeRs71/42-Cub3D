@@ -27,9 +27,9 @@ void	init_mini_map(t_data *data)
 	data->mini_map.discovered = ft_calloc(data->map->map_size, sizeof(bool *));
 	if (!data->mini_map.discovered)
 		ft_error(MALLOC_FAILED, data);
-	while (data->mini_map.discovered[i])
+	while (i < data->map->map_size)
 	{
-		data->mini_map.discovered[i] = ft_calloc(ft_strlen(data->map->map[i]), sizeof(bool));
+		data->mini_map.discovered[i] = ft_calloc(ft_strlen(data->map->map[i])+ 1, sizeof(bool));
 		if (!data->mini_map.discovered[i])
 			ft_error(MALLOC_FAILED, data);
 		i++;
