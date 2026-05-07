@@ -24,6 +24,9 @@ void	init_window(t_data *data, t_mlx *mlx)
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
 	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
+	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_motion, data);
+	mlx_mouse_hide(mlx->mlx_connect, mlx->mlx_window);
+	mlx_mouse_move(mlx->mlx_connect, mlx->mlx_window, data->window_x / 2, data->window_y / 2);
 	mlx->img = mlx_new_image(mlx->mlx_connect, data->window_x, data->window_y);
 	if (!mlx->img)
 		ft_error(MINI_LBX, data);

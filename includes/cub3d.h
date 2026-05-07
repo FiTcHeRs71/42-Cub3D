@@ -5,6 +5,8 @@
 # define TITLE "Cub3D - LES RAY-CAST-COUILLES"
 # define MOVE_SPEED 0.08
 # define ROT_SPEED  0.03
+# define MOUSE_SENSITIVITY 0.002
+# define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
 
 /*================== LIBRAIRY & HEADERS ==================*/
@@ -64,6 +66,7 @@ void			move_right(t_data *data, t_raycast *r);
 void			init_window(t_data *data, t_mlx *mlx);
 int				handle_key_press(int keycode, t_data *data);
 int				handle_key_release(int keycode, t_data *data);
+int				mouse_motion(int x, int y, t_data *data);
 int				close_window(t_data *data);
 
 /*-------- DRAW ------------*/

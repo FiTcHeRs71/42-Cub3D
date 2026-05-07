@@ -116,17 +116,24 @@ typedef struct s_texture
 	double				wall_x;
 }						t_texture;
 
+typedef struct s_mouse
+{
+	bool				mouse_active;
+	
+}	t_mouse;
+
 typedef struct s_data
 {
 	int					fd;
 	int					window_y;
 	int					window_x;
+	t_keys				keys;
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;
-	t_keys				keys;
 	t_raycast			*raycast;
 	t_draw				*draw;
+	t_mouse				mouse;
 	struct s_linked_map	*linked_map;
 }						t_data;
 
