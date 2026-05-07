@@ -13,3 +13,25 @@ void	init_data(t_data *data)
 		ft_error(MALLOC_FAILED, data);
 	data->mouse_active = true;
 }
+
+void	init_mini_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->mini_map.width = data->window_x * 0.15;
+	data->mini_map.height = data->window_y * 0.15;
+	data->mini_map.scale = data->mini_map.width / data->lasrgest_line;
+	data->mini_map.pos_x = data->window_x - data->mini_map.width - 10;
+	data->mini_map.pos_y = 10;
+	data->mini_map.discovered = ft_calloc(data->map->map_size, sizeof(bool *));
+	if (!data->mini_map.discovered)
+		ft_error(MALLOC_FAILED, data);
+	while (data->mini_map.discovered)
+	{
+		data->mini_map.discovered[i] = ft_calloc(ft_strlen(data->map->map[i]), sizeof(bool));
+		if (!data->mini_map.discovered[i])
+			ft_error(MALLOC_FAILED, data);
+		i++;
+	}
+}

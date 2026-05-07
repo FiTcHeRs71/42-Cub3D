@@ -13,6 +13,7 @@ int	game_loop(t_data *data)
 {
 	update_player(data);
 	clear_image(data);
+	change_state_fog_of_war(data);
 	raycasting(data, data->raycast, data->draw);
 	mlx_put_image_to_window(data->mlx->mlx_connect, data->mlx->mlx_window,
 		data->mlx->img, 0, 0);

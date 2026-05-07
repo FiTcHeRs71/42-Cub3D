@@ -21,7 +21,7 @@ SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
 	window.c window_utils.c)
 
 SRCS_MOUV = $(addprefix $(SRCDIR)/mouvement/, \
-	mouvement.c mouvement_utils.c)
+	mouvement.c mouvement_utils.c utils.c)
 
 SRCS_RAYCAST = $(addprefix $(SRCDIR)/raycasting/, \
 	raycasting.c)

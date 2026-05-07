@@ -90,6 +90,7 @@ void	clean_all(t_data *data)
 	}
 	free(data->draw);
 	free(data->raycast);
+	clean_mini_map(data);
 	destroy_images(data->texture, data->mlx);
 	free_map_struct(data->map);
 	free_texture_struct(data->texture);

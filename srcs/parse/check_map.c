@@ -122,6 +122,8 @@ void	check_map(t_data *data, t_map *map)
 	while (map->map[i])
 	{
 		check_arg(map->map[i], data, i);
+		if (ft_strlen(map->map[i]) > data->lasrgest_line)
+			data->lasrgest_line = ft_strlen(map->map[i]);
 		i++;
 	}
 	if (map->player_flag != 1)

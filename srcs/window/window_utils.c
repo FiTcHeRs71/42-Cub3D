@@ -1,7 +1,7 @@
 
 #include "../../includes/cub3d.h"
 
-void release_mouse(t_data *data)
+static void	release_mouse(t_data *data)
 {
 	mlx_mouse_show(data->mlx->mlx_connect, data->mlx->mlx_window);
 	data->mouse_active = false;

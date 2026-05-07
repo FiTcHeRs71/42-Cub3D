@@ -8,6 +8,18 @@
 # define MOUSE_SENSITIVITY 0.002
 # define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
+# define COLLISION_MARGIN 0.15
+
+/*================== MINI MAP ==================*/
+
+# define MINIMAP_RATIO 0.15
+# define REVEAL_RADIUS 5
+# define MM_COLOR_WALL 0x000000
+# define MM_COLOR_FLOOR 0x808080
+# define MM_COLOR_PLAYER 0xFF0000
+# define MM_COLOR_CONE 0xFFFF00
+# define MM_CONE_ALPHA 0.4
+# define MM_CONE_LENGTH 4.0
 
 /*================== LIBRAIRY & HEADERS ==================*/
 
@@ -52,6 +64,8 @@ bool			checker_before_split(char *line, char sep);
 void			clean_all(t_data *data);
 void			ft_error(char *msg, t_data *data);
 void			init_data(t_data *data);
+void			init_mini_map(t_data *data);
+void			clean_mini_map(t_data *data);
 
 /*-------- TEXTURES ------------*/
 void			load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx);

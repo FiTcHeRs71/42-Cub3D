@@ -116,18 +116,32 @@ typedef struct s_texture
 	double				wall_x;
 }						t_texture;
 
+typedef struct	s_minimap
+{
+	bool	**discovered;
+	bool	fullscreen;
+	int		pos_x;
+	int		pos_y;
+	int		width;
+	int		height;
+	int		scale;
+}	t_minimap;
+
+
 typedef struct s_data
 {
 	int					fd;
 	int					window_y;
 	int					window_x;
 	bool				mouse_active;
+	int					lasrgest_line;
 	t_keys				keys;
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;
 	t_raycast			*raycast;
 	t_draw				*draw;
+	t_minimap			mini_map;
 	struct s_linked_map	*linked_map;
 }						t_data;
 
