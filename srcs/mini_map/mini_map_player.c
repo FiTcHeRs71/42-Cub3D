@@ -86,11 +86,19 @@ void	draw_mini_map_cone(t_data *data)
 
 void	compute_minimap_fullscreen(t_data *data)
 {
-	data->mini_map.scale = min(data->window_x / data->largest_line, data->window_y / data->map->map_size);
+	int	scale_x;
+	int	scale_y;
+
+	scale_x = data->window_x / data->largest_line;
+	scale_y = data->window_y / data->map->map_size;
+	if (scale_x < scale_y)
+		data->mini_map.scale = scale_x;
+	else
+		data->mini_map.scale = scale_y;
 	data->mini_map.width = data->mini_map.scale * data->largest_line;
 	data->mini_map.height = data->mini_map.scale * data->map->map_size;
 	data->mini_map.pos_x = (data->window_x - data->mini_map.width) / 2;
-	data->mini_map.pos_x = (data->window_y - data->mini_map.height) / 2;
+	data->mini_map.pos_y = (data->window_y - data->mini_map.height) / 2;
 }
 
 void	toggle_minimap_fullscreen(t_data *data)

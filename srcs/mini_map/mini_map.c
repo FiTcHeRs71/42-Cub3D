@@ -99,6 +99,15 @@ void	change_state_fog_of_war(t_data *data)
 
 void	compute_minimap_normal(t_data *data)
 {
+	data->mini_map.width = data->window_x * MINIMAP_RATIO;
+	data->mini_map.height = data->window_y * MINIMAP_RATIO;
+	data->mini_map.scale = data->mini_map.width / data->largest_line;
+	data->mini_map.pos_x = data->window_x - data->mini_map.width - 10;
+	data->mini_map.pos_y = 10;
+}
+
+void	draw_mini_map(t_data *data)
+{
 	draw_mini_map_cells(data);
 	draw_mini_map_cone(data);
 	draw_mini_map_player(data);
