@@ -54,7 +54,7 @@ int	mouse_motion(int x, int y, t_data *data)
 	double	rot;
 
 	(void)y;
-	if (!data->mouse_active)
+	if (!data->mouse_active || !data->raycast)
 		return (0);
 	delta_x = x - (data->window_x / 2);
 	if (delta_x == 0)

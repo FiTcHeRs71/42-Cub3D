@@ -11,7 +11,7 @@ bool	checker_file_extension(char *file, char *extension)
 		return (false);
 	if (ft_strncmp(&file[ft_strlen(file) - 4], extension, 4))
 		return (false);
-	fd = open(file, O_RDONLY, O_DIRECTORY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (false);
 	close(fd);

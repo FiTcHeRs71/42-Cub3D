@@ -1,6 +1,12 @@
 
 #include "../../includes/cub3d.h"
 
+void release_mouse(t_data *data)
+{
+	mlx_mouse_show(data->mlx->mlx_connect, data->mlx->mlx_window);
+	data->mouse_active = false;
+}
+
 int	handle_key_press(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
@@ -17,6 +23,13 @@ int	handle_key_press(int keycode, t_data *data)
 		data->keys.left = true;
 	else if (keycode == XK_Right)
 		data->keys.right = true;
+	else if (keycode == XK_Tab)
+	{
+		if (data->mouse_active)
+			release_mouse(data);
+		else
+			reset_mouse_to_center(data);
+	}
 	return (0);
 }
 
@@ -37,13 +50,13 @@ int	handle_key_release(int keycode, t_data *data)
 	return (0);
 }
 
-int focus_in(t_data *data)
+int	focus_in(t_data *data)
 {
 	reset_mouse_to_center(data);
 	return (0);
 }
 
-int focus_out(t_data *data)
+int	focus_out(t_data *data)
 {
 	data->mouse_active = false;
 	return (0);
