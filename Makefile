@@ -12,7 +12,7 @@ SRCDIR = srcs
 SRCS_MAIN = main.c
 
 SRCS_MM = $(addprefix $(SRCDIR)/mini_map/,\
-	mini_map.c)
+	mini_map.c mini_map_player.c)
 
 SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
 	check_map.c parse_config.c parse_cub3d.c parse_utils.c utils.c)

@@ -30,6 +30,8 @@ int	handle_key_press(int keycode, t_data *data)
 		else
 			reset_mouse_to_center(data);
 	}
+	else if (keycode == XK_m)
+		toggle_minimap_fullscreen(data);
 	return (0);
 }
 

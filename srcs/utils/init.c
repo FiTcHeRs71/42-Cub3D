@@ -24,6 +24,7 @@ void	init_mini_map(t_data *data)
 	data->mini_map.scale = data->mini_map.width / data->largest_line;
 	data->mini_map.pos_x = data->window_x - data->mini_map.width - 10;
 	data->mini_map.pos_y = 10;
+	compute_minimap_normal(data);
 	data->mini_map.discovered = ft_calloc(data->map->map_size, sizeof(bool *));
 	if (!data->mini_map.discovered)
 		ft_error(MALLOC_FAILED, data);

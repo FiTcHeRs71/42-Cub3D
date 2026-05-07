@@ -1,6 +1,67 @@
 
 #include "../../includes/cub3d.h"
 
+void	mm_put_pixel(t_data *data, int x, int y, int color)
+{
+	char	*pixel;
+	int		offset;
+
+	if (x < 0 || x >= data->window_x || y < 0 || y >= data->window_y)
+		return ;
+	offset = (y * data->mlx->size_line) + (x * (data->mlx->bits_per_pixel / 8));
+	pixel = data->mlx->img_data + offset;
+	*(unsigned int *)pixel = color;
+}
+
+static void	draw_filled_square(t_data *data, int px, int py, int color)
+{
+	int	dx;
+	int	dy;
+	int	size;
+
+	size = data->mini_map.scale;
+	dy = 0;
+	while (dy < size)
+	{
+		dx = 0;
+		while (dx < size)
+		{
+			mm_put_pixel(data, px + dx, py + dy, color);
+			dx++;
+		}
+		dy++;
+	}
+}
+
+void	draw_mini_map_cells(t_data *data)
+{
+	int	y;
+	int	x;
+	int	color;
+	int	pixel_x;
+	int	pixel_y;
+
+	y = 0;
+	while (y < data->map->map_size)
+	{
+		x = 0;
+		while (data->map->map[y] && data->map->map[y][x])
+		{
+			if (data->mini_map.discovered[y][x])
+			{
+				color = MM_COLOR_FLOOR;
+				if (data->map->map[y][x] == '1')
+					color = MM_COLOR_WALL;
+				pixel_x = data->mini_map.pos_x + x * data->mini_map.scale;
+				pixel_y = data->mini_map.pos_y + y * data->mini_map.scale;
+				draw_filled_square(data, pixel_x, pixel_y, color);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 static bool	is_in_map_bounds(t_data *data, int y, int x)
 {
 	if (y < 0 || y >= data->map->map_size)
@@ -34,4 +95,11 @@ void	change_state_fog_of_war(t_data *data)
 		}
 		dy++;
 	}
+}
+
+void	compute_minimap_normal(t_data *data)
+{
+	draw_mini_map_cells(data);
+	draw_mini_map_cone(data);
+	draw_mini_map_player(data);
 }
