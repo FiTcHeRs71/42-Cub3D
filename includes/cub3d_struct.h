@@ -134,7 +134,7 @@ typedef struct s_data
 	int					window_y;
 	int					window_x;
 	bool				mouse_active;
-	int					lasrgest_line;
+	int					largest_line;
 	t_keys				keys;
 	t_map				*map;
 	t_texture			*texture;

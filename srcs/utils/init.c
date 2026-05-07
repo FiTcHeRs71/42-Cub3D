@@ -21,13 +21,13 @@ void	init_mini_map(t_data *data)
 	i = 0;
 	data->mini_map.width = data->window_x * 0.15;
 	data->mini_map.height = data->window_y * 0.15;
-	data->mini_map.scale = data->mini_map.width / data->lasrgest_line;
+	data->mini_map.scale = data->mini_map.width / data->largest_line;
 	data->mini_map.pos_x = data->window_x - data->mini_map.width - 10;
 	data->mini_map.pos_y = 10;
 	data->mini_map.discovered = ft_calloc(data->map->map_size, sizeof(bool *));
 	if (!data->mini_map.discovered)
 		ft_error(MALLOC_FAILED, data);
-	while (data->mini_map.discovered)
+	while (data->mini_map.discovered[i])
 	{
 		data->mini_map.discovered[i] = ft_calloc(ft_strlen(data->map->map[i]), sizeof(bool));
 		if (!data->mini_map.discovered[i])
