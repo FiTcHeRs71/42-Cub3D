@@ -1,5 +1,13 @@
 
 #include "../../includes/cub3d.h"
+#include <stdbool.h>
+
+void	reset_mouse_to_center(t_data *data)
+{
+	mlx_mouse_hide(data->mlx->mlx_connect, data->mlx->mlx_window);
+	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x / 2, data->window_y / 2);
+	data->mouse_active = true;
+}
 
 int	game_loop(t_data *data)
 {
@@ -27,8 +35,7 @@ void	init_window(t_data *data, t_mlx *mlx)
 	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_motion, data);
 	mlx_hook(mlx->mlx_window, 9, 1L << 21, focus_in, data);
 	mlx_hook(mlx->mlx_window, 10, 1L << 21, focus_out, data);
-	mlx_mouse_hide(mlx->mlx_connect, mlx->mlx_window);
-	mlx_mouse_move(mlx->mlx_connect, mlx->mlx_window, data->window_x / 2, data->window_y / 2);
+	reset_mouse_to_center(data);
 	mlx->img = mlx_new_image(mlx->mlx_connect, data->window_x, data->window_y);
 	if (!mlx->img)
 		ft_error(MINI_LBX, data);

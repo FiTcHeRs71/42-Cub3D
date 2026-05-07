@@ -39,8 +39,7 @@ int	handle_key_release(int keycode, t_data *data)
 
 int focus_in(t_data *data)
 {
-	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x / 2, data->window_y / 2);
-	data->mouse_active = true;
+	reset_mouse_to_center(data);
 	return (0);
 }
 

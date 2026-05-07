@@ -65,7 +65,7 @@ int	mouse_motion(int x, int y, t_data *data)
 		delta_x = -MOUSE_MAX_DELTA;
 	rot = delta_x * MOUSE_SENSITIVITY;
 	apply_rotation(data->raycast, rot);
-	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x / 2, data->window_y / 2);
+	reset_mouse_to_center(data);
 	return (0);
 }
 

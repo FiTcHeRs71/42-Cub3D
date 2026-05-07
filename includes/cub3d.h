@@ -74,6 +74,7 @@ int				mouse_motion(int x, int y, t_data *data);
 int				focus_in(t_data *data);
 int				focus_out(t_data *data);
 int				close_window(t_data *data);
+void			reset_mouse_to_center(t_data *data);
 
 /*-------- DRAW ------------*/
 void			draw_wall(t_data *stats, t_raycast *data,
