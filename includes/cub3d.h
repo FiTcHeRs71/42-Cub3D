@@ -8,6 +8,18 @@
 # define MOUSE_SENSITIVITY 0.002
 # define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
+# define COLLISION_MARGIN 0.15
+
+/*================== MINI MAP ==================*/
+
+# define MINIMAP_RATIO 0.15
+# define REVEAL_RADIUS 5
+# define MM_COLOR_WALL 0x000000
+# define MM_COLOR_FLOOR 0x808080
+# define MM_COLOR_PLAYER 0xFF0000
+# define MM_COLOR_CONE 0xFFFF00
+# define MM_CONE_ALPHA 0.4
+# define MM_CONE_LENGTH 4.0
 
 /*================== LIBRAIRY & HEADERS ==================*/
 
@@ -17,22 +29,10 @@
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
 # include <pthread.h>
+# include "cub3d_message.h"
 
 # include "fred.h"// a suppr
 # include "leo.h" // a suppr
-
-/*================== MESSAGE MANAGEMENT ==================*/
-
-# define INSTRUCTIONS "Error \nUsage: ./cub3d <valid_map.cub>\n"
-# define MALLOC_FAILED "Error \nMemory allocation failed\n"
-# define FD_ERROR "Error \nUnable to open map file\n"
-# define INVALID_MAP "Error \nInvalid map\n"
-# define INVALID_SETTINGS "Error \nInvalid configuration format or \
-missing elements\n"
-# define NB_PLAYER "Error \nMap must contain only one player\n"
-# define MINI_LBX "Error \nError related to the mini libx\n"
-# define NO_ACCES "Error \nNo acces right to the file\n"
-# define NO_MAP "Error\nNo map in file\n"
 
 /*================== FONCTION ==================*/
 
@@ -52,7 +52,10 @@ bool			checker_before_split(char *line, char sep);
 /*-------- UTILS ------------*/
 void			clean_all(t_data *data);
 void			ft_error(char *msg, t_data *data);
+void			ft_error_ctx(char *what, char *detail, t_data *data);
 void			init_data(t_data *data);
+void			init_mini_map(t_data *data);
+void			clean_mini_map(t_data *data);
 
 /*-------- TEXTURES ------------*/
 void			load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx);
@@ -75,6 +78,7 @@ int				mouse_motion(int x, int y, t_data *data);
 int				focus_in(t_data *data);
 int				focus_out(t_data *data);
 int				close_window(t_data *data);
+void			reset_mouse_to_center(t_data *data);
 
 /*-------- DRAW ------------*/
 void			draw_wall(t_data *stats, t_raycast *data,

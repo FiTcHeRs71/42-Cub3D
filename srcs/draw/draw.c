@@ -106,5 +106,3 @@ void	draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
 		y++;
 	}
 }
-
-// texture 64x64

@@ -1,16 +1,15 @@
 
 #include "../../includes/cub3d.h"
 
-bool	can_move(t_data *data, double new_x, double mew_y)
+bool	can_move(t_data *data, double new_x, double new_y)
 {
-	int	x;
-	int	y;
-
-	x = (int)new_x;
-	y = (int)mew_y;
-	if (y < 0 || x < 0 || !data->map->map[y] || x >= (int)ft_strlen(data->map->map[y]))
+	if (is_wall_at(data, new_x - COLLISION_MARGIN, new_y - COLLISION_MARGIN))
 		return (false);
-	if (data->map->map[y][x] == '1' || data->map->map[y][x] == ' ')
+	if (is_wall_at(data, new_x + COLLISION_MARGIN, new_y - COLLISION_MARGIN))
+		return (false);
+	if (is_wall_at(data, new_x - COLLISION_MARGIN, new_y + COLLISION_MARGIN))
+		return (false);
+	if (is_wall_at(data, new_x + COLLISION_MARGIN, new_y + COLLISION_MARGIN))
 		return (false);
 	return (true);
 }
@@ -25,7 +24,7 @@ void	move_up(t_data *data, t_raycast *r)
 	if (can_move(data, new_x, r->pos_y))
 		r->pos_x = new_x;
 	if (can_move(data, r->pos_x, new_y))
-		r->pos_y= new_y;
+		r->pos_y = new_y;
 }
 
 void	move_down(t_data *data, t_raycast *r)
@@ -38,7 +37,7 @@ void	move_down(t_data *data, t_raycast *r)
 	if (can_move(data, new_x, r->pos_y))
 		r->pos_x = new_x;
 	if (can_move(data, r->pos_x, new_y))
-		r->pos_y= new_y;
+		r->pos_y = new_y;
 }
 
 void	move_left(t_data *data, t_raycast *r)
@@ -51,7 +50,7 @@ void	move_left(t_data *data, t_raycast *r)
 	if (can_move(data, new_x, r->pos_y))
 		r->pos_x = new_x;
 	if (can_move(data, r->pos_x, new_y))
-		r->pos_y= new_y;
+		r->pos_y = new_y;
 }
 
 void	move_right(t_data *data, t_raycast *r)
@@ -64,5 +63,5 @@ void	move_right(t_data *data, t_raycast *r)
 	if (can_move(data, new_x, r->pos_y))
 		r->pos_x = new_x;
 	if (can_move(data, r->pos_x, new_y))
-		r->pos_y= new_y;
+		r->pos_y = new_y;
 }

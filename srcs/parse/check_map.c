@@ -16,11 +16,11 @@ static void	check_arg(char *line, t_data *data, int y)
 
 	i = 0;
 	if (line[0] == '\0')
-		ft_error(INVALID_MAP, data);
+		ft_error(ERR_MAP_EMPTY_LINE, data);
 	while (line[i])
 	{
-		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEW\n\t", line[i])))
-			ft_error("Invalid parameters in map.\n", data);
+		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEWDd\n\t", line[i])))
+			ft_error(ERR_MAP_CHAR, data);
 		if (ft_strchr("NSEW", line[i]))
 		{
 			if (ft_strchr("N", line[i]))
@@ -50,7 +50,7 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 	copy = ft_calloc(i + 1, sizeof(char *));
 	if (!copy)
 	{
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	}
 	i = 0;
 	while (original[i])
@@ -59,7 +59,7 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 		if (!copy[i])
 		{
 			ft_free_2d_array(copy);
-			ft_error(MALLOC_FAILED, data);
+			ft_error(ERR_MALLOC, data);
 		}
 		i++;
 	}
@@ -81,17 +81,17 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
 	if (y < 0 || x < 0 || y >= map->map_size || x >= (int)ft_strlen(map->map_copy[y]))
 	{
-		ft_error(INVALID_MAP, data);
+		ft_error(ERR_MAP_NOT_CLOSED, data);
 	}
 	if (!map->map_copy[y] || !map->map_copy[y][x])
 	{
-		ft_error(INVALID_MAP, data);
+		ft_error(ERR_MAP_NOT_CLOSED, data);
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X' || map->map_copy[y][x] == ' ')
 		return ;
-	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
+	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEWDd", map->map_copy[y][x]))
 	{
-		ft_error(INVALID_MAP, data);
+		ft_error(ERR_MAP_NOT_CLOSED, data);
 	}
 	map->map_copy[y][x] = 'X';
 	flood_fill_valid_map(data, map, y - 1, x);
@@ -117,15 +117,17 @@ void	check_map(t_data *data, t_map *map)
 	map->map_size = node_map_size(data->linked_map);
 	map->map = ft_calloc(map->map_size + 1, sizeof(char *));
 	if (!map->map)
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	convert_linked_map_to_array(data, map);
 	while (map->map[i])
 	{
 		check_arg(map->map[i], data, i);
+		if ((int)ft_strlen(map->map[i]) > data->largest_line)
+			data->largest_line = ft_strlen(map->map[i]);
 		i++;
 	}
 	if (map->player_flag != 1)
-		ft_error(NB_PLAYER, data);
+		ft_error(ERR_MAP_PLAYER, data);
 	map->map_copy = flood_fill_copy_map(data, map->map);
 	flood_fill_valid_map(data, map, map->player_y, map->player_x);
 }

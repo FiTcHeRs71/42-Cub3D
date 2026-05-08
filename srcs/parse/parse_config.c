@@ -36,10 +36,10 @@ int	get_color_code(t_data *data, char **array_code)
 	while (array_code[i])
 	{
 		if (!is_valid_color_code(array_code[i]))
-			ft_error(INVALID_SETTINGS, data);
+			ft_error(ERR_COLOR_FORMAT, data);
 		rgb_code[i] = ft_atoi(array_code[i]);
 		if (rgb_code[i] > 255 || rgb_code[i] < 0)
-			ft_error(INVALID_SETTINGS, data);
+			ft_error(ERR_COLOR_RANGE, data);
 		i++;
 	}
 	bit_rgb = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 0);
@@ -65,11 +65,11 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 		return (false);
 	temp = ft_split(&line[0], ',');
 	if (!temp)
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	if (ft_array_size(temp) != 3)
 	{
 		ft_free_2d_array(temp);
-		ft_error(INVALID_SETTINGS, data);
+		ft_error(ERR_COLOR_FORMAT, data);
 	}
 	*(rgb_code) = ft_calloc(ft_array_size(temp) + 1, sizeof(char *));
 	i = 0;
@@ -77,7 +77,7 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 	{
 		(*rgb_code)[i] = ft_strtrim(temp[i], " \n\t");
 		if (!(*rgb_code)[i])
-			ft_error(MALLOC_FAILED, data);
+			ft_error(ERR_MALLOC, data);
 		i++;
 	}
 	return (ft_free_2d_array(temp), true);
@@ -96,7 +96,7 @@ static bool	save_texture(t_data *data, char **texture_path, char *line)
 		return (false);
 	*texture_path = ft_strdup(&line[i]);
 	if (!*texture_path)
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
 	i = ft_strlen(*texture_path) - 1;
 	if (i >= 0 && (*texture_path)[i] == '\n')
 		(*texture_path)[i] = '\0';

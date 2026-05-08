@@ -1,6 +1,0 @@
-ODIRECTORY with message errors that are more precise
-Error\n in front of all messages
-segfault with no map
-multiple , in the RGB should exit
-click on the cross with the mouse should be allowed
-more precise errors for the parsing, not always the same error message everywhere

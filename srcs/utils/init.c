@@ -10,7 +10,27 @@ void	init_data(t_data *data)
 	data->map = ft_calloc(1, sizeof(t_map));
 	data->texture = ft_calloc(1, sizeof(t_texture));
 	data->threads = ft_calloc(10, sizeof(t_thread_data));
-	data->mouse_active = true;
 	if (!data->mlx || !data->raycast || !data->map || !data->texture)
-		ft_error(MALLOC_FAILED, data);
+		ft_error(ERR_MALLOC, data);
+	data->mouse_active = true;
+}
+
+void	init_mini_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->mini_map.fullscreen = false;
+	compute_minimap_normal(data);
+	data->mini_map.discovered = ft_calloc(data->map->map_size, sizeof(bool *));
+	if (!data->mini_map.discovered)
+		ft_error(ERR_MALLOC, data);
+	while (i < data->map->map_size)
+	{
+		data->mini_map.discovered[i] = ft_calloc(
+			ft_strlen(data->map->map[i]) + 1, sizeof(bool));
+		if (!data->mini_map.discovered[i])
+			ft_error(ERR_MALLOC, data);
+		i++;
+	}
 }
