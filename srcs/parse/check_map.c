@@ -19,7 +19,7 @@ static void	check_arg(char *line, t_data *data, int y)
 		ft_error(ERR_MAP_EMPTY_LINE, data);
 	while (line[i])
 	{
-		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEW\n\t", line[i])))
+		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEWDd\n\t", line[i])))
 			ft_error(ERR_MAP_CHAR, data);
 		if (ft_strchr("NSEW", line[i]))
 		{
@@ -89,7 +89,7 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 	}
 	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X' || map->map_copy[y][x] == ' ')
 		return ;
-	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEW", map->map_copy[y][x]))
+	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEWDd", map->map_copy[y][x]))
 	{
 		ft_error(ERR_MAP_NOT_CLOSED, data);
 	}

@@ -100,6 +100,7 @@ typedef struct s_texture
 	t_tex_img			no;
 	t_tex_img			we;
 	t_tex_img			ea;
+	t_tex_img			door;
 	t_tex_img			tex_flag;
 	char				*no_path;
 	char				*so_path;

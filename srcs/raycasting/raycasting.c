@@ -105,7 +105,7 @@ static bool	is_wall_or_oob(t_map *map, int y, int x)
 		return (true);
 	if (x < 0 || x >= (int)ft_strlen(map->map[y]))
 		return (true);
-	if (map->map[y][x] == '1' || map->map[y][x] == ' ')
+	if (map->map[y][x] == '1' || map->map[y][x] == ' ' || map->map[y][x] == 'D')
 		return (true);
 	return (false);
 }

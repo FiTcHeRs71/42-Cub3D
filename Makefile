@@ -33,7 +33,7 @@ SRCS_DRAW = $(addprefix $(SRCDIR)/draw/, \
 	draw.c)
 
 SRCS_TEXTURES = $(addprefix $(SRCDIR)/textures/, \
-	textures.c)
+	textures.c door_textures.c)
 
 # Combine all sources
 SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV) $(SRCS_MM)
@@ -43,7 +43,7 @@ OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # Compiler and flags
 CC =  cc
-CFLAGS = -Wall -Wextra -Werror -Wno-incompatible-pointer-types -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 # Includes
 INCLUDES = -I$(INCDIR) -I$(LIBFTDIR)/include -I$(MLXDIR)

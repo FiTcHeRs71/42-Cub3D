@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 	init_window(&data, data.mlx);
 	init_mini_map(&data);
 	load_wall_textures(&data, data.texture, data.mlx);
+	load_door_textures(&data, data.texture, data.mlx);
 	mlx_loop(data.mlx->mlx_connect);
 	clean_all(&data);
 	return (0);

@@ -19,6 +19,8 @@ int	handle_key_press(int keycode, t_data *data)
 		data->keys.s = true;
 	else if (keycode == XK_d)
 		data->keys.d = true;
+	else if (keycode == XK_e)
+		toggle_nearest_door(data);
 	else if (keycode == XK_Left)
 		data->keys.left = true;
 	else if (keycode == XK_Right)
