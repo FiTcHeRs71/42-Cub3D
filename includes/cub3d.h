@@ -81,8 +81,7 @@ int				close_window(t_data *data);
 void			reset_mouse_to_center(t_data *data);
 
 /*-------- DRAW ------------*/
-void			draw_wall(t_data *stats, t_raycast *data,
-					t_draw *draw, int x_coord);
+void			draw_wall(t_data *data, t_raycast *ray, t_draw *draw, int x_coord);
 
 /*-------- RAYCASTING ------------*/
 void			*raycasting(void *arg);

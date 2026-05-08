@@ -7,7 +7,7 @@ typedef struct s_thread_data
 {
 	int			x_start;
 	int			x_end;
-	t_data		*stats;
+	t_data		*data;
 	pthread_t	id;
 }				t_thread_data;
 
@@ -40,8 +40,6 @@ typedef struct s_raycast
 	double				time;// used to make movement smoother by using time difference between frames
 	double				old_time;
 	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
 	double				side_dist_x;
 	double				side_dist_y;
 	double				delta_dist_x;
@@ -51,7 +49,6 @@ typedef struct s_raycast
 	int					step_x;
 	int					step_y;
 	double				wall_dist;
-	int					wall_side;
 	bool				is_hit;
 	bool				done;
 	char				hit_char;
@@ -104,6 +101,8 @@ typedef struct s_texture
 	t_tex_img			we;
 	t_tex_img			ea;
 	t_tex_img			door;
+	t_tex_img			floor;
+	t_tex_img			ceiling;
 	t_tex_img			tex_flag;
 	char				*no_path;
 	char				*so_path;
