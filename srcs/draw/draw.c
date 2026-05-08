@@ -91,6 +91,7 @@ void	draw_wall(t_data *stats, t_raycast *data, t_draw *draw, int x_coord)
 	draw->tex.so = stats->texture->so;
 	draw->tex.ea = stats->texture->ea;
 	draw->tex.we = stats->texture->we;
+	draw->tex.door = stats->texture->door;
 	draw->raydir_x = data->ray_dir_x;
 	draw->raydir_y = data->ray_dir_y;
 	draw->wall_side = data->wall_side;
