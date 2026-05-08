@@ -25,10 +25,10 @@
 
 # include <X11/keysym.h>
 # include <math.h>
+# include <pthread.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
-# include <pthread.h>
 # include "cub3d_message.h"
 
 # include "fred.h"// a suppr

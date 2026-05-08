@@ -60,8 +60,9 @@ void	init_window(t_data *data, t_mlx *mlx)
 	mlx->mlx_window = mlx_new_window(mlx->mlx_connect, data->window_x,
 			data->window_y, TITLE);
 	if (!mlx->mlx_window)
-		ft_error(MINI_LBX, data);
+		ft_error_ctx(ERR_MLX_INIT, "Window", data);
 	load_wall_textures(data, data->texture, data->mlx);
+	load_door_textures(data, data->texture, data->mlx);
 	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
