@@ -14,7 +14,6 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	parse_cub3d(&data, argv[1]);
 	init_window(&data, data.mlx);
-	load_wall_textures(&data, data.texture, data.mlx);
 	mlx_loop(data.mlx->mlx_connect);
 	clean_all(&data);
 	return (0);

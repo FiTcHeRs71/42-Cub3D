@@ -9,6 +9,7 @@ void	init_data(t_data *data)
 	data->draw = ft_calloc(1, sizeof(t_draw));
 	data->map = ft_calloc(1, sizeof(t_map));
 	data->texture = ft_calloc(1, sizeof(t_texture));
+	data->threads = ft_calloc(10, sizeof(t_thread_data));
 	data->mouse_active = true;
 	if (!data->mlx || !data->raycast || !data->map || !data->texture)
 		ft_error(MALLOC_FAILED, data);

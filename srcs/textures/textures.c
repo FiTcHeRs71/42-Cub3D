@@ -43,14 +43,14 @@ void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw, t_raycast *ra
 	tex->tex_pos = (draw->line_start - data->window_y / 2 + draw->line_h / 2) * tex->step;
 }
 
-void	use_texture(t_data *data, t_raycast *ray, t_texture *tex)
+void	use_texture(t_data *data, t_raycast *ray, t_texture *tex, t_draw *draw)
 {
 	if (ray->wall_side == 0)
 		tex->wall_x = ray->pos_y + ray->wall_dist * ray->ray_dir_y;
 	else
 		tex->wall_x = ray->pos_x + ray->wall_dist * ray->ray_dir_x;
 	tex->wall_x = tex->wall_x - floor(tex->wall_x);
-	finalise_tex_data(data, tex, data->draw, ray);
+	finalise_tex_data(data, tex, draw, ray);
 	tex->tex_x = (int)(tex->wall_x * (double)(tex->tex_flag.width));
 	if (ray->wall_side == 0 && ray->ray_dir_x > 0)
 		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;

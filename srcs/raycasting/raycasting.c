@@ -142,27 +142,38 @@ void	set_up_drawing_data(t_data *stats, t_raycast *data, t_draw *draw)
 		draw->line_end = stats->window_y - 1;
 }
 
-void	raycasting(t_data *stats, t_raycast *data, t_draw *draw)
+void	*raycasting(void *arg)
 {
-	int	x;
+	t_thread_data	*td;
+	t_raycast		ray;
+	t_draw			draw;
 
-	x = 0;
-	while (x < stats->window_x)
+	td = (t_thread_data *)arg;
+	ft_memset(&ray, 0, sizeof(t_raycast));
+	ft_memset(&draw, 0, sizeof(t_draw));
+	ray.pos_x = td->stats->raycast->pos_x;
+	ray.pos_y = td->stats->raycast->pos_y;
+	ray.dir_x = td->stats->raycast->dir_x;
+	ray.dir_y = td->stats->raycast->dir_y;
+	ray.plane_x = td->stats->raycast->plane_x;
+	ray.plane_y = td->stats->raycast->plane_y;
+	while (td->x_start < td->x_end)
 	{
-		initialise_DDA(data, x, stats);
-		data->map_x = (int)data->pos_x;
-		data->map_y = (int)data->pos_y;
-		finalise_DDA_data(data);
-		cast_ray(stats, data);
-		if (data->wall_side == 0)
-			data->wall_dist = (data->side_dist_x - data->delta_dist_x);
+		initialise_DDA(&ray, td->x_start, td->stats);
+		ray.map_x = (int)ray.pos_x;
+		ray.map_y = (int)ray.pos_y;
+		finalise_DDA_data(&ray);
+		cast_ray(td->stats, &ray);
+		if (ray.wall_side == 0)
+			ray.wall_dist = (ray.side_dist_x - ray.delta_dist_x);
 		else
-			data->wall_dist = (data->side_dist_y - data->delta_dist_y);
-		set_up_drawing_data(stats, data, draw);
-		draw_wall(stats, data, draw, x);
-		draw_floor(stats, data, draw, x);
-		draw_ceiling(stats, data, draw, x);
-		data->is_hit = false;
-		x++;
+			ray.wall_dist = (ray.side_dist_y - ray.delta_dist_y);
+		set_up_drawing_data(td->stats, &ray, &draw);
+		draw_wall(td->stats, &ray, &draw, td->x_start);
+		draw_floor(td->stats, &ray, &draw, td->x_start);
+		draw_ceiling(td->stats, &ray, &draw, td->x_start);
+		ray.is_hit = false;
+		td->x_start++;
 	}
+	return (NULL);
 }

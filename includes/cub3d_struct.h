@@ -1,6 +1,16 @@
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
 
+typedef struct s_data t_data;
+
+typedef struct s_thread_data
+{
+	int			x_start;
+	int			x_end;
+	t_data		*stats;
+	pthread_t	id;
+}				t_thread_data;
+
 typedef enum e_direction
 {
 	NORTH,
@@ -45,14 +55,6 @@ typedef struct s_raycast
 	bool				is_hit;
 	bool				done;
 }						t_raycast;
-
-typedef struct s_draw
-{
-	int					line_h;
-	int					line_start;
-	int					line_end;
-	int					steps;
-}						t_draw;
 
 typedef struct s_linked_map
 {
@@ -116,6 +118,18 @@ typedef struct s_texture
 	double				wall_x;
 }						t_texture;
 
+typedef struct s_draw
+{
+	int					line_h;
+	int					line_start;
+	int					line_end;
+	int					steps;
+	int					wall_side;
+	double				raydir_x;
+	double				raydir_y;
+	t_texture			tex;
+}						t_draw;
+
 typedef struct s_data
 {
 	int					fd;
@@ -123,6 +137,7 @@ typedef struct s_data
 	int					window_x;
 	bool				mouse_active;
 	t_keys				keys;
+	t_thread_data		*threads;
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;

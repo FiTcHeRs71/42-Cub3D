@@ -16,6 +16,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"
+# include <pthread.h>
 
 # include "fred.h"// a suppr
 # include "leo.h" // a suppr
@@ -55,7 +56,7 @@ void			init_data(t_data *data);
 
 /*-------- TEXTURES ------------*/
 void			load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx);
-void			use_texture(t_data *data, t_raycast *ray, t_texture *tex);
+void			use_texture(t_data *data, t_raycast *ray, t_texture *tex, t_draw *draw);
 
 /*-------- MOUVEMENT ------------*/
 void			update_player(t_data *data);
@@ -80,8 +81,7 @@ void			draw_wall(t_data *stats, t_raycast *data,
 					t_draw *draw, int x_coord);
 
 /*-------- RAYCASTING ------------*/
-void			raycasting(t_data *stats,
-					t_raycast *data, t_draw *draw);
+void			*raycasting(void *arg);
 void			set_data_raycasting(t_raycast *data, t_map *map);
 
 #endif
