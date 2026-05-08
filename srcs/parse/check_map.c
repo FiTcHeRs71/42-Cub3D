@@ -119,11 +119,15 @@ void	check_map(t_data *data, t_map *map)
 	if (!map->map)
 		ft_error(ERR_MALLOC, data);
 	convert_linked_map_to_array(data, map);
+	map->line_len = ft_calloc(map->map_size + 1, sizeof(int));
+	if (!map->line_len)
+		ft_error(ERR_MALLOC, data);
 	while (map->map[i])
 	{
 		check_arg(map->map[i], data, i);
-		if ((int)ft_strlen(map->map[i]) > data->largest_line)
-			data->largest_line = ft_strlen(map->map[i]);
+		map->line_len[i] = (int)ft_strlen(map->map[i]);
+		if (map->line_len[i] > data->largest_line)
+			data->largest_line = map->line_len[i];
 		i++;
 	}
 	if (map->player_flag != 1)

@@ -30,10 +30,10 @@ SRCS = $(SRCS_BASIC) $(SRCS_PRINTF) $(SRCS_GNL)
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 # Flags
-CC = gcc
+CC = cc
 AR = ar rcs
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I$(INCDIR) -I$(INCDIR)/ft_printf -I$(INCDIR)/get_next_line
 
 # Colors

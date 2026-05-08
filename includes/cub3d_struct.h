@@ -92,6 +92,7 @@ typedef struct s_map
 	int					player_y;
 	int					player_dir;
 	int					map_size;
+	int					*line_len;
 }						t_map;
 
 typedef struct s_tex_img

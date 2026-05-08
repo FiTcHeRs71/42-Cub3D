@@ -44,6 +44,8 @@ static void	free_map_struct(t_map *map)
 			ft_free_2d_array(map->map);
 		if (map->map_copy)
 			ft_free_2d_array(map->map_copy);
+		if (map->line_len)
+			free(map->line_len);
 		free(map);
 	}
 }
