@@ -5,28 +5,28 @@ void	load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx)
 {
 	texture->no.img = mlx_xpm_file_to_image(mlx->mlx_connect, texture->no_path,
 			&texture->no.width, &texture->no.height);
+	if (!texture->no.img)
+		ft_error_ctx("Texture", texture->no_path, data);
 	texture->no.addr = mlx_get_data_addr(texture->no.img, &texture->no.bpp,
 			&texture->no.size_line, &texture->no.endian);
 	texture->so.img = mlx_xpm_file_to_image(mlx->mlx_connect, texture->so_path,
 			&texture->so.width, &texture->so.height);
+	if (!texture->so.img)
+		ft_error_ctx("Texture", texture->so_path, data);
 	texture->so.addr = mlx_get_data_addr(texture->so.img, &texture->so.bpp,
 			&texture->so.size_line, &texture->so.endian);
 	texture->ea.img = mlx_xpm_file_to_image(mlx->mlx_connect, texture->ea_path,
 			&texture->ea.width, &texture->ea.height);
+	if (!texture->ea.img)
+		ft_error_ctx("Texture", texture->ea_path, data);
 	texture->ea.addr = mlx_get_data_addr(texture->ea.img, &texture->ea.bpp,
 			&texture->ea.size_line, &texture->ea.endian);
 	texture->we.img = mlx_xpm_file_to_image(mlx->mlx_connect, texture->we_path,
 			&texture->we.width, &texture->we.height);
-	texture->we.addr = mlx_get_data_addr(texture->we.img, &texture->we.bpp,
-			&texture->we.size_line, &texture->we.endian);
-	if (!texture->no.img)
-		ft_error_ctx("Texture", texture->no_path, data);
-	if (!texture->so.img)
-		ft_error_ctx("Texture", texture->so_path, data);
-	if (!texture->ea.img)
-		ft_error_ctx("Texture", texture->ea_path, data);
 	if (!texture->we.img)
 		ft_error_ctx("Texture", texture->we_path, data);
+	texture->we.addr = mlx_get_data_addr(texture->we.img, &texture->we.bpp,
+			&texture->we.size_line, &texture->we.endian);
 }
 
 void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw, t_raycast *ray)

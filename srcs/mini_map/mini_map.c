@@ -33,6 +33,17 @@ static void	draw_filled_square(t_data *data, int px, int py, int color)
 	}
 }
 
+int	choose_color_mini_map_cells(char grid)
+{
+	if (grid == 'd')
+		return (MM_COLOR_DOOR_OPEN);
+	else if (grid == 'D')
+		return (MM_COLOR_DOOR_CLOSED);
+	else if (grid == '1')
+		return (MM_COLOR_WALL);
+	return (MM_COLOR_FLOOR);
+}
+
 void	draw_mini_map_cells(t_data *data)
 {
 	int	y;
@@ -49,9 +60,7 @@ void	draw_mini_map_cells(t_data *data)
 		{
 			if (data->mini_map.discovered[y][x])
 			{
-				color = MM_COLOR_FLOOR;
-				if (data->map->map[y][x] == '1')
-					color = MM_COLOR_WALL;
+				color = choose_color_mini_map_cells(data->map->map[y][x]);
 				pixel_x = data->mini_map.pos_x + x * data->mini_map.scale;
 				pixel_y = data->mini_map.pos_y + y * data->mini_map.scale;
 				draw_filled_square(data, pixel_x, pixel_y, color);

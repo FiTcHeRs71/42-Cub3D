@@ -1,6 +1,7 @@
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
 
+#include <bits/pthreadtypes.h>
 typedef struct s_data t_data;
 
 typedef struct s_thread_data
