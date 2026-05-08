@@ -11,6 +11,9 @@ SRCDIR = srcs
 # Source files
 SRCS_MAIN = main.c
 
+SRCS_GUN = $(addprefix $(SRCDIR)/gun/,\
+	gun.c gun_draw.c gun_anim.c)
+
 SRCS_MM = $(addprefix $(SRCDIR)/mini_map/,\
 	mini_map.c mini_map_player.c)
 
@@ -36,7 +39,7 @@ SRCS_TEXTURES = $(addprefix $(SRCDIR)/textures/, \
 	textures.c door_textures.c)
 
 # Combine all sources
-SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV) $(SRCS_MM)
+SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV) $(SRCS_MM) $(SRCS_GUN)
 
 # Object files 
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

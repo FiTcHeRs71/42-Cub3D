@@ -10,6 +10,11 @@
 # define MAGENTA 0xFF00FF
 # define COLLISION_MARGIN 0.15
 
+/*================== GUN ==================*/
+
+# define GUN_HEIGHT_RATIO 0.4
+# define GUN_ANIM_FRAMES 2
+
 /*================== MINI MAP ==================*/
 
 # define MINIMAP_RATIO 0.15
@@ -36,7 +41,7 @@
 # include "fred.h"// a suppr
 # include "leo.h" // a suppr
 
-/*================== FONCTION ==================*/
+/*================== FONCTION ==================*/ 
 
 /*-------- PARSE ------------*/
 void			parse_cub3d(t_data *data, char *file);
@@ -62,6 +67,12 @@ void			clean_mini_map(t_data *data);
 /*-------- TEXTURES ------------*/
 void			load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx);
 void			use_texture(t_data *data, t_raycast *ray, t_texture *tex, t_draw *draw);
+
+/*-------- GUN ------------*/
+void			load_gun_textures(t_data *data);
+void			draw_gun(t_data *data);
+void			update_gun_animation(t_data *data);
+int				mouse_press(int button, int x, int y, t_data *data);
 
 /*-------- MOUVEMENT ------------*/
 void			update_player(t_data *data);

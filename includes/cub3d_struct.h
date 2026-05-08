@@ -20,6 +20,13 @@ typedef enum e_direction
 	EAST,
 }						t_direction;
 
+typedef enum e_gun_state
+{
+	GUN_IDLE,
+	GUN_SHOOT_1,
+	GUN_SHOOT_2,
+}						t_gun_state;
+
 typedef struct s_keys
 {
 	bool				w;
@@ -145,6 +152,15 @@ typedef struct s_draw
 	t_texture			tex;
 }						t_draw;
 
+typedef struct s_gun
+{
+	t_tex_img		neutre;
+	t_tex_img		shoot1;
+	t_tex_img		shoot2;
+	t_gun_state		state;
+	int				frame_counter;
+}				t_gun;
+
 typedef struct s_data
 {
 	int					fd;
@@ -152,6 +168,7 @@ typedef struct s_data
 	int					window_x;
 	bool				mouse_active;
 	int					largest_line;
+	t_gun				gun;
 	t_keys				keys;
 	t_thread_data		*threads;
 	t_map				*map;

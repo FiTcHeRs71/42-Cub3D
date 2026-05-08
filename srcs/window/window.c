@@ -47,6 +47,8 @@ int	game_loop(t_data *data)
 		i++;
 	}
 	draw_mini_map(data);
+	update_gun_animation(data);
+	draw_gun(data);
 	mlx_put_image_to_window(data->mlx->mlx_connect, data->mlx->mlx_window,
 		data->mlx->img, 0, 0);
 	return (0);
@@ -63,7 +65,9 @@ void	init_window(t_data *data, t_mlx *mlx)
 		ft_error_ctx(ERR_MLX_INIT, "Window", data);
 	load_wall_textures(data, data->texture, data->mlx);
 	load_door_textures(data, data->texture, data->mlx);
+	load_gun_textures(data);
 	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
+	mlx_hook(mlx->mlx_window, 4, 1L << 2, mouse_press, data);
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
 	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
