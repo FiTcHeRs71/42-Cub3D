@@ -13,5 +13,5 @@ void	draw_mini_map_cone(t_data *data);
 void	toggle_minimap_fullscreen(t_data *data);
 void	load_door_textures(t_data *data, t_texture *texture, t_mlx *mlx);
 void	toggle_nearest_door(t_data *data);
-
+bool	in_bounds(t_data *data, int y, int x);
 #endif

@@ -25,6 +25,7 @@
 
 # include <X11/keysym.h>
 # include <math.h>
+# include <limits.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 # include "cub3d_struct.h"

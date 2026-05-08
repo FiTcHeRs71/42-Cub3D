@@ -44,6 +44,7 @@ typedef struct s_raycast
 	int					wall_side;
 	bool				is_hit;
 	bool				done;
+	char				hit_char;
 }						t_raycast;
 
 typedef struct s_draw

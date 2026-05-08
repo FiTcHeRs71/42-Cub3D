@@ -31,7 +31,9 @@ void	load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx)
 
 void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw, t_raycast *ray)
 {
-	if (ray->wall_side == 0)
+	if (ray->hit_char == 'D')
+		tex->tex_flag = tex->door;
+	else if (ray->wall_side == 0)
 	{
 		if (ray->ray_dir_x > 0)
 			tex->tex_flag = tex->ea;

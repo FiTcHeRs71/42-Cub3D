@@ -128,6 +128,10 @@ void	cast_ray(t_data *stats, t_raycast *data)
 		}
 		if (is_wall_or_oob(stats->map, data->map_y, data->map_x))
 			data->is_hit = true;
+		if (in_bounds(stats, data->map_y, data->map_x))
+			data->hit_char = stats->map->map[data->map_y][data->map_x];
+		else
+			data->hit_char = '1';
 	}
 }
 
