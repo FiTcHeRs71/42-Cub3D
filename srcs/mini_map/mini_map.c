@@ -1,18 +1,6 @@
 
 #include "../../includes/cub3d.h"
 
-void	mm_put_pixel(t_data *data, int x, int y, int color)
-{
-	char	*pixel;
-	int		offset;
-
-	if (x < 0 || x >= data->window_x || y < 0 || y >= data->window_y)
-		return ;
-	offset = (y * data->mlx->size_line) + (x * (data->mlx->bits_per_pixel / 8));
-	pixel = data->mlx->img_data + offset;
-	*(unsigned int *)pixel = color;
-}
-
 static void	draw_filled_square(t_data *data, int px, int py, int color)
 {
 	int	dx;
@@ -31,17 +19,6 @@ static void	draw_filled_square(t_data *data, int px, int py, int color)
 		}
 		dy++;
 	}
-}
-
-int	choose_color_mini_map_cells(char grid)
-{
-	if (grid == 'd')
-		return (MM_COLOR_DOOR_OPEN);
-	else if (grid == 'D')
-		return (MM_COLOR_DOOR_CLOSED);
-	else if (grid == '1')
-		return (MM_COLOR_WALL);
-	return (MM_COLOR_FLOOR);
 }
 
 void	draw_mini_map_cells(t_data *data)
@@ -104,15 +81,6 @@ void	change_state_fog_of_war(t_data *data)
 		}
 		dy++;
 	}
-}
-
-void	compute_minimap_normal(t_data *data)
-{
-	data->mini_map.width = data->window_x * MINIMAP_RATIO;
-	data->mini_map.height = data->window_y * MINIMAP_RATIO;
-	data->mini_map.scale = data->mini_map.width / data->largest_line;
-	data->mini_map.pos_x = data->window_x - data->mini_map.width - 10;
-	data->mini_map.pos_y = 10;
 }
 
 void	draw_mini_map(t_data *data)

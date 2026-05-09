@@ -16,3 +16,15 @@ void	clean_mini_map(t_data *data)
 		free(data->mini_map.discovered);
 	}
 }
+
+void	free_enemies(t_enemy *enemies)
+{
+	t_enemy	*tmp;
+
+	while (enemies)
+	{
+		tmp = enemies;
+		enemies = enemies->next;
+		free(tmp);
+	}
+}

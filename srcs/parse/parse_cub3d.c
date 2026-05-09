@@ -70,6 +70,7 @@ static void	copy_map(t_data *data, char *line)
 		line = free_and_getline(line, data->fd);
 	}
 }
+
 /**
  * @brief opens the map file and parses the elements.
  *
@@ -79,12 +80,10 @@ static void	copy_map(t_data *data, char *line)
  *
  * @param data  Pointer to the main structure where parsed data is stored.
  */
-static void	fill_config(t_data *data)
+static int	fill_config(t_data *data, char *line)
 {
-	char	*line;
 	int		config_count;
 
-	line = get_next_line(data->fd);
 	config_count = 0;
 	while (line)
 	{
@@ -105,11 +104,9 @@ static void	fill_config(t_data *data)
 			break ;
 		line = free_and_getline(line, data->fd);
 	}
-	if (config_count < 6)
-		ft_error(ERR_CFG_MISSING, data);
 	copy_map(data, line);
+	return (config_count);
 }
-
 
 /**
  * @brief Parses and validates the .cub configuration file.
@@ -124,6 +121,8 @@ static void	fill_config(t_data *data)
  */
 void	parse_cub3d(t_data *data, char *file)
 {
+	char	*line;
+
 	if (!checker_file_extension(file, ".cub"))
 		ft_error(ERR_FILE_EXT, data);
 	data->fd = open(file, O_RDONLY);
@@ -131,7 +130,9 @@ void	parse_cub3d(t_data *data, char *file)
 	{
 		ft_error(ERR_FILE_OPEN, data);
 	}
-	fill_config(data);
+	line = get_next_line(data->fd);
+	if (fill_config(data, line) != 6)
+		ft_error(ERR_CFG_MISSING, data);
 	close(data->fd);
 	data->fd = 0;
 	check_map(data, data->map);

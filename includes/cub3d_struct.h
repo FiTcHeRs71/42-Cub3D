@@ -1,18 +1,20 @@
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
 
-#include <bits/pthreadtypes.h>
-typedef struct s_data t_data;
-# define ENEMY_FRAMES 4
+# include <bits/pthreadtypes.h>
 
+typedef struct s_data	t_data;
+
+# define ENEMY_FRAMES 4
+# define GUN_FRAMES 3
 
 typedef struct s_thread_data
 {
-	int			x_start;
-	int			x_end;
-	t_data		*stats;
-	pthread_t	id;
-}				t_thread_data;
+	int					x_start;
+	int					x_end;
+	t_data				*stats;
+	pthread_t			id;
+}						t_thread_data;
 
 typedef enum e_direction
 {
@@ -43,11 +45,11 @@ typedef struct s_raycast
 {
 	double				pos_x;
 	double				pos_y;
-	double				dir_x; // direction vector
+	double				dir_x;
 	double				dir_y;
-	double				plane_x; // 2d raycasting version
+	double				plane_x;
 	double				plane_y;
-	double				time;// used to make movement smoother by using time difference between frames
+	double				time;
 	double				old_time;
 	double				camera_x;
 	double				ray_dir_x;
@@ -131,17 +133,16 @@ typedef struct s_texture
 	double				wall_x;
 }						t_texture;
 
-typedef struct	s_minimap
+typedef struct s_minimap
 {
-	bool	**discovered;
-	bool	fullscreen;
-	int		pos_x;
-	int		pos_y;
-	int		width;
-	int		height;
-	int		scale;
-}	t_minimap;
-
+	bool				**discovered;
+	bool				fullscreen;
+	int					pos_x;
+	int					pos_y;
+	int					width;
+	int					height;
+	int					scale;
+}						t_minimap;
 
 typedef struct s_draw
 {
@@ -157,27 +158,37 @@ typedef struct s_draw
 
 typedef struct s_enemy
 {
-	double			pos_x;
-	double			pos_y;
-	double			dist;
-	struct s_enemy	*next;
-}					t_enemy;
+	double				pos_x;
+	double				pos_y;
+	double				dist;
+	struct s_enemy		*next;
+}						t_enemy;
 
 typedef struct s_enemy_anim
 {
-	t_tex_img	frames[ENEMY_FRAMES];
-	int			current_frame;
-	int			frame_counter;
-}				t_enemy_anim;
+	t_tex_img			frames[ENEMY_FRAMES];
+	int					current_frame;
+	int					frame_counter;
+}						t_enemy_anim;
+
+typedef struct s_gun_draw
+{
+	int					gun_size;
+	int					x_start;
+	int					y_start;
+	int					x;
+	int					y;
+	int					tx;
+	int					ty;
+	int					color;
+}						t_gun_draw;
 
 typedef struct s_gun
 {
-	t_tex_img		neutre;
-	t_tex_img		shoot1;
-	t_tex_img		shoot2;
-	t_gun_state		state;
-	int				frame_counter;
-}				t_gun;
+	t_tex_img			frames[GUN_FRAMES];
+	t_gun_state			state;
+	int					frame_counter;
+}						t_gun;
 
 typedef struct s_data
 {

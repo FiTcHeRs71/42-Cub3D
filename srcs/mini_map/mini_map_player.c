@@ -2,32 +2,6 @@
 #include "../../includes/cub3d.h"
 #include <sys/param.h>
 
-void	draw_mini_map_player(t_data *data)
-{
-	int	pixel_x;
-	int	pixel_y;
-	int	dx;
-	int	dy;
-	int	size;
-
-	size = 5;
-	pixel_x = data->mini_map.pos_x
-		+ (int)(data->raycast->pos_x * data->mini_map.scale);
-	pixel_y = data->mini_map.pos_y
-		+ (int)(data->raycast->pos_y * data->mini_map.scale);
-	dy = -size / 2;
-	while (dy <= size / 2)
-	{
-		dx = -size / 2;
-		while (dx <= size / 2)
-		{
-			mm_put_pixel(data, pixel_x + dx, pixel_y + dy, MM_COLOR_PLAYER);
-			dx++;
-		}
-		dy++;
-	}
-}
-
 static void	bresenham_step(int p[5], int *x0, int *y0)
 {
 	int	e2;
@@ -72,10 +46,10 @@ void	draw_mini_map_cone(t_data *data)
 	double	len;
 
 	len = data->mini_map.scale * MM_CONE_LENGTH;
-	px = data->mini_map.pos_x
-		+ (int)(data->raycast->pos_x * data->mini_map.scale);
-	py = data->mini_map.pos_y
-		+ (int)(data->raycast->pos_y * data->mini_map.scale);
+	px = data->mini_map.pos_x + (int)(data->raycast->pos_x
+			* data->mini_map.scale);
+	py = data->mini_map.pos_y + (int)(data->raycast->pos_y
+			* data->mini_map.scale);
 	left_x = px + (int)((data->raycast->dir_x + data->raycast->plane_x) * len);
 	left_y = py + (int)((data->raycast->dir_y + data->raycast->plane_y) * len);
 	draw_line(data, px, py, left_x, left_y);

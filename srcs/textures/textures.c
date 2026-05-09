@@ -29,7 +29,8 @@ void	load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx)
 			&texture->we.size_line, &texture->we.endian);
 }
 
-void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw, t_raycast *ray)
+void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw,
+		t_raycast *ray)
 {
 	if (ray->hit_char == 'D')
 	{
@@ -50,7 +51,8 @@ void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw, t_raycast *ra
 			tex->tex_flag = tex->no;
 	}
 	tex->step = 1.0 * tex->tex_flag.height / draw->line_h;
-	tex->tex_pos = (draw->line_start - data->window_y / 2 + draw->line_h / 2) * tex->step;
+	tex->tex_pos = (draw->line_start - data->window_y / 2 + draw->line_h / 2)
+		* tex->step;
 }
 
 void	use_texture(t_data *data, t_raycast *ray, t_texture *tex, t_draw *draw)

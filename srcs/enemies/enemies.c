@@ -19,12 +19,11 @@ static void	load_one_frame(t_data *data, int i)
 
 	f = &data->enemy_anim.frames[i];
 	path = get_enemy_path(i);
-	f->img = mlx_xpm_file_to_image(data->mlx->mlx_connect,
-			(char *)path, &f->width, &f->height);
+	f->img = mlx_xpm_file_to_image(data->mlx->mlx_connect, (char *)path,
+			&f->width, &f->height);
 	if (!f->img)
 		ft_error_ctx("Texture", (char *)path, data);
-	f->addr = mlx_get_data_addr(f->img, &f->bpp,
-			&f->size_line, &f->endian);
+	f->addr = mlx_get_data_addr(f->img, &f->bpp, &f->size_line, &f->endian);
 }
 
 void	load_enemy_textures(t_data *data)
@@ -37,6 +36,4 @@ void	load_enemy_textures(t_data *data)
 		load_one_frame(data, i);
 		i++;
 	}
-	data->enemy_anim.current_frame = 0;
-	data->enemy_anim.frame_counter = 0;
 }

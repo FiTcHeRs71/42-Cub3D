@@ -16,6 +16,7 @@ static bool	is_valid_color_code(char *str)
 	}
 	return (true);
 }
+
 /**
  * @brief checks that the code is valid and performs the bit shifting.
  *
@@ -29,7 +30,7 @@ static bool	is_valid_color_code(char *str)
 int	get_color_code(t_data *data, char **array_code)
 {
 	int	i;
-	int	rgb_code[3]; 
+	int	rgb_code[3];
 	int	bit_rgb;
 
 	i = 0;
@@ -45,6 +46,7 @@ int	get_color_code(t_data *data, char **array_code)
 	bit_rgb = (rgb_code[0] << 16) | (rgb_code[1] << 8) | (rgb_code[2] << 0);
 	return (bit_rgb);
 }
+
 /**
  * @brief Splits and stores an RGB color string into the texture structure.
  *
@@ -104,6 +106,7 @@ static bool	save_texture(t_data *data, char **texture_path, char *line)
 		return (false);
 	return (true);
 }
+
 /**
  * @brief Parses a single configuration line and stores the corresponding value.
  *

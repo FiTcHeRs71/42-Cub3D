@@ -39,14 +39,27 @@ void	enemy_add_back(t_enemy **lst, t_enemy *new_one)
 	last->next = new_one;
 }
 
-void	free_enemies(t_enemy *enemies)
+void	add_enemy(t_data *data, int i, int y, char *line)
 {
-	t_enemy	*tmp;
+	enemy_add_back(&data->enemies, new_enemy((double)i + 0.5, (double)y
+			+ 0.5));
+	if (!data->enemies)
+		ft_error(ERR_MALLOC, data);
+	data->enemy_count++;
+	line[i] = '0';
+}
 
-	while (enemies)
-	{
-		tmp = enemies;
-		enemies = enemies->next;
-		free(tmp);
-	}
+void	init_pos_player(t_data *data, char *line, int i, int y)
+{
+	if (ft_strchr("N", line[i]))
+		data->map->player_dir = NORTH;
+	if (ft_strchr("S", line[i]))
+		data->map->player_dir = SOUTH;
+	if (ft_strchr("W", line[i]))
+		data->map->player_dir = WEST;
+	if (ft_strchr("E", line[i]))
+		data->map->player_dir = EAST;
+	data->map->player_x = i;
+	data->map->player_y = y;
+	data->map->player_flag += 1;
 }

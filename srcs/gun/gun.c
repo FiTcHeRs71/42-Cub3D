@@ -1,21 +1,40 @@
 
 #include "../../includes/cub3d.h"
 
+static const char	*get_gun_path(int i)
+{
+	static const char	*paths[ENEMY_FRAMES] = {
+		"./images/guns/gun_neutre.xpm",
+		"./images/guns/gun-shoot-1.xpm",
+		"./images/guns/gun-shoot-2.xpm",
+	};
+
+	return (paths[i]);
+}
+
+static void	load_one_gun_frame(t_data *data, int i)
+{
+	const char	*path;
+	void		*conn;
+	t_tex_img	*f;
+
+	path = get_gun_path(i);
+	conn = data->mlx->mlx_connect;
+	f = &data->gun.frames[i];
+	f->img = mlx_xpm_file_to_image(conn, (char *)path, &f->width, &f->height);
+	if (!f->img)
+		ft_error_ctx("Texture", (char *)path, data);
+	f->addr = mlx_get_data_addr(f->img, &f->bpp, &f->size_line, &f->endian);
+}
+
 void	load_gun_textures(t_data *data)
 {
-	void	*conn;
+	int	i;
 
-	conn = data->mlx->mlx_connect;
-	data->gun.neutre.img = mlx_xpm_file_to_image(conn, "./images/guns/gun_neutre.xpm", &data->gun.neutre.width, &data->gun.neutre.height);
-	if (!data->gun.neutre.img)
-		ft_error_ctx("Texture", "./images/guns/gun_neutre.xpm", data);
-	data->gun.neutre.addr = mlx_get_data_addr(data->gun.neutre.img, &data->gun.neutre.bpp, &data->gun.neutre.size_line, &data->gun.neutre.endian);
-	data->gun.shoot1.img = mlx_xpm_file_to_image(conn, "./images/guns/gun-shoot-1.xpm", &data->gun.shoot1.width, &data->gun.shoot1.height);
-	if (!data->gun.shoot1.img)
-		ft_error_ctx("Texture", "./images/guns/gun_shoot_1.xpm", data);
-	data->gun.shoot1.addr = mlx_get_data_addr(data->gun.shoot1.img, &data->gun.shoot1.bpp, &data->gun.shoot1.size_line, &data->gun.shoot1.endian);
-	data->gun.shoot2.img = mlx_xpm_file_to_image(conn, "./images/guns/gun-shoot-2.xpm", &data->gun.shoot2.width, &data->gun.shoot2.height);
-	if (!data->gun.shoot2.img)
-		ft_error_ctx("Texture", "./images/guns/gun_shoot_2.xpm", data);
-	data->gun.shoot2.addr = mlx_get_data_addr(data->gun.shoot2.img, &data->gun.shoot2.bpp, &data->gun.shoot2.size_line, &data->gun.shoot2.endian);
+	i = 0;
+	while (i < GUN_FRAMES)
+	{
+		load_one_gun_frame(data, i);
+		i++;
+	}
 }

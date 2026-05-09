@@ -50,7 +50,7 @@ static void	rotate_player(t_data *data, t_raycast *r)
 
 int	mouse_motion(int x, int y, t_data *data)
 {
-	int	delta_x;
+	int		delta_x;
 	double	rot;
 
 	(void)y;

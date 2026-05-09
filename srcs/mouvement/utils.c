@@ -2,10 +2,10 @@
 #include "../../includes/cub3d.h"
 #include <limits.h>
 
-bool is_wall_at(t_data *data, double px, double py)
+bool	is_wall_at(t_data *data, double px, double py)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = (int)px;
 	y = (int)py;
@@ -13,7 +13,8 @@ bool is_wall_at(t_data *data, double px, double py)
 		return (true);
 	if (!data->map->map[y] || x >= (int)ft_strlen(data->map->map[y]))
 		return (true);
-	if (data->map->map[y][x] == '1' || data->map->map[y][x] == ' ' || data->map->map[y][x] == 'D')
+	if (data->map->map[y][x] == '1' || data->map->map[y][x] == ' '
+		|| data->map->map[y][x] == 'D')
 		return (true);
 	return (false);
 }

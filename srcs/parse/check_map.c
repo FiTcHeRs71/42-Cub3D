@@ -7,7 +7,9 @@
  * Checks each character in the map line for validity
  * (only ' ', '0', '1', 'N', 'S', 'E', 'W' are allowed).
  * @param line  The current line of the map being checked.
- * @param data  Pointer to the main structure (used for error handling and player info).
+
+ * @param data  Pointer to the main structure (used for error 
+				handling and player info).
  * @param y     The current row index in the map (used for player position).
  */
 static void	check_arg(char *line, t_data *data, int y)
@@ -19,30 +21,15 @@ static void	check_arg(char *line, t_data *data, int y)
 		ft_error(ERR_MAP_EMPTY_LINE, data);
 	while (line[i])
 	{
-	if (!ft_isascii(line[i]) || (!ft_strchr(" 012NSEWDd\n\t", line[i])))
-		ft_error(ERR_MAP_CHAR, data);
-	if (line[i] == '2')
-	{
-		enemy_add_back(&data->enemies,
-			new_enemy((double)i + 0.5, (double)y + 0.5));
-		if (!data->enemies)
-			ft_error(ERR_MALLOC, data);
-		data->enemy_count++;
-		line[i] = '0';
-	}
+		if (!ft_isascii(line[i]) || (!ft_strchr(" 012NSEWDd\n\t", line[i])))
+			ft_error(ERR_MAP_CHAR, data);
+		if (line[i] == '2')
+		{
+			add_enemy(data, i, y, line);
+		}
 		if (ft_strchr("NSEW", line[i]))
 		{
-			if (ft_strchr("N", line[i]))
-				data->map->player_dir = NORTH;
-			if (ft_strchr("S", line[i]))
-				data->map->player_dir = SOUTH;
-			if (ft_strchr("W", line[i]))
-				data->map->player_dir = WEST;
-			if (ft_strchr("E", line[i]))
-				data->map->player_dir = EAST;
-			data->map->player_x = i;
-			data->map->player_y = y;
-			data->map->player_flag += 1;
+			init_pos_player(data, line, i, y);
 		}
 		i++;
 	}
@@ -74,6 +61,7 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
 	}
 	return (copy);
 }
+
 /**
  * @brief Recursively validates map boundaries using a flood fill algorithm.
  *
@@ -88,7 +76,8 @@ static char	**flood_fill_copy_map(t_data *data, char **original)
  */
 static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 {
-	if (y < 0 || x < 0 || y >= map->map_size || x >= (int)ft_strlen(map->map_copy[y]))
+	if (y < 0 || x < 0 || y >= map->map_size
+		|| x >= (int)ft_strlen(map->map_copy[y]))
 	{
 		ft_error(ERR_MAP_NOT_CLOSED, data);
 	}
@@ -96,7 +85,8 @@ static void	flood_fill_valid_map(t_data *data, t_map *map, int y, int x)
 	{
 		ft_error(ERR_MAP_NOT_CLOSED, data);
 	}
-	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X' || map->map_copy[y][x] == ' ')
+	if (map->map_copy[y][x] == '1' || map->map_copy[y][x] == 'X'
+		|| map->map_copy[y][x] == ' ')
 		return ;
 	if (map->map_copy[y][x] != '0' && !ft_strchr("NSEWDd", map->map_copy[y][x]))
 	{

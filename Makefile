@@ -18,7 +18,7 @@ SRCS_GUN = $(addprefix $(SRCDIR)/gun/,\
 	gun.c gun_draw.c gun_anim.c)
 
 SRCS_MM = $(addprefix $(SRCDIR)/mini_map/,\
-	mini_map.c mini_map_player.c)
+	mini_map.c mini_map_player.c mini_map_utils.c)
 
 SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
 	check_map.c parse_config.c parse_cub3d.c parse_utils.c utils.c parse_enemies.c)
