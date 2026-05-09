@@ -1,3 +1,4 @@
+
 #include "../../includes/cub3d.h"
 
 void	update_enemy_animation(t_data *data)

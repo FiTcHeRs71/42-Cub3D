@@ -23,6 +23,7 @@ int	mouse_press(int button, int x, int y, t_data *data)
 	{
 		data->gun.state = GUN_SHOOT_1;
 		data->gun.frame_counter = 0;
+		try_shoot(data);
 	}
 	return (0);
 }

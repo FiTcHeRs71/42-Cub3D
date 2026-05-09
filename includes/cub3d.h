@@ -5,21 +5,29 @@
 
 /*================== PLAYER MOVEMENT ==================*/
 
-# define MOVE_SPEED 0.15
+# define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
-# define MOUSE_SENSITIVITY 0.005
+# define MOUSE_SENSITIVITY 0.002
 # define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
 # define COLLISION_MARGIN 0.15
 
+/*================== CROSSHAIR ==================*/
+
+# define CROSSHAIR_SIZE 10
+# define CROSSHAIR_THICKNESS 2
+# define CROSSHAIR_COLOR 0xFFFFFF
+
 /*================== ENEMIES ==================*/
 
 # define ENEMY_ANIM_SPEED 10
+# define SPRITE_SCALE 1.0
 
 /*================== GUN ==================*/
 
 # define GUN_HEIGHT_RATIO 0.4
 # define GUN_ANIM_FRAMES 2
+# define SHOOT_RANGE 10.0
 
 /*================== MINI MAP ==================*/
 
@@ -77,7 +85,12 @@ void			enemy_add_back(t_enemy **lst, t_enemy *new_one);
 void			free_enemies(t_enemy *enemies);
 void			load_enemy_textures(t_data *data);
 void			update_enemy_animation(t_data *data);
-
+void			compute_screen_bounds(t_sprite_calc *s, t_data *data);
+void			compute_transform(t_sprite_calc *s, t_data *data, t_enemy *e);
+int				get_pixel(t_tex_img *tex, int tx, int ty);
+void			put_pixel_sprite(t_data *data, int x, int y, int color);
+void			draw_sprites(t_data *data);
+void			sort_enemies(t_data *data);
 /*-------- TEXTURES ------------*/
 void			load_wall_textures(t_data *data, t_texture *texture,
 					t_mlx *mlx);
@@ -90,7 +103,8 @@ void			load_gun_textures(t_data *data);
 void			draw_gun(t_data *data);
 void			update_gun_animation(t_data *data);
 int				mouse_press(int button, int x, int y, t_data *data);
-
+void			draw_crosshair(t_data *data);
+void			try_shoot(t_data *data);
 /*-------- MOUVEMENT ------------*/
 void			update_player(t_data *data);
 bool			can_move(t_data *data, double new_x, double mew_y);

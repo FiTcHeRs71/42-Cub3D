@@ -47,8 +47,10 @@ int	game_loop(t_data *data)
 		pthread_join(data->threads[i].id, NULL);
 		i++;
 	}
+	draw_sprites(data);
 	draw_mini_map(data);
 	update_gun_animation(data);
+	draw_crosshair(data);
 	draw_gun(data);
 	mlx_put_image_to_window(data->mlx->mlx_connect, data->mlx->mlx_window,
 		data->mlx->img, 0, 0);

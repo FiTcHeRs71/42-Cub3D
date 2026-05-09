@@ -12,10 +12,10 @@ SRCDIR = srcs
 SRCS_MAIN = main.c
 
 SRCS_ENEMIES = $(addprefix $(SRCDIR)/enemies/,\
-	enemies.c enemies_anim.c)
+	enemies.c shoot.c enemies_anim.c enemies_draw_utils.c enemies_draw.c enemies_sort.c)
 
 SRCS_GUN = $(addprefix $(SRCDIR)/gun/,\
-	gun.c gun_draw.c gun_anim.c)
+	gun.c gun_draw.c gun_anim.c crosshair.c)
 
 SRCS_MM = $(addprefix $(SRCDIR)/mini_map/,\
 	mini_map.c mini_map_player.c mini_map_utils.c)

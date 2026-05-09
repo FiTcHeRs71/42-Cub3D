@@ -69,6 +69,23 @@ typedef struct s_raycast
 	char				hit_char;
 }						t_raycast;
 
+typedef struct s_sprite_calc
+{
+	double				sprite_x;
+	double				sprite_y;
+	double				inv_det;
+	double				transform_x;
+	double				transform_y;
+	int					screen_x;
+	int					height;
+	int					width;
+	int					v_offset;
+	int					draw_start_x;
+	int					draw_end_x;
+	int					draw_start_y;
+	int					draw_end_y;
+}						t_sprite_calc;
+
 typedef struct s_linked_map
 {
 	char				*line;
@@ -144,6 +161,14 @@ typedef struct s_minimap
 	int					scale;
 }						t_minimap;
 
+typedef struct s_shoot_calc
+{
+	double	transform_x;
+	double	transform_y;
+	int		screen_x;
+	int		width;
+}			t_shoot_calc;
+
 typedef struct s_draw
 {
 	int					line_h;
@@ -161,6 +186,7 @@ typedef struct s_enemy
 	double				pos_x;
 	double				pos_y;
 	double				dist;
+	bool				is_dead;
 	struct s_enemy		*next;
 }						t_enemy;
 
