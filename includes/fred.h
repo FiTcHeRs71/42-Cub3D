@@ -14,4 +14,12 @@ void	toggle_minimap_fullscreen(t_data *data);
 void	load_door_textures(t_data *data, t_texture *texture, t_mlx *mlx);
 void	toggle_nearest_door(t_data *data);
 bool	in_bounds(t_data *data, int y, int x);
+
+/*-------- ENEMIES ------------*/
+t_enemy		*new_enemy(double x, double y);
+void		enemy_add_back(t_enemy **lst, t_enemy *new_one);
+void		free_enemies(t_enemy *enemies);
+void	load_enemy_textures(t_data *data);
+void	update_enemy_animation(t_data *data);
+
 #endif

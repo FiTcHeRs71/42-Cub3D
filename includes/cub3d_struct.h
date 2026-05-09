@@ -3,6 +3,8 @@
 
 #include <bits/pthreadtypes.h>
 typedef struct s_data t_data;
+# define ENEMY_FRAMES 4
+
 
 typedef struct s_thread_data
 {
@@ -153,6 +155,21 @@ typedef struct s_draw
 	t_texture			tex;
 }						t_draw;
 
+typedef struct s_enemy
+{
+	double			pos_x;
+	double			pos_y;
+	double			dist;
+	struct s_enemy	*next;
+}					t_enemy;
+
+typedef struct s_enemy_anim
+{
+	t_tex_img	frames[ENEMY_FRAMES];
+	int			current_frame;
+	int			frame_counter;
+}				t_enemy_anim;
+
 typedef struct s_gun
 {
 	t_tex_img		neutre;
@@ -169,6 +186,8 @@ typedef struct s_data
 	int					window_x;
 	bool				mouse_active;
 	int					largest_line;
+	int					enemy_count;
+	double				*z_buffer;
 	t_gun				gun;
 	t_keys				keys;
 	t_thread_data		*threads;
@@ -178,6 +197,8 @@ typedef struct s_data
 	t_raycast			*raycast;
 	t_draw				*draw;
 	t_minimap			mini_map;
+	t_enemy				*enemies;
+	t_enemy_anim		enemy_anim;
 	struct s_linked_map	*linked_map;
 }						t_data;
 

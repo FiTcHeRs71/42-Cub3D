@@ -38,6 +38,7 @@ int	game_loop(t_data *data)
 
 	i = 0;
 	update_player(data);
+	update_enemy_animation(data);
 	clear_image(data);
 	change_state_fog_of_war(data);
 	create_threads(data);
@@ -63,9 +64,13 @@ void	init_window(t_data *data, t_mlx *mlx)
 			data->window_y, TITLE);
 	if (!mlx->mlx_window)
 		ft_error_ctx(ERR_MLX_INIT, "Window", data);
+	data->z_buffer = ft_calloc(data->window_x, sizeof(double));
+	if (!data->z_buffer)
+		ft_error(ERR_MALLOC, data);
 	load_wall_textures(data, data->texture, data->mlx);
 	load_door_textures(data, data->texture, data->mlx);
 	load_gun_textures(data);
+	load_enemy_textures(data);
 	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
 	mlx_hook(mlx->mlx_window, 4, 1L << 2, mouse_press, data);
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);

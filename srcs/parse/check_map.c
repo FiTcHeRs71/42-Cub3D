@@ -19,8 +19,17 @@ static void	check_arg(char *line, t_data *data, int y)
 		ft_error(ERR_MAP_EMPTY_LINE, data);
 	while (line[i])
 	{
-		if (!ft_isascii(line[i]) || (!ft_strchr(" 01NSEWDd\n\t", line[i])))
-			ft_error(ERR_MAP_CHAR, data);
+	if (!ft_isascii(line[i]) || (!ft_strchr(" 012NSEWDd\n\t", line[i])))
+		ft_error(ERR_MAP_CHAR, data);
+	if (line[i] == '2')
+	{
+		enemy_add_back(&data->enemies,
+			new_enemy((double)i + 0.5, (double)y + 0.5));
+		if (!data->enemies)
+			ft_error(ERR_MALLOC, data);
+		data->enemy_count++;
+		line[i] = '0';
+	}
 		if (ft_strchr("NSEW", line[i]))
 		{
 			if (ft_strchr("N", line[i]))
