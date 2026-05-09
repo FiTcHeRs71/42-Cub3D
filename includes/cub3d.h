@@ -3,9 +3,11 @@
 # define CUB3D_H
 
 # define TITLE "Cub3D - LES RAY-CAST-COUILLES"
+
+/*================== PLAYER MOVEMENT ==================*/
 # define MOVE_SPEED 0.15
 # define ROT_SPEED  0.03
-# define MOUSE_SENSITIVITY 0.002
+# define MOUSE_SENSITIVITY 0.005
 # define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
 # define COLLISION_MARGIN 0.15
