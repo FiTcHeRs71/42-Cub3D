@@ -1,5 +1,6 @@
 
 #include "../../includes/cub3d.h"
+#include <stdio.h>
 
 void	clean_mini_map(t_data *data)
 {
@@ -26,5 +27,45 @@ void	free_enemies(t_enemy *enemies)
 		tmp = enemies;
 		enemies = enemies->next;
 		free(tmp);
+	}
+}
+
+void	clean_wall_and_door(t_texture *texture, t_mlx *mlx)
+{
+	if (texture->no.img)
+		mlx_destroy_image(mlx->mlx_connect, texture->no.img);
+	if (texture->so.img)
+		mlx_destroy_image(mlx->mlx_connect, texture->so.img);
+	if (texture->ea.img)
+		mlx_destroy_image(mlx->mlx_connect, texture->ea.img);
+	if (texture->we.img)
+		mlx_destroy_image(mlx->mlx_connect, texture->we.img);
+	if (texture->door.img)
+		mlx_destroy_image(mlx->mlx_connect, texture->door.img);
+}
+
+void	clean_enemies_and_gun(t_mlx *mlx, t_gun *gun, t_enemy_anim *enemy)
+{
+	int	i;
+
+	i = 0;
+	while (i < ENEMY_FRAMES)
+	{
+		if (enemy->frames[i].img)
+		{
+			mlx_destroy_image(mlx->mlx_connect, enemy->frames[i].img);
+		}
+		i++;
+	}
+	if (enemy->dead_frame.img)
+		mlx_destroy_image(mlx->mlx_connect, enemy->dead_frame.img);
+	i = 0;
+	while (i < GUN_FRAMES)
+	{
+		if (gun->frames[i].img)
+		{
+			mlx_destroy_image(mlx->mlx_connect, gun->frames[i].img);
+		}
+		i++;
 	}
 }

@@ -33,6 +33,8 @@ run_valgrind()
 
 	echo "$output" | grep -q "definitely lost: [^0]" && has_leak=1
 	echo "$output" | grep -q "indirectly lost: [^0]" && has_leak=1
+	echo "$output" | grep -q "possibly lost: [^0]" && has_leak=1
+	echo "$output" | grep -q "still reachable: [^0]" && has_leak=1
 	echo "$output" | grep -q "Open file descriptor" && has_fd_leak=1
 
 	if [ "$expect_error" = "1" ]; then
@@ -88,6 +90,7 @@ has_leak=0
 has_fd_leak=0
 echo "$output" | grep -q "definitely lost: [^0]" && has_leak=1
 echo "$output" | grep -q "indirectly lost: [^0]" && has_leak=1
+echo "$output" | grep -q "possibly lost: [^0]" && has_leak=1
 echo "$output" | grep -q "Open file descriptor" && has_fd_leak=1
 name=$(basename "$VALID_MAP")
 if [ "$has_leak" -eq 0 ] && [ "$has_fd_leak" -eq 0 ]; then

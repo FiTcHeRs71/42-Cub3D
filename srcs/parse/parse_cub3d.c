@@ -2,6 +2,7 @@
 #include "../../includes/cub3d.h"
 #include <fcntl.h>
 #include <math.h>
+#include <stdlib.h>
 
 bool	checker_file_extension(char *file, char *extension)
 {

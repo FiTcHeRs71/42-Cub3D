@@ -62,7 +62,7 @@ void			check_map(t_data *data, t_map *map);
 void			node_map_add_back(t_linked_map **lst, t_linked_map *new_one);
 void			convert_linked_map_to_array(t_data *data, t_map *map);
 bool			extract_config(char *line, t_data *data);
-int				get_color_code(t_data *data, char **arry_code);
+int				get_color_code(t_data *data, char **array_code);
 int				node_map_size(t_linked_map *lst);
 t_linked_map	*new_node_map(void *content);
 bool			checker_file_extension(char *file, char *extension);

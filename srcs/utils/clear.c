@@ -50,27 +50,23 @@ static void	free_map_struct(t_map *map)
 	}
 }
 
-static void	destroy_images(t_texture *texture, t_mlx *mlx)
+static void	destroy_images(t_data *data, t_texture *texture, t_mlx *mlx)
 {
 	if (!texture)
 		return ;
 	if (mlx && mlx->mlx_connect)
 	{
 		mlx_mouse_show(mlx->mlx_connect, mlx->mlx_window);
-		if (texture->no.img)
-			mlx_destroy_image(mlx->mlx_connect, texture->no.img);
-		if (texture->so.img)
-			mlx_destroy_image(mlx->mlx_connect, texture->so.img);
-		if (texture->ea.img)
-			mlx_destroy_image(mlx->mlx_connect, texture->ea.img);
-		if (texture->we.img)
-			mlx_destroy_image(mlx->mlx_connect, texture->we.img);
+		clean_wall_and_door(texture, mlx);
+		clean_enemies_and_gun(mlx, &data->gun, &data->enemy_anim);
 		if (mlx->img)
 			mlx_destroy_image(mlx->mlx_connect, mlx->img);
 		if (mlx->mlx_window)
 			mlx_destroy_window(mlx->mlx_connect, mlx->mlx_window);
 		mlx_destroy_display(mlx->mlx_connect);
+		printf("check\n");
 		free(mlx->mlx_connect);
+		printf("check\n");
 	}
 	if (mlx)
 		free(mlx);
@@ -86,17 +82,27 @@ static void	destroy_images(t_texture *texture, t_mlx *mlx)
  */
 void	clean_all(t_data *data)
 {
+	char	*tmp;
+
 	if (data->fd > 0)
 	{
+		while ((tmp = get_next_line(data->fd)))
+			free(tmp);
 		close(data->fd);
+	}
+	if (data->current_line)
+	{
+		free(data->current_line);
+		data->current_line = NULL;
 	}
 	free(data->draw);
 	free(data->raycast);
+	free(data->threads);
 	if (data->z_buffer)
 		free(data->z_buffer);
 	clean_mini_map(data);
 	free_enemies(data->enemies);
-	destroy_images(data->texture, data->mlx);
+	destroy_images(data, data->texture, data->mlx);
 	free_map_struct(data->map);
 	free_texture_struct(data->texture);
 	free_linked_map(data->linked_map);

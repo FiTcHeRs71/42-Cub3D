@@ -193,6 +193,7 @@ typedef struct s_enemy
 typedef struct s_enemy_anim
 {
 	t_tex_img			frames[ENEMY_FRAMES];
+	t_tex_img			dead_frame;
 	int					current_frame;
 	int					frame_counter;
 }						t_enemy_anim;
@@ -219,6 +220,7 @@ typedef struct s_gun
 typedef struct s_data
 {
 	int					fd;
+	char				*current_line;
 	int					window_y;
 	int					window_x;
 	bool				mouse_active;
@@ -227,15 +229,15 @@ typedef struct s_data
 	double				*z_buffer;
 	t_gun				gun;
 	t_keys				keys;
+	t_minimap			mini_map;
+	t_enemy_anim		enemy_anim;
 	t_thread_data		*threads;
 	t_map				*map;
 	t_texture			*texture;
 	t_mlx				*mlx;
 	t_raycast			*raycast;
 	t_draw				*draw;
-	t_minimap			mini_map;
 	t_enemy				*enemies;
-	t_enemy_anim		enemy_anim;
 	struct s_linked_map	*linked_map;
 }						t_data;
 

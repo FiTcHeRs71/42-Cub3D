@@ -1,5 +1,7 @@
 
 #include "../../includes/cub3d.h"
+#include <stdbool.h>
+#include <stdio.h>
 
 static bool	is_valid_color_code(char *str)
 {
@@ -70,8 +72,8 @@ static bool	save_color_code(t_data *data, char ***rgb_code, char *line)
 		ft_error(ERR_MALLOC, data);
 	if (ft_array_size(temp) != 3)
 	{
-		ft_free_2d_array(temp);
-		ft_error(ERR_COLOR_FORMAT, data);
+		printf(ERR_COLOR_FORMAT);
+		return (ft_free_2d_array(temp), false);
 	}
 	*(rgb_code) = ft_calloc(ft_array_size(temp) + 1, sizeof(char *));
 	i = 0;

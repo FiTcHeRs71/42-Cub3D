@@ -38,7 +38,10 @@ static void	draw_one_sprite(t_data *data, t_enemy *e)
 	if (s.transform_y <= 0)
 		return ;
 	compute_screen_bounds(&s, data);
-	tex = &data->enemy_anim.frames[data->enemy_anim.current_frame];
+	if (e->is_dead)
+		tex = &data->enemy_anim.dead_frame;
+	else
+		tex = &data->enemy_anim.frames[data->enemy_anim.current_frame];
 	x = s.draw_start_x;
 	while (x < s.draw_end_x)
 	{

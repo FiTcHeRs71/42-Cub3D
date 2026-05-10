@@ -28,7 +28,8 @@ static void	load_one_frame(t_data *data, int i)
 
 void	load_enemy_textures(t_data *data)
 {
-	int	i;
+	t_tex_img	*d;
+	int			i;
 
 	i = 0;
 	while (i < ENEMY_FRAMES)
@@ -36,4 +37,10 @@ void	load_enemy_textures(t_data *data)
 		load_one_frame(data, i);
 		i++;
 	}
+	d = &data->enemy_anim.dead_frame;
+	d->img = mlx_xpm_file_to_image(data->mlx->mlx_connect,
+			"./images/enemies/toad4.xpm", &d->width, &d->height);
+	if (!d->img)
+		ft_error_ctx("Texture", "./images/enemies/toad4.xpm", data);
+	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->size_line, &d->endian);
 }

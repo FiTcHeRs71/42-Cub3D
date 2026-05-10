@@ -73,6 +73,5 @@ void	try_shoot(t_data *data)
 		printf("MISS\n");
 		return ;
 	}
-	printf("HIT enemy at (%.2f, %.2f)\n", target->pos_x, target->pos_y);
-	// target->is_dead = true;  // ← on activera ça à l'étape C
+	target->is_dead = true;  // ← on activera ça à l'étape C
 }
