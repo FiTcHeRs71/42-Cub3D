@@ -70,7 +70,6 @@ void	try_shoot(t_data *data)
 	target = find_target(data);
 	if (!target)
 	{
-		printf("MISS\n");
 		return ;
 	}
 	target->is_dead = true;
