@@ -85,6 +85,8 @@ void	clean_all(t_data *data)
 	free(data->threads);
 	if (data->z_buffer)
 		free(data->z_buffer);
+	if (data->fd)
+		close(data->fd);
 	clean_mini_map(data);
 	free_enemies(data->enemies);
 	destroy_images(data, data->texture, data->mlx);

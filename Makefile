@@ -124,7 +124,7 @@ run: all
 
 valgrind: all
 	@echo "$(YELLOW)🔍 Running valgrind...$(RESET)"
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME) maps/valid_map/intra.cub
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME) map/valid_map/intra.cub
 
 norm:
 	@echo "$(YELLOW)📋 Checking norminette...$(RESET)"
