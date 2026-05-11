@@ -36,16 +36,16 @@ void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw,
 	{
 		tex->tex_flag = tex->door;
 	}
-	else if (ray->wall_side == 0)
+	else if (draw->wall_side == 0)
 	{
-		if (ray->ray_dir_x > 0)
+		if (draw->raydir_x > 0)
 			tex->tex_flag = tex->ea;
 		else
 			tex->tex_flag = tex->we;
 	}
 	else
 	{
-		if (ray->ray_dir_y > 0)
+		if (draw->raydir_y > 0)
 			tex->tex_flag = tex->so;
 		else
 			tex->tex_flag = tex->no;
@@ -57,16 +57,16 @@ void	finalise_tex_data(t_data *data, t_texture *tex, t_draw *draw,
 
 void	use_texture(t_data *data, t_raycast *ray, t_texture *tex, t_draw *draw)
 {
-	if (ray->wall_side == 0)
-		tex->wall_x = ray->pos_y + ray->wall_dist * ray->ray_dir_y;
+	if (draw->wall_side == 0)
+		tex->wall_x = ray->pos_y + ray->wall_dist * draw->raydir_y;
 	else
-		tex->wall_x = ray->pos_x + ray->wall_dist * ray->ray_dir_x;
+		tex->wall_x = ray->pos_x + ray->wall_dist * draw->raydir_x;
 	tex->wall_x = tex->wall_x - floor(tex->wall_x);
 	finalise_tex_data(data, tex, draw, ray);
 	tex->tex_x = (int)(tex->wall_x * (double)(tex->tex_flag.width));
-	if (ray->wall_side == 0 && ray->ray_dir_x > 0)
+	if (draw->wall_side == 0 && draw->raydir_x > 0)
 		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;
-	if (ray->wall_side == 1 && ray->ray_dir_y > 0)
+	if (draw->wall_side == 1 && draw->raydir_y > 0)
 		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;
 }
 

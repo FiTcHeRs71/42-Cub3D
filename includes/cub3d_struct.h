@@ -10,11 +10,11 @@ typedef struct s_data	t_data;
 
 typedef struct s_thread_data
 {
-	int					x_start;
-	int					x_end;
-	t_data				*stats;
-	pthread_t			id;
-}						t_thread_data;
+	int			x_start;
+	int			x_end;
+	t_data		*data;
+	pthread_t	id;
+}				t_thread_data;
 
 typedef enum e_direction
 {
@@ -52,8 +52,6 @@ typedef struct s_raycast
 	double				time;
 	double				old_time;
 	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
 	double				side_dist_x;
 	double				side_dist_y;
 	double				delta_dist_x;
@@ -63,7 +61,6 @@ typedef struct s_raycast
 	int					step_x;
 	int					step_y;
 	double				wall_dist;
-	int					wall_side;
 	bool				is_hit;
 	bool				done;
 	char				hit_char;
@@ -134,13 +131,15 @@ typedef struct s_texture
 	t_tex_img			we;
 	t_tex_img			ea;
 	t_tex_img			door;
+	t_tex_img			ground;
+	t_tex_img			ceiling;
 	t_tex_img			tex_flag;
 	char				*no_path;
 	char				*so_path;
 	char				*we_path;
 	char				*ea_path;
 	char				**floor;
-	char				**ceiling;
+	char				**roof;
 	int					rgb_floor;
 	int					rgb_ceiling;
 	int					tex_x;
