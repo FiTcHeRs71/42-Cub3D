@@ -19,19 +19,29 @@ static void	bresenham_step(int p[5], int *x0, int *y0)
 	}
 }
 
-static void	draw_line(t_data *data, int x0, int y0, int x1, int y1)
+static void	draw_line(t_data *data, int start[2], int end[2])
 {
 	int	p[5];
+	int	x0;
+	int	y0;
 
-	p[0] = abs(x1 - x0);
-	p[1] = -abs(y1 - y0);
-	p[2] = (x0 < x1) ? 1 : -1;
-	p[3] = (y0 < y1) ? 1 : -1;
+	x0 = start[0];
+	y0 = start[1];
+	p[0] = abs(end[0] - x0);
+	p[1] = -abs(end[1] - y0);
+	if (x0 < end[0])
+		p[2] = 1;
+	else
+		p[2] = -1;
+	if (y0 < end[1])
+		p[3] = 1;
+	else
+		p[3] = -1;
 	p[4] = p[0] + p[1];
 	while (1)
 	{
 		mm_put_pixel(data, x0, y0, MM_COLOR_CONE);
-		if (x0 == x1 && y0 == y1)
+		if (x0 == end[0] && y0 == end[1])
 			break ;
 		bresenham_step(p, &x0, &y0);
 	}
@@ -39,23 +49,25 @@ static void	draw_line(t_data *data, int x0, int y0, int x1, int y1)
 
 void	draw_mini_map_cone(t_data *data)
 {
-	int		px;
-	int		py;
-	int		left_x;
-	int		left_y;
+	int		start[2];
+	int		end[2];
 	double	len;
 
 	len = data->mini_map.scale * MM_CONE_LENGTH;
-	px = data->mini_map.pos_x + (int)(data->raycast->pos_x
+	start[0] = data->mini_map.pos_x + (int)(data->raycast->pos_x
 			* data->mini_map.scale);
-	py = data->mini_map.pos_y + (int)(data->raycast->pos_y
+	start[1] = data->mini_map.pos_y + (int)(data->raycast->pos_y
 			* data->mini_map.scale);
-	left_x = px + (int)((data->raycast->dir_x + data->raycast->plane_x) * len);
-	left_y = py + (int)((data->raycast->dir_y + data->raycast->plane_y) * len);
-	draw_line(data, px, py, left_x, left_y);
-	left_x = px + (int)((data->raycast->dir_x - data->raycast->plane_x) * len);
-	left_y = py + (int)((data->raycast->dir_y - data->raycast->plane_y) * len);
-	draw_line(data, px, py, left_x, left_y);
+	end[0] = start[0] + (int)((data->raycast->dir_x
+				+ data->raycast->plane_x) * len);
+	end[1] = start[1] + (int)((data->raycast->dir_y
+				+ data->raycast->plane_y) * len);
+	draw_line(data, start, end);
+	end[0] = start[0] + (int)((data->raycast->dir_x
+				- data->raycast->plane_x) * len);
+	end[1] = start[1] + (int)((data->raycast->dir_y
+				- data->raycast->plane_y) * len);
+	draw_line(data, start, end);
 }
 
 void	compute_minimap_fullscreen(t_data *data)

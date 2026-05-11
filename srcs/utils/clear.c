@@ -64,9 +64,7 @@ static void	destroy_images(t_data *data, t_texture *texture, t_mlx *mlx)
 		if (mlx->mlx_window)
 			mlx_destroy_window(mlx->mlx_connect, mlx->mlx_window);
 		mlx_destroy_display(mlx->mlx_connect);
-		printf("check\n");
 		free(mlx->mlx_connect);
-		printf("check\n");
 	}
 	if (mlx)
 		free(mlx);
@@ -82,19 +80,6 @@ static void	destroy_images(t_data *data, t_texture *texture, t_mlx *mlx)
  */
 void	clean_all(t_data *data)
 {
-	char	*tmp;
-
-	if (data->fd > 0)
-	{
-		while ((tmp = get_next_line(data->fd)))
-			free(tmp);
-		close(data->fd);
-	}
-	if (data->current_line)
-	{
-		free(data->current_line);
-		data->current_line = NULL;
-	}
 	free(data->draw);
 	free(data->raycast);
 	free(data->threads);

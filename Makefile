@@ -27,7 +27,7 @@ SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
 	init.c clear.c error.c window_clear.c clear_2.c)
 
 SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
-	window.c window_utils.c)
+	window.c window_utils.c window_thread.c keyboard.c)
 
 SRCS_MOUV = $(addprefix $(SRCDIR)/mouvement/, \
 	mouvement.c mouvement_utils.c utils.c)
@@ -49,7 +49,7 @@ OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # Compiler and flags
 CC =  cc
-CFLAGS = -Wall -Wextra -Werror -g -Wno-incompatible-pointer-types -O2
+CFLAGS = -Wall -Wextra -Werror -O2
 
 # Includes
 INCLUDES = -I$(INCDIR) -I$(LIBFTDIR)/include -I$(MLXDIR)

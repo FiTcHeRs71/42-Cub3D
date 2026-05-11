@@ -73,5 +73,5 @@ void	try_shoot(t_data *data)
 		printf("MISS\n");
 		return ;
 	}
-	target->is_dead = true;  // ← on activera ça à l'étape C
+	target->is_dead = true;
 }

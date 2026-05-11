@@ -5,9 +5,9 @@
 
 /*================== PLAYER MOVEMENT ==================*/
 
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.03
-# define MOUSE_SENSITIVITY 0.002
+# define MOVE_SPEED 0.3
+# define ROT_SPEED 0.9
+# define MOUSE_SENSITIVITY 0.005
 # define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
 # define COLLISION_MARGIN 0.15
@@ -20,7 +20,7 @@
 
 /*================== ENEMIES ==================*/
 
-# define ENEMY_ANIM_SPEED 10
+# define ENEMY_ANIM_SPEED 5
 # define SPRITE_SCALE 1.0
 
 /*================== GUN ==================*/
@@ -52,7 +52,6 @@
 # include <math.h>
 # include <pthread.h>
 
-# include "fred.h" // a suppr
 # include "leo.h" 
 /*================== FONCTION ==================*/
 
@@ -78,7 +77,8 @@ void			ft_error_ctx(char *what, char *detail, t_data *data);
 void			init_data(t_data *data);
 void			init_mini_map(t_data *data);
 void			clean_mini_map(t_data *data);
-
+void			clean_wall_and_door(t_texture *texture, t_mlx *mlx);
+void			clean_enemies_and_gun(t_mlx *mlx, t_gun *gun, t_enemy_anim *enemy);
 /*-------- ENEMIES ------------*/
 t_enemy			*new_enemy(double x, double y);
 void			enemy_add_back(t_enemy **lst, t_enemy *new_one);
@@ -130,12 +130,15 @@ int				choose_color_mini_map_cells(char grid);
 void			init_window(t_data *data, t_mlx *mlx);
 int				handle_key_press(int keycode, t_data *data);
 int				handle_key_release(int keycode, t_data *data);
+int				handler_bonus_key(int keycode, t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
 int				focus_in(t_data *data);
 int				focus_out(t_data *data);
 int				close_window(t_data *data);
 void			reset_mouse_to_center(t_data *data);
 void			toggle_minimap_fullscreen(t_data *data);
+void			create_threads(t_data *data);
+void			release_mouse(t_data *data);
 
 /*-------- DRAW ------------*/
 void			draw_wall(t_data *stats, t_raycast *data, t_draw *draw,

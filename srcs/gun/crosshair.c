@@ -21,7 +21,7 @@ void	draw_crosshair(t_data *data)
 	int	t;
 
 	cx = data->window_x / 2;
-	cy = data->window_y / 2;
+	cy = data->window_y / 1.7;
 	t = CROSSHAIR_THICKNESS / 2;
 	i = -CROSSHAIR_SIZE;
 	while (i <= CROSSHAIR_SIZE)

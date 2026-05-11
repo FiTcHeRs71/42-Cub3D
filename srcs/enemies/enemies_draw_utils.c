@@ -1,7 +1,6 @@
 
 #include "../../includes/cub3d.h"
 
-
 static void	draw_column(t_data *data, t_sprite_calc *s, int x, t_tex_img *tex)
 {
 	int	tex_x;

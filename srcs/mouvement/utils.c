@@ -30,7 +30,7 @@ bool	in_bounds(t_data *data, int y, int x)
 	return (true);
 }
 
-static void	check_one_case(t_data *data, int dy, int dx, int *best, int out[2])
+static void	check_one_case(t_data *data, int d_x_y[2], int *best, int out[2])
 {
 	int		player_x;
 	int		player_y;
@@ -40,16 +40,16 @@ static void	check_one_case(t_data *data, int dy, int dx, int *best, int out[2])
 
 	player_x = (int)data->raycast->pos_x;
 	player_y = (int)data->raycast->pos_y;
-	case_x = player_x + dx;
-	case_y = player_y + dy;
+	case_x = player_x + d_x_y[0];
+	case_y = player_y + d_x_y[1];
 	if (!in_bounds(data, case_y, case_x))
 		return ;
 	c = data->map->map[case_y][case_x];
 	if (c != 'D' && c != 'd')
 		return ;
-	if (dx * dx + dy * dy < *best)
+	if (d_x_y[0] * d_x_y[0] + d_x_y[1] * d_x_y[1] < *best)
 	{
-		*best = dx * dx + dy * dy;
+		*best = d_x_y[0] * d_x_y[0] + d_x_y[1] * d_x_y[1];
 		out[0] = case_x;
 		out[1] = case_y;
 	}
@@ -57,25 +57,24 @@ static void	check_one_case(t_data *data, int dy, int dx, int *best, int out[2])
 
 bool	find_nearest_door(t_data *data, int *out_x, int *out_y)
 {
-	int	dx;
-	int	dy;
+	int	d_x_y[2];
 	int	best;
 	int	out[2];
 
 	best = 999;
 	out[0] = -1;
 	out[1] = -1;
-	dy = -1;
-	while (dy <= 1)
+	d_x_y[1] = -1;
+	while (d_x_y[1] <= 1)
 	{
-		dx = -1;
-		while (dx <= 1)
+		d_x_y[0] = -1;
+		while (d_x_y[0] <= 1)
 		{
-			if (!(dx == 0 && dy == 0))
-				check_one_case(data, dy, dx, &best, out);
-			dx++;
+			if (!(d_x_y[0] == 0 && d_x_y[1] == 0))
+				check_one_case(data, d_x_y, &best, out);
+			d_x_y[0]++;
 		}
-		dy++;
+		d_x_y[1]++;
 	}
 	if (out[0] == -1)
 		return (false);

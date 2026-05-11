@@ -220,7 +220,6 @@ typedef struct s_gun
 typedef struct s_data
 {
 	int					fd;
-	char				*current_line;
 	int					window_y;
 	int					window_x;
 	bool				mouse_active;

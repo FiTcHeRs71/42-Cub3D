@@ -1,34 +1,19 @@
 
 #include "../../includes/cub3d.h"
 
-void	create_threads(t_data *data)
+static void	loading_texture(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < 9)
-	{
-		data->threads[i].stats = data;
-		data->threads[i].x_start = i * data->window_x / 9;
-		if (i == 8)
-			data->threads[i].x_end = data->window_x;
-		else
-			data->threads[i].x_end = (i + 1) * data->window_x / 9;
-		i++;
-	}
-	i = 0;
-	while (i < 9)
-	{
-		pthread_create(&data->threads[i].id, NULL, raycasting, &data->threads[i]);
-		i++;
-	}
+	load_wall_textures(data, data->texture, data->mlx);
+	load_door_textures(data, data->texture, data->mlx);
+	load_gun_textures(data);
+	load_enemy_textures(data);
 }
-#include <stdbool.h>
 
 void	reset_mouse_to_center(t_data *data)
 {
 	mlx_mouse_hide(data->mlx->mlx_connect, data->mlx->mlx_window);
-	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x / 2, data->window_y / 2);
+	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x
+		/ 2, data->window_y / 2);
 	data->mouse_active = true;
 }
 
@@ -56,6 +41,19 @@ int	game_loop(t_data *data)
 		data->mlx->img, 0, 0);
 	return (0);
 }
+
+static void	create_hook(t_data *data, t_mlx *mlx)
+{
+	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
+	mlx_hook(mlx->mlx_window, 4, 1L << 2, mouse_press, data);
+	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
+	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
+	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
+	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_motion, data);
+	mlx_hook(mlx->mlx_window, 9, 1L << 21, focus_in, data);
+	mlx_hook(mlx->mlx_window, 10, 1L << 21, focus_out, data);
+}
+
 void	init_window(t_data *data, t_mlx *mlx)
 {
 	mlx->mlx_connect = mlx_init();
@@ -69,18 +67,8 @@ void	init_window(t_data *data, t_mlx *mlx)
 	data->z_buffer = ft_calloc(data->window_x, sizeof(double));
 	if (!data->z_buffer)
 		ft_error(ERR_MALLOC, data);
-	load_wall_textures(data, data->texture, data->mlx);
-	load_door_textures(data, data->texture, data->mlx);
-	load_gun_textures(data);
-	load_enemy_textures(data);
-	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
-	mlx_hook(mlx->mlx_window, 4, 1L << 2, mouse_press, data);
-	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
-	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
-	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
-	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_motion, data);
-	mlx_hook(mlx->mlx_window, 9, 1L << 21, focus_in, data);
-	mlx_hook(mlx->mlx_window, 10, 1L << 21, focus_out, data);
+	loading_texture(data);
+	create_hook(data, mlx);
 	reset_mouse_to_center(data);
 	mlx->img = mlx_new_image(mlx->mlx_connect, data->window_x, data->window_y);
 	if (!mlx->img)
@@ -88,4 +76,3 @@ void	init_window(t_data *data, t_mlx *mlx)
 	mlx->img_data = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 			&mlx->size_line, &mlx->endian);
 }
-

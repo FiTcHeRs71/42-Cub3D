@@ -20,7 +20,7 @@ void	compute_screen_bounds(t_sprite_calc *s, t_data *data)
 	s->screen_x = (int)((data->window_x / 2)
 			* (1 + s->transform_x / s->transform_y));
 	s->height = abs((int)(data->window_y / s->transform_y)) * SPRITE_SCALE;
-	s->width  = abs((int)(data->window_y / s->transform_y)) * SPRITE_SCALE;
+	s->width = abs((int)(data->window_y / s->transform_y)) * SPRITE_SCALE;
 	s->v_offset = s->height / 2;
 	s->draw_start_y = -s->height / 2 + data->window_y / 2 + s->v_offset;
 	if (s->draw_start_y < 0)
