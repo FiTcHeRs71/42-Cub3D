@@ -30,8 +30,8 @@ static void	free_texture_struct(t_texture *texture)
 			free(texture->ea_path);
 		if (texture->floor)
 			ft_free_2d_array(texture->floor);
-		if (texture->ceiling)
-			ft_free_2d_array(texture->ceiling);
+		if (texture->roof)
+			ft_free_2d_array(texture->roof);
 		free(texture);
 	}
 }

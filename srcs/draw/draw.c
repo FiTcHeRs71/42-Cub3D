@@ -20,37 +20,6 @@ void	put_pixel(t_data *data, t_draw *draw, int y_coord, int x_coord)
 	if ((draw->wall_side == 0 && draw->raydir_x > 0) || (draw->wall_side == 1 && draw->raydir_y > 0))
 		color = (color >> 1) & 0x7F7F7F;
 	*(unsigned int *)pixel = color;
-	color = *(unsigned int *)(texture.addr + draw->tex.tex_y * texture.size_line + draw->tex.tex_x * (texture.bpp / 8));
-}
-
-void	put_pixel_ceiling(t_data *data, t_draw *draw, int y_coord, int x_coord)
-{
-	char	*pixel;
-	int		offset;
-
-	if (x_coord < 0 || x_coord >= data->window_x || y_coord < 0 || y_coord >= data->window_y)
-		return ;
-	offset = (y_coord * data->mlx->size_line) + (x_coord * (data->mlx->bits_per_pixel / 8));
-	pixel = data->mlx->img_data + offset;
-	if (draw->wall_side == 1)
-		*(unsigned int *)pixel = data->texture->rgb_ceiling;
-	else
-		*(unsigned int *)pixel = data->texture->rgb_ceiling;
-}
-
-void	draw_ceiling(t_data *data, t_draw *draw, int x_coord)
-{
-	int	i;
-	int	y;
-
-	i = draw->line_end;
-	y = draw->line_end;
-	while (i < data->window_y)
-	{
-		put_pixel_ceiling(data, draw, y, x_coord);
-		y++;
-		i++;
-	}
 }
 
 void	draw_wall(t_data *data, t_raycast *ray, t_draw *draw, int x_coord)

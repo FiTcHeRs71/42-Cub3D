@@ -161,6 +161,7 @@ void	*raycasting(void *arg)
 	ray.dir_y = td->data->raycast->dir_y;
 	ray.plane_x = td->data->raycast->plane_x;
 	ray.plane_y = td->data->raycast->plane_y;
+	draw_background(td, &ray);
 	while (td->x_start < td->x_end)
 	{
 		initialise_DDA(&ray, td->x_start, td->data, &draw);
@@ -174,8 +175,6 @@ void	*raycasting(void *arg)
 			ray.wall_dist = (ray.side_dist_y - ray.delta_dist_y);
 		set_up_drawing_data(td->data, &ray, &draw);
 		draw_wall(td->data, &ray, &draw, td->x_start);
-		draw_floor(td->data, &draw, td->x_start);
-		draw_ceiling(td->data, &draw, td->x_start);
 		ray.is_hit = false;
 		td->x_start++;
 	}

@@ -30,10 +30,10 @@ SRCS_RAYCAST = $(addprefix $(SRCDIR)/raycasting/, \
 	raycasting.c)
 
 SRCS_DRAW = $(addprefix $(SRCDIR)/draw/, \
-	draw.c)
+	draw.c draw_floor.c)
 
 SRCS_TEXTURES = $(addprefix $(SRCDIR)/textures/, \
-	textures.c door_textures.c)
+	textures.c load_textures.c)
 
 # Combine all sources
 SRCS = $(SRCS_MAIN) $(SRCS_PARSE) $(SRCS_UTILS) $(SRCS_RAYCAST) $(SRCS_DRAW) $(SRCS_WINDOW) $(SRCS_TEXTURES) $(SRCS_MOUV) $(SRCS_MM)

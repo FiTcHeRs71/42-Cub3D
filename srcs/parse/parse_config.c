@@ -134,6 +134,6 @@ bool	extract_config(char *line, t_data *data)
 	else if (ft_strncmp(&line[i], "F ", 2) == 0)
 		return (save_color_code(data, &data->texture->floor, &line[i + 1]));
 	else if (ft_strncmp(&line[i], "C ", 2) == 0)
-		return (save_color_code(data, &data->texture->ceiling, &line[i + 1]));
+		return (save_color_code(data, &data->texture->roof, &line[i + 1]));
 	return (false);
 }

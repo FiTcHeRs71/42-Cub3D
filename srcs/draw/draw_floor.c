@@ -1,72 +1,80 @@
 #include "../../includes/cub3d.h"
 
-void	draw_floor(t_data *data, t_draw *draw, int x_coord)
+void	put_pixel_ceiling(t_data *data, t_floor *ground)
 {
-	int	i;
-	int	y;
+	t_tex_img	ceiling_tex;
+	char		*pixel;
+	int			offset;
+	int			color;
 
-	i = 0;
-	y = 0;
-	while (i < draw->line_start)
-	{
-		put_pixel_floor(data, draw, y, x_coord);
-		y++;
-		i++;
-	}
+	ceiling_tex = data->texture->ceiling;
+	if (ground->screen_x < 0 || ground->screen_x >= data->window_x || ground->ceiling_y < 0 || ground->ceiling_y >= data->window_y)
+		return ;
+	if (ground->tex_x < 0 || ground->tex_x >= ceiling_tex.width
+		|| ground->tex_y < 0 || ground->tex_y >= ceiling_tex.height)
+		return ;
+	offset = (ground->ceiling_y * data->mlx->size_line) + (ground->screen_x * (data->mlx->bits_per_pixel / 8));
+	pixel = data->mlx->img_data + offset;
+	color = *(unsigned int *)(ceiling_tex.addr + ground->tex_y * ceiling_tex.size_line + ground->tex_x * (ceiling_tex.bpp / 8));
+	*(unsigned int *)pixel = color;
 }
 
-// void	put_pixel_floor(t_data *data, t_draw *draw, t_floor *floor)
-// {
-// 	t_texture	texture;
-// 	char		*pixel;
-// 	int			offset;
-// 	int			color;
-
-// 	texture = data->texture->floor;
-// 	if (x_coord < 0 || x_coord >= data->window_x || y_coord < 0 || y_coord >= data->window_y)
-// 		return ;
-// 	if ( draw->tex.tex_x < 0 ||  draw->tex.tex_x >= texture.width
-// 		||  draw->tex.tex_y < 0 ||  draw->tex.tex_y >= texture.height)
-// 		return ;
-// 	color = *(unsigned int *)(texture.addr +  draw->tex.tex_y * texture.size_line +  draw->tex.tex_x * (texture.bpp / 8));
-// 	offset = (y_coord * data->mlx->size_line) + (x_coord * (data->mlx->bits_per_pixel / 8));
-// 	pixel = data->mlx->img_data + offset;
-// 	if ((draw->wall_side == 0 && draw->raydir_x > 0) || (draw->wall_side == 1 && draw->raydir_y > 0))
-// 		color = (color >> 1) & 0x7F7F7F;
-// 	*(unsigned int *)pixel = color;
-// 	color = *(unsigned int *)(texture.addr + draw->tex.tex_y * texture.size_line + draw->tex.tex_x * (texture.bpp / 8));
-// }
-
-void	draw_f(t_data *data, t_raycast *ray, t_draw *draw, t_texture *tex)
+void	put_pixel_ground(t_data *data, t_floor *ground)
 {
-	t_floor	floor;
-	double	horizon_d;
+	t_tex_img	ground_tex;
+	char		*pixel;
+	int			offset;
+	int			color;
 
-	ft_memset(&floor, 0, sizeof(t_floor));
-	floor.screen_y = data->window_y / 2;
-	while (floor.screen_y < data->window_y - 1)
+	ground_tex = data->texture->ground;
+	if (ground->screen_x < 0 || ground->screen_x >= data->window_x || ground->screen_y < 0 || ground->screen_y >= data->window_y)
+		return ;
+	if (ground->tex_x < 0 || ground->tex_x >= ground_tex.width
+		||  ground->tex_y < 0 ||  ground->tex_y >= ground_tex.height)
+		return ;
+	offset = (ground->screen_y * data->mlx->size_line) + (ground->screen_x * (data->mlx->bits_per_pixel / 8));
+	pixel = data->mlx->img_data + offset;
+	color = *(unsigned int *)(ground_tex.addr + ground->tex_y * ground_tex.size_line + ground->tex_x * (ground_tex.bpp / 8));
+	*(unsigned int *)pixel = color;
+}
+
+void	draw_background(t_thread_data *td, t_raycast *ray)
+{
+	t_tex_img	tex;
+	t_floor		ground;
+	t_data		*data;
+	double		horizon_d;
+
+	ft_memset(&ground, 0, sizeof(t_floor));
+	data = td->data;
+	tex = data->texture->ground;
+	ground.screen_y = data->window_y / 2 + 1;
+	while (ground.screen_y < data->window_y - 1)
 	{
-		floor.ceiling_y = data->window_y - floor.screen_y - 1;
-		horizon_d = floor.screen_y - data->window_y / 2.0;
-		floor.row_distance = data->window_y / 2 / horizon_d;
-		floor.left_ray_x = ray->dir_x - ray->plane_x;
-		floor.left_ray_y = ray->dir_y - ray->plane_y;
-		floor.right_ray_x = ray->dir_x + ray->plane_x;
-		floor.right_ray_y = ray->dir_y + ray->plane_y;
-		floor.floor_x = ray->pos_x + floor.row_distance * floor.left_ray_x;
-		floor.floor_y = ray->pos_y + floor.row_distance * floor.left_ray_y;
-		floor.floor_step_x = floor.row_distance * (floor.right_ray_x - floor.left_ray_x) / data->window_x;
-		floor.floor_step_y = floor.row_distance * (floor.right_ray_y - floor.left_ray_y) / data->window_x;
-		floor.screen_x = 0;
-		while (floor.screen_x < data->window_x)
+		ground.ceiling_y = data->window_y - ground.screen_y - 1;
+		horizon_d = ground.screen_y - data->window_y / 2.0;
+		ground.row_distance = data->window_y / 2 / horizon_d;
+		ground.left_ray_x = ray->dir_x - ray->plane_x;
+		ground.left_ray_y = ray->dir_y - ray->plane_y;
+		ground.right_ray_x = ray->dir_x + ray->plane_x;
+		ground.right_ray_y = ray->dir_y + ray->plane_y;
+		ground.floor_x = ray->pos_x + ground.row_distance * ground.left_ray_x;
+		ground.floor_y = ray->pos_y + ground.row_distance * ground.left_ray_y;
+		ground.floor_step_x = ground.row_distance * (ground.right_ray_x - ground.left_ray_x) / data->window_x;
+		ground.floor_step_y = ground.row_distance * (ground.right_ray_y - ground.left_ray_y) / data->window_x;
+		ground.floor_x += td->x_start * ground.floor_step_x;
+		ground.floor_y += td->x_start * ground.floor_step_y;
+		ground.screen_x = td->x_start;
+		while (ground.screen_x < td->x_end)
 		{
-			floor.tex_x = (floor.floor_x - (int)floor.floor_x) / tex->floor.width;
-			floor.tex_y = (floor.floor_y - (int)floor.floor_y) / tex->floor.height;
-			put_pixel_floor(data, draw, &floor);
-			floor.floor_x += floor.floor_step_x;
-			floor.floor_y += floor.floor_step_y;
-			floor.screen_x++;
+			ground.tex_x = (int)((ground.floor_x - floor(ground.floor_x)) * tex.width);
+			ground.tex_y = (int)((ground.floor_y - floor(ground.floor_y)) * tex.height);
+			put_pixel_ground(data, &ground);
+			put_pixel_ceiling(data, &ground);
+			ground.floor_x += ground.floor_step_x;
+			ground.floor_y += ground.floor_step_y;
+			ground.screen_x++;
 		}
-		floor.screen_y++;
+		ground.screen_y++;
 	}
 }
