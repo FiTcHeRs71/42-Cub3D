@@ -239,4 +239,22 @@ typedef struct s_data
 	struct s_linked_map	*linked_map;
 }						t_data;
 
+typedef struct s_floor
+{
+	double	row_distance;
+	double	floor_x;
+	double	floor_y;
+	double	ceiling_y;
+	double	floor_step_x;
+	double	floor_step_y;
+	double	left_ray_x;
+	double	left_ray_y;
+	double	right_ray_x;
+	double	right_ray_y;
+	int		screen_x;
+	int		screen_y;
+	int		tex_x;
+	int		tex_y;
+}			t_floor;
+
 #endif

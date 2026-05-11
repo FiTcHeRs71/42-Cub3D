@@ -33,7 +33,7 @@ SRCS_MOUV = $(addprefix $(SRCDIR)/mouvement/, \
 	mouvement.c mouvement_utils.c utils.c)
 
 SRCS_RAYCAST = $(addprefix $(SRCDIR)/raycasting/, \
-	raycasting.c)
+	raycasting.c raycasting_utils.c)
 
 SRCS_DRAW = $(addprefix $(SRCDIR)/draw/, \
 	draw.c draw_floor.c)

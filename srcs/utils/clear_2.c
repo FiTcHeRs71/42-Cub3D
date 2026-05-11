@@ -69,3 +69,15 @@ void	clean_enemies_and_gun(t_mlx *mlx, t_gun *gun, t_enemy_anim *enemy)
 		i++;
 	}
 }
+
+void	clear_image(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->mlx->size_line * data->window_y)
+	{
+		data->mlx->img_data[i] = 0;
+		i++;
+	}
+}

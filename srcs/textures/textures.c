@@ -1,4 +1,3 @@
-
 #include "../../includes/cub3d.h"
 
 void	load_wall_textures(t_data *data, t_texture *texture, t_mlx *mlx)
@@ -68,16 +67,4 @@ void	use_texture(t_data *data, t_raycast *ray, t_texture *tex, t_draw *draw)
 		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;
 	if (draw->wall_side == 1 && draw->raydir_y > 0)
 		tex->tex_x = tex->tex_flag.width - tex->tex_x - 1;
-}
-
-void	clear_image(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->mlx->size_line * data->window_y)
-	{
-		data->mlx->img_data[i] = 0;
-		i++;
-	}
 }

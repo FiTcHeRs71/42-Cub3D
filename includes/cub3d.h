@@ -7,7 +7,7 @@
 
 # define MOVE_SPEED 0.3
 # define ROT_SPEED 0.9
-# define MOUSE_SENSITIVITY 0.005
+# define MOUSE_SENSITIVITY 0.004
 # define MOUSE_MAX_DELTA 5
 # define MAGENTA 0xFF00FF
 # define COLLISION_MARGIN 0.15
@@ -52,7 +52,6 @@
 # include <math.h>
 # include <pthread.h>
 
-# include "leo.h" 
 /*================== FONCTION ==================*/
 
 /*-------- PARSE ------------*/
@@ -79,6 +78,8 @@ void			init_mini_map(t_data *data);
 void			clean_mini_map(t_data *data);
 void			clean_wall_and_door(t_texture *texture, t_mlx *mlx);
 void			clean_enemies_and_gun(t_mlx *mlx, t_gun *gun, t_enemy_anim *enemy);
+void			clear_image(t_data *data);
+
 /*-------- ENEMIES ------------*/
 t_enemy			*new_enemy(double x, double y);
 void			enemy_add_back(t_enemy **lst, t_enemy *new_one);
@@ -143,11 +144,11 @@ void			release_mouse(t_data *data);
 /*-------- DRAW ------------*/
 void			draw_wall(t_data *data, t_raycast *ray, t_draw *draw, int x_coord);
 void			draw_background(t_thread_data *td, t_raycast *ray);
-void			put_pixel_ground(t_data *data, t_floor *ground);
-void			put_pixel_ceiling(t_data *data, t_floor *ground);
 
 /*-------- RAYCASTING ------------*/
 void			*raycasting(void *arg);
 void			set_data_raycasting(t_raycast *data, t_map *map);
+void			init_dda(t_raycast *ray, int x, t_data *data, t_draw *draw);
+void			finalise_dda_data(t_raycast *ray, t_draw *draw);
 
 #endif
