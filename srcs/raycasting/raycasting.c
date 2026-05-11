@@ -173,7 +173,7 @@ void	*raycasting(void *arg)
 			ray.wall_dist = (ray.side_dist_x - ray.delta_dist_x);
 		else
 			ray.wall_dist = (ray.side_dist_y - ray.delta_dist_y);
-		td->stats->z_buffer[td->x_start] = ray.wall_dist;
+		td->data->z_buffer[td->x_start] = ray.wall_dist;
 		set_up_drawing_data(td->data, &ray, &draw);
 		draw_wall(td->data, &ray, &draw, td->x_start);
 		ray.is_hit = false;

@@ -8,7 +8,7 @@ void	create_threads(t_data *data)
 	i = 0;
 	while (i < 9)
 	{
-		data->threads[i].stats = data;
+		data->threads[i].data = data;
 		data->threads[i].x_start = i * data->window_x / 9;
 		if (i == 8)
 			data->threads[i].x_end = data->window_x;

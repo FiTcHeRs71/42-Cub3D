@@ -96,7 +96,7 @@ void			load_wall_textures(t_data *data, t_texture *texture,
 					t_mlx *mlx);
 void			use_texture(t_data *data, t_raycast *ray, t_texture *tex,
 					t_draw *draw);
-void			load_door_textures(t_data *data, t_texture *texture,
+void			load_bonus_textures(t_data *data, t_texture *texture,
 					t_mlx *mlx);
 /*-------- GUN ------------*/
 void			load_gun_textures(t_data *data);

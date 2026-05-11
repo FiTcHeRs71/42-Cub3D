@@ -4,7 +4,7 @@
 static void	loading_texture(t_data *data)
 {
 	load_wall_textures(data, data->texture, data->mlx);
-	load_door_textures(data, data->texture, data->mlx);
+	load_bonus_textures(data, data->texture, data->mlx);
 	load_gun_textures(data);
 	load_enemy_textures(data);
 }
