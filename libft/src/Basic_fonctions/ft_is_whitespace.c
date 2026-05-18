@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 20:48:00 by fducrot           #+#    #+#             */
-/*   Updated: 2026/05/02 20:48:00 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/18 13:51:25 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 13:51:25 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_is_whitespace(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

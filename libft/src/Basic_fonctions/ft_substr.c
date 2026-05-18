@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 20:52:59 by fducrot           #+#    #+#             */
-/*   Updated: 2026/05/02 20:52:59 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/18 13:50:51 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 13:50:51 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;

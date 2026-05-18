@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 20:51:16 by fducrot           #+#    #+#             */
-/*   Updated: 2026/05/02 20:51:16 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/18 13:52:24 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 13:52:24 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-

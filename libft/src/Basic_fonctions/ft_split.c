@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 20:51:41 by fducrot           #+#    #+#             */
-/*   Updated: 2026/05/02 20:51:45 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/18 13:52:55 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 13:53:05 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
+
 void	ft_free_2d_array(char **tab)
 {
 	int	i;
@@ -93,4 +94,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (array_of_string);
 }
-

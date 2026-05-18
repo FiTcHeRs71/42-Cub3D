@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 20:48:22 by fducrot           #+#    #+#             */
-/*   Updated: 2026/05/02 20:48:22 by fducrot          ###   ########.ch       */
+/*   Created: 2026/05/18 13:51:46 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 13:51:46 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
+
 int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
