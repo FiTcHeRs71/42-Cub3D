@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/18 10:53:17 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 10:53:17 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "includes/cub3d.h"
 #include "minilibx-linux/mlx.h"
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	if (argc != 2)
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/18 10:53:50 by fducrot           #+#    #+#             */
+/*   Updated: 2026/05/18 10:54:22 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -77,7 +89,8 @@ void			init_data(t_data *data);
 void			init_mini_map(t_data *data);
 void			clean_mini_map(t_data *data);
 void			clean_wall_and_door(t_texture *texture, t_mlx *mlx);
-void			clean_enemies_and_gun(t_mlx *mlx, t_gun *gun, t_enemy_anim *enemy);
+void			clean_enemies_and_gun(t_mlx *mlx, t_gun *gun,
+					t_enemy_anim *enemy);
 void			clear_image(t_data *data);
 
 /*-------- ENEMIES ------------*/
@@ -142,7 +155,8 @@ void			create_threads(t_data *data);
 void			release_mouse(t_data *data);
 
 /*-------- DRAW ------------*/
-void			draw_wall(t_data *data, t_raycast *ray, t_draw *draw, int x_coord);
+void			draw_wall(t_data *data, t_raycast *ray,
+					t_draw *draw, int x_coord);
 void			draw_background(t_thread_data *td, t_raycast *ray);
 
 /*-------- RAYCASTING ------------*/
