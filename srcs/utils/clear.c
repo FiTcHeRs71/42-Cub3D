@@ -67,14 +67,14 @@ static void	destroy_images(t_data *data, t_texture *texture, t_mlx *mlx)
 		return ;
 	if (mlx && mlx->mlx_connect)
 	{
-		mlx_mouse_show(mlx->mlx_connect, mlx->mlx_window);
+		compat_mouse_show(mlx->mlx_connect, mlx->mlx_window);
 		clean_wall_and_door(texture, mlx);
 		clean_enemies_and_gun(mlx, &data->gun, &data->enemy_anim);
 		if (mlx->img)
 			mlx_destroy_image(mlx->mlx_connect, mlx->img);
 		if (mlx->mlx_window)
 			mlx_destroy_window(mlx->mlx_connect, mlx->mlx_window);
-		mlx_destroy_display(mlx->mlx_connect);
+		compat_destroy_display(mlx->mlx_connect);
 		free(mlx->mlx_connect);
 	}
 	if (mlx)

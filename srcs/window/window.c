@@ -22,9 +22,9 @@ static void	loading_texture(t_data *data)
 
 void	reset_mouse_to_center(t_data *data)
 {
-	mlx_mouse_hide(data->mlx->mlx_connect, data->mlx->mlx_window);
-	mlx_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window, data->window_x
-		/ 2, data->window_y / 2);
+	compat_mouse_hide(data->mlx->mlx_connect, data->mlx->mlx_window);
+	compat_mouse_move(data->mlx->mlx_connect, data->mlx->mlx_window,
+		data->window_x / 2, data->window_y / 2);
 	data->mouse_active = true;
 }
 
@@ -55,14 +55,14 @@ int	game_loop(t_data *data)
 
 static void	create_hook(t_data *data, t_mlx *mlx)
 {
-	mlx_loop_hook(mlx->mlx_connect, game_loop, data);
-	mlx_hook(mlx->mlx_window, 4, 1L << 2, mouse_press, data);
-	mlx_hook(mlx->mlx_window, 2, 1L << 0, handle_key_press, data);
-	mlx_hook(mlx->mlx_window, 3, 1L << 1, handle_key_release, data);
-	mlx_hook(mlx->mlx_window, 17, 0, close_window, data);
-	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_motion, data);
-	mlx_hook(mlx->mlx_window, 9, 1L << 21, focus_in, data);
-	mlx_hook(mlx->mlx_window, 10, 1L << 21, focus_out, data);
+	mlx_loop_hook(mlx->mlx_connect, (void *)game_loop, data);
+	mlx_hook(mlx->mlx_window, 4, 1L << 2, (void *)mouse_press, data);
+	mlx_hook(mlx->mlx_window, 2, 1L << 0, (void *)handle_key_press, data);
+	mlx_hook(mlx->mlx_window, 3, 1L << 1, (void *)handle_key_release, data);
+	mlx_hook(mlx->mlx_window, 17, 0, (void *)close_window, data);
+	mlx_hook(mlx->mlx_window, 6, 1L << 6, (void *)mouse_motion, data);
+	mlx_hook(mlx->mlx_window, 9, 1L << 21, (void *)focus_in, data);
+	mlx_hook(mlx->mlx_window, 10, 1L << 21, (void *)focus_out, data);
 }
 
 void	init_window(t_data *data, t_mlx *mlx)

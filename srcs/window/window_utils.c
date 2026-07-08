@@ -14,25 +14,25 @@
 
 void	release_mouse(t_data *data)
 {
-	mlx_mouse_show(data->mlx->mlx_connect, data->mlx->mlx_window);
+	compat_mouse_show(data->mlx->mlx_connect, data->mlx->mlx_window);
 	data->mouse_active = false;
 }
 
 int	handle_key_press(int keycode, t_data *data)
 {
-	if (keycode == XK_w)
+	if (keycode == KEY_W)
 		data->keys.w = true;
-	else if (keycode == XK_a)
+	else if (keycode == KEY_A)
 		data->keys.a = true;
-	else if (keycode == XK_s)
+	else if (keycode == KEY_S)
 		data->keys.s = true;
-	else if (keycode == XK_d)
+	else if (keycode == KEY_D)
 		data->keys.d = true;
-	else if (keycode == XK_e)
+	else if (keycode == KEY_E)
 		toggle_nearest_door(data);
-	else if (keycode == XK_Left)
+	else if (keycode == KEY_LEFT)
 		data->keys.left = true;
-	else if (keycode == XK_Right)
+	else if (keycode == KEY_RIGHT)
 		data->keys.right = true;
 	else
 		handler_bonus_key(keycode, data);
@@ -41,17 +41,17 @@ int	handle_key_press(int keycode, t_data *data)
 
 int	handle_key_release(int keycode, t_data *data)
 {
-	if (keycode == XK_w)
+	if (keycode == KEY_W)
 		data->keys.w = false;
-	else if (keycode == XK_a)
+	else if (keycode == KEY_A)
 		data->keys.a = false;
-	else if (keycode == XK_s)
+	else if (keycode == KEY_S)
 		data->keys.s = false;
-	else if (keycode == XK_d)
+	else if (keycode == KEY_D)
 		data->keys.d = false;
-	else if (keycode == XK_Left)
+	else if (keycode == KEY_LEFT)
 		data->keys.left = false;
-	else if (keycode == XK_Right)
+	else if (keycode == KEY_RIGHT)
 		data->keys.right = false;
 	return (0);
 }

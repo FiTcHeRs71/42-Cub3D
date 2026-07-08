@@ -5,8 +5,10 @@ NAME = cub3D
 INCDIR = includes
 OBJDIR = objs
 LIBFTDIR = libft
-MLXDIR = minilibx-linux
 SRCDIR = srcs
+
+# OS detection (Linux X11 mlx vs macOS Metal mlx / mms)
+UNAME := $(shell uname)
 
 # Source files
 SRCS_MAIN = main.c
@@ -24,7 +26,8 @@ SRCS_PARSE = $(addprefix $(SRCDIR)/parse/, \
 	check_map.c parse_config.c parse_cub3d.c parse_utils.c utils.c parse_enemies.c)
 
 SRCS_UTILS = $(addprefix $(SRCDIR)/utils/, \
-	init.c clear.c error.c window_clear.c clear_2.c)
+	init.c clear.c error.c window_clear.c clear_2.c \
+	platform_linux.c platform_macos.c)
 
 SRCS_WINDOW = $(addprefix $(SRCDIR)/window/, \
 	window.c window_utils.c window_thread.c keyboard.c)
@@ -51,11 +54,27 @@ OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 CC =  cc
 CFLAGS = -Wall -Wextra -Werror -O2
 
+# Platform-specific minilibx: dir, built library and link flags
+ifeq ($(UNAME), Darwin)
+	MLXDIR = minilibx-macos
+	MLX_LIB = $(MLXDIR)/libmlx.dylib
+	MLX_LDFLAGS = -L$(MLXDIR) -lmlx -Wl,-rpath,@loader_path/$(MLXDIR) \
+		-framework AppKit -framework Metal -framework MetalKit -lm
+	# mms builds the dylib with a bare install_name; rewrite it to @rpath so
+	# the executable can locate it at runtime via -rpath @loader_path.
+	MLX_FIX = install_name_tool -id @rpath/libmlx.dylib $(MLX_LIB)
+else
+	MLXDIR = minilibx-linux
+	MLX_LIB = $(MLXDIR)/libmlx.a
+	MLX_LDFLAGS = -L$(MLXDIR) -lmlx -lXext -lX11 -lm -lz
+	MLX_FIX = true
+endif
+
 # Includes
 INCLUDES = -I$(INCDIR) -I$(LIBFTDIR)/include -I$(MLXDIR)
 
 # LDFLAGS
-LDFLAGS = -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx -lXext -lX11 -lm -lz
+LDFLAGS = -L$(LIBFTDIR) -lft $(MLX_LDFLAGS)
 
 # Colors
 GREEN = \033[0;32m
@@ -83,14 +102,14 @@ define spin
 endef
 
 # Rules
-all: $(LIBFTDIR)/libft.a $(MLXDIR)/libmlx.a $(NAME)
+all: $(LIBFTDIR)/libft.a $(MLX_LIB) $(NAME)
 	@echo "$(GREEN)🎉 $(NAME) ready! 🎉$(RESET)"
 
 $(LIBFTDIR)/libft.a:
 	$(call spin,📚 Building libft...,$(MAKE) -C $(LIBFTDIR) --no-print-directory)
 
-$(MLXDIR)/libmlx.a:
-	$(call spin,🖼️  Building minilibx...,$(MAKE) -C $(MLXDIR))
+$(MLX_LIB):
+	$(call spin,🖼️  Building minilibx...,$(MAKE) -C $(MLXDIR) && $(MLX_FIX))
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)

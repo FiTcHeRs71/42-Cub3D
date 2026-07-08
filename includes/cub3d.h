@@ -57,10 +57,9 @@
 /*================== LIBRAIRY & HEADERS ==================*/
 
 # include "../libft/include/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "keys.h"
 # include "cub3d_message.h"
 # include "cub3d_struct.h"
-# include <X11/keysym.h>
 # include <math.h>
 # include <pthread.h>
 

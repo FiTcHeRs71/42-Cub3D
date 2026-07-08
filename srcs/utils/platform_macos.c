@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard.c                                         :+:      :+:    :+:   */
+/*   platform_macos.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 10:51:05 by fducrot           #+#    #+#             */
-/*   Updated: 2026/05/18 10:51:05 by fducrot          ###   ########.ch       */
+/*   Created: 2026/07/08 00:00:00 by fducrot           #+#    #+#             */
+/*   Updated: 2026/07/08 00:00:00 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	handler_bonus_key(int keycode, t_data *data)
+#ifdef __APPLE__
+
+int	compat_mouse_move(void *mlx, void *win, int x, int y)
 {
-	if (keycode == KEY_ESC)
-		close_window(data);
-	else if (keycode == KEY_TAB)
-	{
-		if (data->mouse_active)
-			release_mouse(data);
-		else
-			reset_mouse_to_center(data);
-	}
-	else if (keycode == KEY_M)
-		toggle_minimap_fullscreen(data);
-	else if (keycode == KEY_E)
-		toggle_nearest_door(data);
+	(void)mlx;
+	return (mlx_mouse_move(win, x, y));
+}
+
+int	compat_mouse_hide(void *mlx, void *win)
+{
+	(void)mlx;
+	(void)win;
+	return (mlx_mouse_hide());
+}
+
+int	compat_mouse_show(void *mlx, void *win)
+{
+	(void)mlx;
+	(void)win;
+	return (mlx_mouse_show());
+}
+
+int	compat_destroy_display(void *mlx)
+{
+	(void)mlx;
 	return (0);
 }
+
+#endif
