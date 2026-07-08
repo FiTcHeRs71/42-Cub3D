@@ -27,8 +27,18 @@ $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@
 
 %.swiftmodule: %.swift
-	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@ -emit-module -module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<)
+	swiftc $(OPTI) $(INC) -parse-as-library -emit-module -emit-module-path $@ -module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<) $<
+
+# Inter-module build order (each file imports the modules listed below).
+# Needed so the .swiftmodule interfaces exist before dependents compile,
+# even under parallel make (-j).
+mlx_window.swiftmodule: mlx_image.swiftmodule
+mlx_init.swiftmodule: mlx_image.swiftmodule mlx_window.swiftmodule
+mlx_image.o: mlx_image.swiftmodule
+mlx_window.o: mlx_image.swiftmodule mlx_window.swiftmodule
+mlx_init.o: mlx_image.swiftmodule mlx_window.swiftmodule mlx_init.swiftmodule
+interface.o: mlx_image.swiftmodule mlx_window.swiftmodule mlx_init.swiftmodule
 
 clean:
-	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *~
+	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *.abi.json *~
 
